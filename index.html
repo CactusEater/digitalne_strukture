@@ -276,28 +276,32 @@ const questions = [
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katera od navedenih enačb NI pravilna?<br>a) x↑y = (x⊕y)+(x↓y)<br>b) (x↑y)' = x̄↑ȳ<br>c) x⊕y = (x≡y)·(x↑y)<br>d) x̄+x·y = x̄+y",
+    q: "Katera od navedenih enačb NI pravilna?",
+    image: "img23.jpg",
     answers: ["a)", "b)", "c)", "d)"],
     correct: 2,
     expl: "<p>x≡y (XNOR) je <strong>negacija</strong> od x⊕y (XOR). Ko je XOR=1, je XNOR=0, in produkt z NAND ne more biti enak XOR. Enačba ne velja.</p>"
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katera od navedenih enačb NI pravilna?<br>a) x·ȳ + y = x + ȳ<br>b) x·y + x̄ = y + x̄<br>c) x⊕y = x̄⊕ȳ<br>d) (x̄·ȳ)' + y = x·ȳ",
+    q: "Katera od navedenih enačb NI pravilna?",
+    image: "img28.jpg",
     answers: ["a)", "b)", "c)", "d)"],
     correct: 0,
     expl: "<p>Po absorpciji z dopolnitvijo: <code>x·ȳ + y = x + y</code> (ne x + ȳ).</p>"
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katera od navedenih enačb NI pravilna?<br>a) x·ȳ + y = y<br>b) x + x·y = x<br>c) x·y + x̄ = y + x̄<br>d) x⊕y = x̄⊕ȳ",
+    q: "Katera od navedenih enačb NI pravilna?",
+    image: "img29.jpg",
     answers: ["a)", "b)", "c)", "d)"],
     correct: 0,
     expl: "<p>x·ȳ + y = <strong>x + y</strong>, ne samo y. Drugi člen vsebuje x, ki ga ne moremo izgubiti.</p>"
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katera od navedenih enačb NI pravilna?<br>a) x≡y = (x↓y)+(x·y)<br>b) x̄+x·y = x̄+y<br>c) x↓y = (x↑y)·(x+y)<br>d) (x·ȳ·z)' = x̄+y+z̄",
+    q: "Katera od navedenih enačb NI pravilna?",
+    image: "img35.jpg",
     answers: ["a)", "b)", "c)", "d)"],
     correct: 2,
     expl: "<p>NOR (x↓y) = 1 samo, ko sta oba 0. NAND·OR ne da nikoli te vrednosti, ker NAND=0 le pri obojih 1, OR=0 pri obojih 0 → produkt je vedno 0.</p>"
