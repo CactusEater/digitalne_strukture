@@ -617,7 +617,7 @@ const questions = [
     image: "img89.jpg",
     answers: ["T₁=T₂=0; R₁=R₂=1", "T₁=T₂=1; R₁=R₂=0", "T₁=T₂=0; R₁=R₂=0", "T₁=T₂=1; R₁=R₂=1"],
     correct: 3,
-    expl: "<p>T=1 vedno omogoča toggle (štetje). R=1 v določenih kombinacijah obrne smer štetja navzdol prek negiranih izhodov.</p>"
+    expl: "<p>T=1 vedno omogoča toggle (štetje). R določa smer štetja. R=1 je navzdol.</p>"
   },
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
@@ -641,7 +641,7 @@ const questions = [
     image: "img86.jpg",
     answers: ["a)", "b)", "c)", "d)"],
     correct: 2,
-    expl: "<p>4 Moorova stanja. S₂ ≡ S₃ (oba dajeta izhod 1 in gresta v enaka stanja) → minimalni Mealy z 3 stanji.</p>"
+    expl: "<p>Pretvorba v Mealyja, brez minimalizacije, ker ni enakih skupin.</p>"
   },
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
@@ -649,7 +649,7 @@ const questions = [
     image: "img90.jpg",
     answers: ["S₁≡S₆; S₂≡S₃; S₄≡S₅", "S₁≡S₂; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅"],
     correct: 2,
-    expl: "<p>Iščemo ekvivalentna stanja (enaki izhodi in naslednja stanja pri vseh vhodih). S₂ in S₃ imata enako tabelo, S₄, S₅, S₆ tudi (kjer se don't care '−' ujema). <strong>S₂≡S₃; S₄≡S₅≡S₆</strong></p>"
+    expl: "<p>Iščemo ekvivalentna stanja (enaki izhodi in naslednja stanja pri vseh vhodih). S₂ in S₃ imata enako tabelo, S₄, S₅, S₆ tudi (kjer se don't care '−' ujema s katero koli vrednostjo). <strong>S₂≡S₃; S₄≡S₅≡S₆</strong></p>"
   },
 
   // ============ 10. TEORETIČNA VPRAŠANJA ============
