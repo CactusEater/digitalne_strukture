@@ -510,21 +510,21 @@ const questions = [
     q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register is\nbegin\nprocess (clk,reset) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk='1') then q <= D;\n    end if;\nend process;\nend behavioral;</pre>",
     answers: ["pomikalni s flip-flopi D", "pomikalni z zapahi D", "navadni s flip-flopi D", "navadni z zapahi D"],
     correct: 2,
-    expl: "<p>Sinhrono proženje (clk'event), vsi biti hkrati q ← D, brez pomika → <strong>navadni register iz flip-flopov D</strong>.</p>"
+    expl: "<p>Flip-flop ker sinhrono proženje ob clk. Navadni, ker prepiše vse bite hkrati q<=D</p>"
   },
   {
     topic: "6. & 7. VHDL",
     q: "Ugotovite kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register1 is\nsignal clk,reset,d: std_logic;\nsignal q,a: std_logic_vector (3 downto 0);\nbegin\nprocess (clk,reset,a) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk = '1') then q <= a;\n    end if;\nend process;\na <= d & q(3 downto 1);\nend behavioral;</pre>",
     answers: ["pomikalni z zapahi D", "pomikalni s flip-flopi D", "navadni s flip-flopi D", "navadni z zapahi D"],
     correct: 1,
-    expl: "<p>Vrstica <code>a <= d & q(3 downto 1)</code> izvede pomik v desno za eno mesto z d na MSB. Klasični <strong>pomikalni register s flip-flopi D</strong>.</p>"
+    expl: "<p>Vrstica <code>a <= d & q(3 downto 1)</code> izvede pomik v desno za eno mesto z d na MSB. Flip-flop ker sinhrono proženje ob clk.</p>"
   },
   {
     topic: "6. & 7. VHDL",
     q: "Ugotovite katera spominska celica je opisana z naslednjo VHDL kodo:<pre>process (a,b,c,q) begin\n    if a = '1' and c = '1' then q <= '0';\n    elsif b = '1' and c = '1' then q <= '1';\n    else q <= q;\n    end if;\nend process;</pre>",
     answers: ["flip-flop JK", "zapah D", "flip-flop D", "zapah SR"],
     correct: 3,
-    expl: "<p>c=1 deluje kot omogočilni signal (nivojsko, ne robno). a=1,c=1 → reset, b=1,c=1 → set, sicer obdrži → <strong>zapah SR</strong> z enable.</p>"
+    expl: "<p>SR=SetReset c -> enable, a -> reset, b -> set, else -> ohrani stanje. Zapah, ker <strong>ni<strong> ob uri.</p>"
   },
   {
     topic: "6. & 7. VHDL",
@@ -552,7 +552,7 @@ const questions = [
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
-    image: "img77.jpg",
+    image: "img79.jpg",
     answers: ["celice JK", "celice T", "celice SR", "celice D"],
     correct: 1,
     expl: "<p>Vhod 0 ohrani stanje (zanke), vhod 1 preklopi (puščice med stanjema) → definicija <strong>T celice</strong>.</p>"
@@ -560,7 +560,7 @@ const questions = [
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
-    image: "img79.jpg",
+    image: "img77.jpg",
     answers: ["celice JK", "celice T", "celice D", "celice SR"],
     correct: 2,
     expl: "<p>Vhod 0 vedno vodi v Q=0, vhod 1 vedno v Q=1 (Q⁺ = D) → <strong>D celica</strong>.</p>"
@@ -571,7 +571,7 @@ const questions = [
     image: "img78.jpg",
     answers: ["zapah SR", "flip-flop T", "flip-flop D", "flip-flop JK"],
     correct: 3,
-    expl: "<p>Prožilni vhod C → flip-flop. Dva vhoda X, Y, kjer X=Y=1 preklopi stanje → <strong>JK flip-flop</strong>.</p>"
+    expl: "<p>Reagira samo na rob C. Prožilni vhod C → flip-flop. Dva vhoda X, Y, kjer X=Y=1 preklopi stanje → <strong>JK flip-flop</strong>.</p>"
   },
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
@@ -584,7 +584,7 @@ const questions = [
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Imamo spominsko celico z dvema vhodoma. Na prožilni vhod dovajamo signal C, na preostali vhod signal X, na izhodu pa dobimo naslednji signal (stanje) Q. Za katero spominsko celico gre?",
-    image: "img91.jpg",
+    image: "img92.jpg",
     answers: ["zapah T", "flip-flop D", "flip-flop T", "zapah D"],
     correct: 3,
     expl: "<p>En sam podatkovni vhod X, nivojska omogočitev C → <strong>zapah D</strong>. Q sledi X dokler je C=1.</p>"
@@ -622,7 +622,7 @@ const questions = [
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja (sekvence) \"001\"?",
-    image: "img90.jpg",
+    image: "img91.jpg",
     answers: ["a)", "b)", "c)", "d)"],
     correct: 2,
     expl: "<p>Iščemo diagram, ki sprejme 0, 0, 1 in nato vrne v začetek z izhodom 1 ob zadnjem prehodu: <strong>S₀ →(0)→ S₁ →(0)→ S₂ →(1/1)→ S₀</strong></p>"
@@ -646,7 +646,7 @@ const questions = [
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Delovanje sinhronskega sekvenčnega vezja je opisano s tabelo stanj. Katera stanja moramo združiti, da dobimo minimalno število stanj?",
-    image: "img92.jpg",
+    image: "img90.jpg",
     answers: ["S₁≡S₆; S₂≡S₃; S₄≡S₅", "S₁≡S₂; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅"],
     correct: 2,
     expl: "<p>Iščemo ekvivalentna stanja (enaki izhodi in naslednja stanja pri vseh vhodih). S₂ in S₃ imata enako tabelo, S₄, S₅, S₆ tudi (kjer se don't care '−' ujema). <strong>S₂≡S₃; S₄≡S₅≡S₆</strong></p>"
