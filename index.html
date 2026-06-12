@@ -329,7 +329,7 @@ const questions = [
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Kako se glasi MKNO zapis funkcije f(x₁, x₂, x₃) = (x₁↓x̄₂) ⊕ (x₁↑x₃)?",
+    q: "Kako se glasi MKNO zapis funkcije f(x₁, x₂, x₃) = <span style='text-decoration:overline'>(x₁↓x̄₂)</span> ⊕ (x₁↑x₃)?",
     image: "img33.jpg",
     answers: ["x₁x̄₂ + x̄₁x̄₃", "x̄₁x₂ + x₁x₃", "(x̄₁+x₂)·(x₁+x̄₃)", "(x₁+x₂)·(x̄₁+x₃)"],
     correct: 3,
@@ -344,10 +344,10 @@ const questions = [
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = (x̄₁·((x₂+x₃)·(x̄₁+x̄₂)')')'?",
+    q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = (x̄₁·((x₂+x₃)·(x₁+x̄₂)')')'?",
     image: "img36.jpg",
     answers: ["a)", "b)", "c)", "d)"],
-    correct: 3,
+    correct: 2,
     expl: "<p>Poenostavimo izraz korak za korakom z De Morganom in absorpcijo ter dobimo minimalno MDNO obliko.</p>"
   },
 
@@ -377,9 +377,9 @@ const questions = [
     topic: "4. Statični hazard",
     q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
     image: "img40.jpg",
-    answers: ["sprememba x₃ iz 0 v 1", "sprememba x₂ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 1 v 0"],
+   answers: ["sprememba x₂ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₃ iz 1 v 0", "sprememba x₃ iz 0 v 1"],	
     correct: 2,
-    expl: "<p>Spremenljivka x₁ vstopa po dveh različno dolgih poteh (direktno in skozi invertor). Sprememba 1→0 ustvari kratko časovno okno, kjer sta oba člena prehodno 0 → izhod pade.</p>"
+    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje NAND-NAND (krogci po &).</p>"
   },
   {
     topic: "4. Statični hazard",
@@ -387,7 +387,7 @@ const questions = [
     image: "img45.jpg",
     answers: ["sprememba x₃ iz 0 v 1", "sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 1 v 0"],
     correct: 2,
-    expl: "<p>x₁ vstopa direktno v en AND in skozi invertor v drugega. Pri prehodu 1→0 direktna pot pade hitro, invertorska pot naraste počasi → kratko okno, ko sta oba AND 0 → hazard.</p>"
+    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje AND-OR.</p>"
   },
   {
     topic: "4. Statični hazard",
@@ -395,7 +395,7 @@ const questions = [
     image: "img46.jpg",
     answers: ["sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₂ iz 1 v 0"],
     correct: 0,
-    expl: "<p>Pri OR-AND strukturi je obratno kot pri AND-OR: hazard nastane pri prehodu <strong>0→1</strong>. x₁ vstopa po dveh poteh: direktna naraste hitro, invertor zakasni → oba OR prehodno 1 → izhod skoči na 1.</p>"
+    expl: "<p>Pri vezjih OR‐AND in NOR pa hazardni pojav povzroči le sprememba vhoda iz 0 v 1. V tem primeru je vezje OR-AND.</p>"
   },
 
   // ============ 5. KOMBINACIJSKA VEZJA & PLA ============
