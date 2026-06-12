@@ -424,7 +424,7 @@ const questions = [
   },
   {
     topic: "5. Kombinacijska vezja & PLA",
-    q: "Kateri od multipleksorjev 8/1 realizira isto preklopno funkcijo kot prikazano drevesno vezje?",
+    q: "Kateri od multipleksorjev 8/1 realizira isto preklopno funkcijo kot prikazano vezje?",
     image: "img52.jpg",
     answers: ["a) 1,0,1,X₄,1,0,0,0", "b) 0,1,0,X₄,1,0,1,0", "c) 0,0,0,X₄,1,0,0,0", "d) 0,1,0,X₄,1,0,1,0"],
     correct: 1,
@@ -436,12 +436,12 @@ const questions = [
     image: "img55.jpg",
     answers: ["f = 0", "f = x₁ ⊕ x₂", "f = 1", "f = x₁ ≡ x₂"],
     correct: 0,
-    expl: "<p>Dekodirnik aktivira točno en izhod (z 0). MUX s krmilno kodo (x₂,x₁) zaradi križne vezave izbira nasprotni (1) izhod → vedno 1. Ampak ker so izhodi negirani in vezava obrnjena: vedno se izbere neaktiven (=1) izhod, kar bi dalo f=1. Križno vezava obrne kodo → izbere se aktivni (=0) → <strong>f = 0</strong>.</p>"
+    expl: "<p>Dekodirnik ima negirane izhode (krogci). ko je x1=0 x1=1 -> 01, bo 2. izhod deodirnika negiran 1=0 in bo f vrednost na vhodu mux x1=0 x1=1 -> 10, torej f=0.</p>"
   },
   {
     topic: "5. Kombinacijska vezja & PLA",
-    q: "Katero preklopno funkcijo realizira vezje Dekodirnik + Multipleksor (paralelna vezava x₁x₂)?",
-    image: "img56.jpg",
+    q: "Katero preklopno funkcijo realizira naslednje vezje?",
+    image: "img57.jpg",
     answers: ["f = 0", "f = x₁ ⊕ x₂", "f = 1", "f = x₁ ≡ x₂"],
     correct: 1,
     expl: "<p>Pri tej vezavi MUX s krmilno kodo (x₁,x₂) izbira izhode dekodirnika v drugačnem zaporedju, kar realizira XOR funkcijo: <strong>f = x₁ ⊕ x₂</strong></p>"
@@ -449,8 +449,8 @@ const questions = [
   {
     topic: "5. Kombinacijska vezja & PLA",
     q: "Kako se v obliki MDNO glasi funkcija f₂, ki jo realizira prikazano vezje PLA?",
-    image: "img57.jpg",
-    answers: ["x₂ + x₃", "x₂ + x₃ + x₄ = 1", "x₂x₄", "x₂x₃ + x₃"],
+    image: "img56.jpg",
+    answers: ["x̄₂ + x₃", "x̄₂ + x̄₃ + x₄ = 1", "x̄₁x₄", "x̄₂x̄₃ + x₃"],
     correct: 0,
     expl: "<p>Iz PLA mreže preberemo, kateri produkti so povezani z izhodom f₂. Po minimizaciji dobimo: <strong>x₂ + x₃</strong></p>"
   },
@@ -458,84 +458,84 @@ const questions = [
   // ============ 6. & 7. VHDL ============
   {
     topic: "6. & 7. VHDL",
-    q: "Katero digitalno vezje opisuje VHDL koda?<pre>with a select\n  y <= \"0001\" when \"00\",\n       \"0010\" when \"01\",\n       \"0100\" when \"10\",\n       \"1000\" when others;</pre>",
+    q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal y: std_logic_vector (3 downto 0);\nbegin\nwith a select\n    y <= \"0001\" when \"00\",\n         \"0010\" when \"01\",\n         \"0100\" when \"10\",\n         \"1000\" when others;\nend behavioral;</pre>",
     answers: ["multipleksor", "zapah", "register", "dekodirnik"],
     correct: 3,
     expl: "<p>Vhod a (2 bita) izbira en izhod, ki ima vedno samo en bit '1' → <strong>dekodirnik 2 → 4</strong>.</p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "Katero digitalno vezje opisuje VHDL koda?<pre>f <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);</pre>",
+    q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nsignal f: std_logic;\nbegin\nf <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);\nend behavioral;</pre>",
     answers: ["register", "zapah", "multipleksor", "dekodirnik"],
     correct: 2,
     expl: "<p>A je krmilni signal (2 bita), B(0..3) so podatkovni vhodi, f je izbrani izhod → <strong>4/1 multipleksor</strong>.</p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "V VHDL: A <= \"0101\"; B <= \"1010\"; C <= B(3) & A(3 downto 1). Kakšna je C?",
+    q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(3) & A(3 downto 1);</pre>Katera vrednost je zapisana v vektorju C?",
     answers: ["010", "0101", "1010", "1000"],
     correct: 2,
     expl: "<p>Operator <code>&</code> je konkatenacija. B(3) = 1, A(3 downto 1) = <code>010</code>. Skupaj: <strong>1010</strong></p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "V VHDL: A <= \"0101\"; B <= \"1010\"; C <= B(2) & A(2 downto 0). Kakšna je C?",
+    q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(2) & A(2 downto 0);</pre>Katera vrednost je zapisana v vektorju C?",
     answers: ["1010", "0101", "1101", "000"],
     correct: 1,
     expl: "<p>B(2) = 0, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>0101</strong></p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "V VHDL: A <= \"0101\"; B <= \"1010\"; C <= B(3) & A(2 downto 0). Kakšna je C?",
+    q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(3) & A(2 downto 0);</pre>Katera vrednost je zapisana v vektorju C?",
     answers: ["1000", "1101", "0101", "101"],
     correct: 1,
     expl: "<p>B(3) = 1, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>1101</strong></p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "Kateri števec opisuje VHDL koda?<pre>process (clk) begin\n  if (clk'event and clk='1') then\n    if st = 9 then st <= \"0000\";\n    else st <= st + 1;\n    end if;\n  end if;\nend process;</pre>",
+    q: "Ugotovite katero vezje je opisano z naslednjo VHDL kodo:<pre>process (clk) begin\n    if (clk'event and clk='1') then\n        if st = 9 then st <= \"0000\";\n        else st <= st + 1;\n        end if;\n    end if;\nend process;</pre>",
     answers: ["BCD števec", "binarni števec", "števec po modulu 9", "števec po modulu 4"],
     correct: 0,
     expl: "<p>Šteje 0–9 in se postavi na 0 ko doseže 9 → <strong>BCD števec</strong> (modul 10).</p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "Kateri števec opisuje VHDL koda?<pre>process (clk, d) begin\n  if (clk'event and clk='1') then q <= d;\n  end if;\nend process;\nd <= \"000\" when q = \"100\" else q + 1;</pre>",
+    q: "Ugotovite katero vezje je opisano z naslednjo VHDL kodo:<pre>process (clk,d) begin\n    if (clk'event and clk='1') then\n        q <= d;\n    end if;\nend process;\nd <= \"000\" when q = \"100\" else q + 1;</pre>",
     answers: ["BCD števec", "števec po modulu 4", "binarni števec", "števec po modulu 5"],
     correct: 3,
     expl: "<p>Šteje 0,1,2,3,4 (000–100) in se resetira na 0 → 5 različnih stanj → <strong>modul 5</strong>.</p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "Kateri 4-bitni register opisuje VHDL koda?<pre>architecture behavioral of register is\nbegin\nprocess (clk, reset) begin\n  if reset = '1' then q <= \"0000\";\n  elsif (clk'event and clk='1') then q <= D;\n  end if;\nend process;</pre>",
+    q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register is\nbegin\nprocess (clk,reset) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk='1') then q <= D;\n    end if;\nend process;\nend behavioral;</pre>",
     answers: ["pomikalni s flip-flopi D", "pomikalni z zapahi D", "navadni s flip-flopi D", "navadni z zapahi D"],
     correct: 2,
     expl: "<p>Sinhrono proženje (clk'event), vsi biti hkrati q ← D, brez pomika → <strong>navadni register iz flip-flopov D</strong>.</p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "Kateri 4-bitni register opisuje VHDL koda?<pre>architecture behavioral of register1 is\nsignal clk, reset, d: std_logic;\nsignal q, a: std_logic_vector (3 downto 0);\nbegin\nprocess (clk, reset, a) begin\n  if reset = '1' then q <= \"0000\";\n  elsif (clk'event and clk='1') then q <= a;\n  end if;\nend process;\na <= d & q(3 downto 1);</pre>",
+    q: "Ugotovite kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register1 is\nsignal clk,reset,d: std_logic;\nsignal q,a: std_logic_vector (3 downto 0);\nbegin\nprocess (clk,reset,a) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk = '1') then q <= a;\n    end if;\nend process;\na <= d & q(3 downto 1);\nend behavioral;</pre>",
     answers: ["pomikalni z zapahi D", "pomikalni s flip-flopi D", "navadni s flip-flopi D", "navadni z zapahi D"],
     correct: 1,
     expl: "<p>Vrstica <code>a <= d & q(3 downto 1)</code> izvede pomik v desno za eno mesto z d na MSB. Klasični <strong>pomikalni register s flip-flopi D</strong>.</p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "Katero spominsko celico opisuje VHDL koda?<pre>process (a, b, c, q) begin\n  if a='1' and c='1' then q <= '0';\n  elsif b='1' and c='1' then q <= '1';\n  else q <= q;\n  end if;\nend process;</pre>",
+    q: "Ugotovite katera spominska celica je opisana z naslednjo VHDL kodo:<pre>process (a,b,c,q) begin\n    if a = '1' and c = '1' then q <= '0';\n    elsif b = '1' and c = '1' then q <= '1';\n    else q <= q;\n    end if;\nend process;</pre>",
     answers: ["flip-flop JK", "zapah D", "flip-flop D", "zapah SR"],
     correct: 3,
     expl: "<p>c=1 deluje kot omogočilni signal (nivojsko, ne robno). a=1,c=1 → reset, b=1,c=1 → set, sicer obdrži → <strong>zapah SR</strong> z enable.</p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "Katero digitalno vezje opisuje VHDL koda?<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nbegin\nwith a select\n  y <= \"0001\" when \"00\",\n       \"0010\" when \"01\",\n       \"0100\" when \"10\",\n       \"1000\" when others;\nend behavioral;</pre>",
+    q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal y: std_logic_vector (3 downto 0);\nbegin\nwith a select\n    y <= \"0001\" when \"00\",\n         \"0010\" when \"01\",\n         \"0100\" when \"10\",\n         \"1000\" when others;\nend behavioral;</pre>",
     answers: ["multipleksor", "zapah", "register", "dekodirnik"],
     correct: 3,
     expl: "<p>Vhod a (2 bita) izbira en izhod, ki ima vedno samo en bit '1' → <strong>dekodirnik 2 → 4</strong>.</p>"
   },
   {
     topic: "6. & 7. VHDL",
-    q: "Katero digitalno vezje opisuje VHDL koda?<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nsignal f: std_logic;\nbegin\nf <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);\nend behavioral;</pre>",
+    q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nsignal f: std_logic;\nbegin\nf <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);\nend behavioral;</pre>",
     answers: ["register", "zapah", "multipleksor", "dekodirnik"],
     correct: 2,
     expl: "<p>A je krmilni signal, B(0..3) so podatkovni vhodi, f je izbrani izhod → <strong>4/1 multipleksor</strong>.</p>"
