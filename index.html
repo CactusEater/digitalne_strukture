@@ -238,7 +238,7 @@ const questions = [
     q: "Po vodilu so prejete 4 osembitne besede:<pre>1 0101001\n0 1000011\n0 1011001\n1 1110011</pre>1. bit vsake besede je paritetni, zadnja beseda je kontrolna. V kateri besedi je napačen kateri bit?",
     answers: ["4. bit v 2. besedi", "8. bit v 3. besedi", "2. bit v 2. besedi", "6. bit v 3. besedi"],
     correct: 2,
-    expl: "<p><strong>Postopek</strong>:</p><ol><li>Preveri vrstično pariteto vsake od prvih 3 besed → ugotoviš, v kateri besedi je napaka.</li><li>Uporabi 4. (kontrolno) besedo za stolpčno pariteto → ugotoviš, v katerem bitu (stolpcu) je napaka.</li><li>Presečišče = napačen bit.</li></ol><p>Rezultat: <strong>2. bit v 2. besedi</strong></p>"
+    expl: "<p><strong>Postopek</strong>:</p><ol><li>Preveri vrstično pariteto vsake od prvih 3 besed → ugotoviš, v kateri besedi je napaka.</li><li>Uporabi 4. (kontrolno) besedo za stolpčno pariteto → ugotoviš, v katerem bitu (stolpcu) je napaka.</li><li>Presečišče = napačen bit.</li></ol><p><strong>Liha pariteta (paritetni bit 1, če je liho št. enic).</strong></p>"
   },
 
   // ============ 2. & 3. BOOLOVA ALGEBRA & PREKLOPNE FUNKCIJE ============
@@ -248,7 +248,7 @@ const questions = [
     image: "img20.jpg",
     answers: ["(x₁+x₂)·(x₁+x₃)", "(x₁+x₂)·(x̄₁+x₃)", "x̄₁x₂ + x₁x₃", "(x₁+x̄₂)·(x̄₁+x₃)"],
     correct: 1,
-    expl: "<p>74HC00 vsebuje NAND vrata. Iz vezja preberemo MDNO: f = x̄₁x₂ + x₁x₃. Pretvorba v MKNO preko K-karte ničel da: <strong>f = (x₁+x₂)(x̄₁+x₃)</strong></p>"
+    expl: "<p>74HC00 vsebuje NAND vrata. Iz vezji 74HC00 preberemo MDNO: f = x̄₁x₂ + x₁x₃. Pretvorba v MKNO preko K-karte ničel da: <strong>f = (x₁+x₂)(x̄₁+x₃)</strong>.<p><p>V K-karti za MKNO okrožujemo <strong>ničle</strong> in negiramo za <strong>enke</strong>.</p>"
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
@@ -256,7 +256,7 @@ const questions = [
     image: "img21.jpg",
     answers: ["x̄₁x₂ + x₁x₃", "x₁x₂ + x₁x₃", "(x̄₁+x₃)·(x₁+x₂)", "x̄₁x₂ + x₁x₃ + x₂x₃"],
     correct: 0,
-    expl: "<p>NAND-NAND vezje beremo direktno kot AND-OR (krogci se izničijo).</p><p>Spodnji NAND kot AND vrata → produkti, zgornji NAND kot OR → vsota: <strong>f = x̄₁x₂ + x₁x₃</strong></p>"
+    expl: "<p>74HC00 vsebuje NAND vrata. Iz vezji 74HC00 direktno preberemo MDNO: f = x̄₁x₂ + x₁x₃.</p>"
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
@@ -264,7 +264,7 @@ const questions = [
     image: "img22.jpg",
     answers: ["(x₁+x̄₂)·(x₂+x₃)", "x₁x̄₂ + x₂x₃", "x₁x₂ + x̄₂x₃ + x₁x₃", "x₁x₂ + x̄₂x₃"],
     correct: 3,
-    expl: "<p>74HC02 vsebuje NOR vrata. Struktura NOR-NOR realizira MKNO direktno, MDNO pa preko De Morgana.</p><p><strong>f = x₁x₂ + x̄₂x₃</strong></p>"
+    expl: "<p>74HC02 vsebuje NOR vrata. Struktura NOR-NOR realizira MKNO direktno, MDNO pa preko De Morgana:</p><p><strong>f = x₁x₂ + x̄₂x₃</strong> ali K-karta in obkrožujemo <strong>enke</strong></p>"
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
@@ -371,7 +371,7 @@ const questions = [
     q: "Katere člene moramo zmnožiti k funkciji f(x₁,x₂,x₃) = (x₂+x₃)·(x₁+x̄₃)?",
     answers: ["(x̄₁+x₂)", "(x₁+x̄₂)", "(x̄₁+x̄₂)", "(x₁+x₂)"],
     correct: 3,
-    expl: "<p>Pri OR-AND realizaciji hazard odpravimo z redundantno vsoto. Konsenz med (x₂+x₃) in (x₁+x̄₃) izloči x₃: <strong>(x₁+x₂)</strong></p>"
+    expl: "<p>Pogledamo kje f=0, zapišemo maksterme v K-karto. Poiščemo mejne pare.<strong>(x₁+x₂)</strong></p>"
   },
   {
     topic: "4. Statični hazard",
@@ -379,7 +379,7 @@ const questions = [
     image: "img40.jpg",
    answers: ["sprememba x₂ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₃ iz 1 v 0", "sprememba x₃ iz 0 v 1"],	
     correct: 2,
-    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje NAND-NAND (krogci po &).</p>"
+    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje NAND-NAND (krogci po &).</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
   },
   {
     topic: "4. Statični hazard",
@@ -387,7 +387,7 @@ const questions = [
     image: "img45.jpg",
     answers: ["sprememba x₃ iz 0 v 1", "sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 1 v 0"],
     correct: 2,
-    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje AND-OR.</p>"
+    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje AND-OR.</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
   },
   {
     topic: "4. Statični hazard",
@@ -395,7 +395,7 @@ const questions = [
     image: "img46.jpg",
     answers: ["sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₂ iz 1 v 0"],
     correct: 0,
-    expl: "<p>Pri vezjih OR‐AND in NOR pa hazardni pojav povzroči le sprememba vhoda iz 0 v 1. V tem primeru je vezje OR-AND.</p>"
+    expl: "<p>Pri vezjih OR‐AND in NOR pa hazardni pojav povzroči le sprememba vhoda iz 0 v 1. V tem primeru je vezje OR-AND.</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
   },
 
   // ============ 5. KOMBINACIJSKA VEZJA & PLA ============
@@ -622,7 +622,7 @@ const questions = [
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja (sekvence) \"001\"?",
-    image: "img91.jpg",
+    image: "img91_narisano_HD.jpg",
     answers: ["a)", "b)", "c)", "d)"],
     correct: 2,
     expl: "<p>Iščemo diagram, ki sprejme 0, 0, 1 in nato vrne v začetek z izhodom 1 ob zadnjem prehodu: <strong>S₀ →(0)→ S₁ →(0)→ S₂ →(1/1)→ S₀</strong></p>"
