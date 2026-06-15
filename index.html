@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Digitalne strukture — Kviz (62 vprašanj)</title>
+<title>Digitalne strukture — Kviz (61 vprašanj)</title>
 <style>
   * { box-sizing: border-box; }
   body {
@@ -193,7 +193,7 @@
 <body>
 
 <h1>Digitalne strukture — Kviz</h1>
-<p class="subtitle">62 vprašanj iz vseh tem izpita. Klikni odgovor, nato "Pokaži razlago". Označi težka vprašanja za kasnejši pregled.</p>
+<p class="subtitle">61 vprašanj iz vseh tem izpita. Klikni odgovor, nato "Pokaži razlago". Označi težka vprašanja za kasnejši pregled.</p>
 
 <div class="controls">
   <button id="randomize-btn" onclick="toggleRandom()">🔀 Naključni vrstni red</button>
@@ -238,7 +238,7 @@ const questions = [
     q: "Po vodilu so prejete 4 osembitne besede:<pre>1 0101001\n0 1000011\n0 1011001\n1 1110011</pre>1. bit vsake besede je paritetni, zadnja beseda je kontrolna. V kateri besedi je napačen kateri bit?",
     answers: ["4. bit v 2. besedi", "8. bit v 3. besedi", "2. bit v 2. besedi", "6. bit v 3. besedi"],
     correct: 2,
-    expl: "<p><strong>Postopek</strong>:</p><ol><li>Preveri vrstično pariteto vsake od prvih 3 besed → ugotoviš, v kateri besedi je napaka.</li><li>Uporabi 4. (kontrolno) besedo za stolpčno pariteto → ugotoviš, v katerem bitu (stolpcu) je napaka.</li><li>Presečišče = napačen bit.</li></ol><p><strong>Liha pariteta (paritetni bit 1, če je liho št. enic).</strong></p>"
+    expl: "<p><strong>Postopek</strong>:</p><ol><li>Preveri vrstično pariteto vsake od prvih 3 besed → ugotoviš, v kateri besedi je napaka.</li><li>Uporabi 4. (kontrolno) besedo za stolpčno pariteto → ugotoviš, v katerem bitu (stolpcu) je napaka.</li><li>Presečišče = napačen bit.</li></ol><p>Rezultat: <strong>2. bit v 2. besedi</strong></p>"
   },
 
   // ============ 2. & 3. BOOLOVA ALGEBRA & PREKLOPNE FUNKCIJE ============
@@ -248,7 +248,7 @@ const questions = [
     image: "img20.jpg",
     answers: ["(x₁+x₂)·(x₁+x₃)", "(x₁+x₂)·(x̄₁+x₃)", "x̄₁x₂ + x₁x₃", "(x₁+x̄₂)·(x̄₁+x₃)"],
     correct: 1,
-    expl: "<p>74HC00 vsebuje NAND vrata. Iz vezji 74HC00 preberemo MDNO: f = x̄₁x₂ + x₁x₃. Pretvorba v MKNO preko K-karte ničel da: <strong>f = (x₁+x₂)(x̄₁+x₃)</strong>.<p><p>V K-karti za MKNO okrožujemo <strong>ničle</strong> in negiramo za <strong>enke</strong>.</p>"
+    expl: "<p>74HC00 vsebuje NAND vrata. Iz vezja preberemo MDNO: f = x̄₁x₂ + x₁x₃. Pretvorba v MKNO preko K-karte ničel da: <strong>f = (x₁+x₂)(x̄₁+x₃)</strong></p>"
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
@@ -256,7 +256,7 @@ const questions = [
     image: "img21.jpg",
     answers: ["x̄₁x₂ + x₁x₃", "x₁x₂ + x₁x₃", "(x̄₁+x₃)·(x₁+x₂)", "x̄₁x₂ + x₁x₃ + x₂x₃"],
     correct: 0,
-    expl: "<p>74HC00 vsebuje NAND vrata. Iz vezji 74HC00 direktno preberemo MDNO: f = x̄₁x₂ + x₁x₃.</p>"
+    expl: "<p>NAND-NAND vezje beremo direktno kot AND-OR (krogci se izničijo).</p><p>Spodnji NAND kot AND vrata → produkti, zgornji NAND kot OR → vsota: <strong>f = x̄₁x₂ + x₁x₃</strong></p>"
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
@@ -264,7 +264,7 @@ const questions = [
     image: "img22.jpg",
     answers: ["(x₁+x̄₂)·(x₂+x₃)", "x₁x̄₂ + x₂x₃", "x₁x₂ + x̄₂x₃ + x₁x₃", "x₁x₂ + x̄₂x₃"],
     correct: 3,
-    expl: "<p>74HC02 vsebuje NOR vrata. Struktura NOR-NOR realizira MKNO direktno, MDNO pa preko De Morgana:</p><p><strong>f = x₁x₂ + x̄₂x₃</strong> ali K-karta in obkrožujemo <strong>enke</strong></p>"
+    expl: "<p>74HC02 vsebuje NOR vrata. Struktura NOR-NOR realizira MKNO direktno, MDNO pa preko De Morgana.</p><p><strong>f = x₁x₂ + x̄₂x₃</strong></p>"
   },
   {
     topic: "2. & 3. Boolova algebra & preklopne funkcije",
@@ -371,7 +371,7 @@ const questions = [
     q: "Katere člene moramo zmnožiti k funkciji f(x₁,x₂,x₃) = (x₂+x₃)·(x₁+x̄₃)?",
     answers: ["(x̄₁+x₂)", "(x₁+x̄₂)", "(x̄₁+x̄₂)", "(x₁+x₂)"],
     correct: 3,
-    expl: "<p>Pogledamo kje f=0, zapišemo maksterme v K-karto. Poiščemo mejne pare.<strong>(x₁+x₂)</strong></p>"
+    expl: "<p>Pri OR-AND realizaciji hazard odpravimo z redundantno vsoto. Konsenz med (x₂+x₃) in (x₁+x̄₃) izloči x₃: <strong>(x₁+x₂)</strong></p>"
   },
   {
     topic: "4. Statični hazard",
@@ -379,7 +379,7 @@ const questions = [
     image: "img40.jpg",
    answers: ["sprememba x₂ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₃ iz 1 v 0", "sprememba x₃ iz 0 v 1"],	
     correct: 2,
-    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje NAND-NAND (krogci po &).</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
+    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje NAND-NAND (krogci po &).</p>"
   },
   {
     topic: "4. Statični hazard",
@@ -387,7 +387,7 @@ const questions = [
     image: "img45.jpg",
     answers: ["sprememba x₃ iz 0 v 1", "sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 1 v 0"],
     correct: 2,
-    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje AND-OR.</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
+    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje AND-OR.</p>"
   },
   {
     topic: "4. Statični hazard",
@@ -395,7 +395,7 @@ const questions = [
     image: "img46.jpg",
     answers: ["sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₂ iz 1 v 0"],
     correct: 0,
-    expl: "<p>Pri vezjih OR‐AND in NOR pa hazardni pojav povzroči le sprememba vhoda iz 0 v 1. V tem primeru je vezje OR-AND.</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
+    expl: "<p>Pri vezjih OR‐AND in NOR pa hazardni pojav povzroči le sprememba vhoda iz 0 v 1. V tem primeru je vezje OR-AND.</p>"
   },
 
   // ============ 5. KOMBINACIJSKA VEZJA & PLA ============
@@ -452,7 +452,7 @@ const questions = [
     image: "img56.jpg",
     answers: ["x̄₂ + x₃", "x̄₂ + x̄₃ + x₄ = 1", "x̄₁x₄", "x̄₂x̄₃ + x₃"],
     correct: 0,
-    expl: "<p>Iz PLA mreže preberemo, kateri produkti so povezani z izhodom f₂. Po minimizaciji dobimo: <strong>x̄₂ + x₃</strong></p>"
+    expl: "<p>Iz PLA mreže preberemo, kateri produkti so povezani z izhodom f₂. Po minimizaciji dobimo: <strong>x₂ + x₃</strong></p>"
   },
 
   // ============ 6. & 7. VHDL ============
@@ -510,21 +510,21 @@ const questions = [
     q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register is\nbegin\nprocess (clk,reset) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk='1') then q <= D;\n    end if;\nend process;\nend behavioral;</pre>",
     answers: ["pomikalni s flip-flopi D", "pomikalni z zapahi D", "navadni s flip-flopi D", "navadni z zapahi D"],
     correct: 2,
-    expl: "<p>Flip-flop ker sinhrono proženje ob clk. Navadni, ker prepiše vse bite hkrati q<=D</p>"
+    expl: "<p>Sinhrono proženje (clk'event), vsi biti hkrati q ← D, brez pomika → <strong>navadni register iz flip-flopov D</strong>.</p>"
   },
   {
     topic: "6. & 7. VHDL",
     q: "Ugotovite kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register1 is\nsignal clk,reset,d: std_logic;\nsignal q,a: std_logic_vector (3 downto 0);\nbegin\nprocess (clk,reset,a) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk = '1') then q <= a;\n    end if;\nend process;\na <= d & q(3 downto 1);\nend behavioral;</pre>",
     answers: ["pomikalni z zapahi D", "pomikalni s flip-flopi D", "navadni s flip-flopi D", "navadni z zapahi D"],
     correct: 1,
-    expl: "<p>Vrstica <code>a <= d & q(3 downto 1)</code> izvede pomik v desno za eno mesto z d na MSB. Flip-flop ker sinhrono proženje ob clk.</p>"
+    expl: "<p>Vrstica <code>a <= d & q(3 downto 1)</code> izvede pomik v desno za eno mesto z d na MSB. Klasični <strong>pomikalni register s flip-flopi D</strong>.</p>"
   },
   {
     topic: "6. & 7. VHDL",
     q: "Ugotovite katera spominska celica je opisana z naslednjo VHDL kodo:<pre>process (a,b,c,q) begin\n    if a = '1' and c = '1' then q <= '0';\n    elsif b = '1' and c = '1' then q <= '1';\n    else q <= q;\n    end if;\nend process;</pre>",
     answers: ["flip-flop JK", "zapah D", "flip-flop D", "zapah SR"],
     correct: 3,
-    expl: "<p>SR=SetReset c -> enable, a -> reset, b -> set, else -> ohrani stanje. Zapah, ker <strong>ni<strong> ob uri.</p>"
+    expl: "<p>c=1 deluje kot omogočilni signal (nivojsko, ne robno). a=1,c=1 → reset, b=1,c=1 → set, sicer obdrži → <strong>zapah SR</strong> z enable.</p>"
   },
   {
     topic: "6. & 7. VHDL",
@@ -552,7 +552,7 @@ const questions = [
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
-    image: "img79.jpg",
+    image: "img77.jpg",
     answers: ["celice JK", "celice T", "celice SR", "celice D"],
     correct: 1,
     expl: "<p>Vhod 0 ohrani stanje (zanke), vhod 1 preklopi (puščice med stanjema) → definicija <strong>T celice</strong>.</p>"
@@ -560,7 +560,7 @@ const questions = [
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
-    image: "img77.jpg",
+    image: "img79.jpg",
     answers: ["celice JK", "celice T", "celice D", "celice SR"],
     correct: 2,
     expl: "<p>Vhod 0 vedno vodi v Q=0, vhod 1 vedno v Q=1 (Q⁺ = D) → <strong>D celica</strong>.</p>"
@@ -571,7 +571,7 @@ const questions = [
     image: "img78.jpg",
     answers: ["zapah SR", "flip-flop T", "flip-flop D", "flip-flop JK"],
     correct: 3,
-    expl: "<p>Reagira samo na rob C. Prožilni vhod C → flip-flop. Dva vhoda X, Y, kjer X=Y=1 preklopi stanje → <strong>JK flip-flop</strong>.</p>"
+    expl: "<p>Prožilni vhod C → flip-flop. Dva vhoda X, Y, kjer X=Y=1 preklopi stanje → <strong>JK flip-flop</strong>.</p>"
   },
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
@@ -584,7 +584,7 @@ const questions = [
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Imamo spominsko celico z dvema vhodoma. Na prožilni vhod dovajamo signal C, na preostali vhod signal X, na izhodu pa dobimo naslednji signal (stanje) Q. Za katero spominsko celico gre?",
-    image: "img92.jpg",
+    image: "img91.jpg",
     answers: ["zapah T", "flip-flop D", "flip-flop T", "zapah D"],
     correct: 3,
     expl: "<p>En sam podatkovni vhod X, nivojska omogočitev C → <strong>zapah D</strong>. Q sledi X dokler je C=1.</p>"
@@ -617,12 +617,12 @@ const questions = [
     image: "img89.jpg",
     answers: ["T₁=T₂=0; R₁=R₂=1", "T₁=T₂=1; R₁=R₂=0", "T₁=T₂=0; R₁=R₂=0", "T₁=T₂=1; R₁=R₂=1"],
     correct: 3,
-    expl: "<p>T=1 vedno omogoča toggle (štetje). R določa smer štetja. R=1 je navzdol.</p>"
+    expl: "<p>T=1 vedno omogoča toggle (štetje). R=1 v določenih kombinacijah obrne smer štetja navzdol prek negiranih izhodov.</p>"
   },
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja (sekvence) \"001\"?",
-    image: "img91_narisano_HD.jpg",
+    image: "img90.jpg",
     answers: ["a)", "b)", "c)", "d)"],
     correct: 2,
     expl: "<p>Iščemo diagram, ki sprejme 0, 0, 1 in nato vrne v začetek z izhodom 1 ob zadnjem prehodu: <strong>S₀ →(0)→ S₁ →(0)→ S₂ →(1/1)→ S₀</strong></p>"
@@ -641,15 +641,15 @@ const questions = [
     image: "img86.jpg",
     answers: ["a)", "b)", "c)", "d)"],
     correct: 2,
-    expl: "<p>Pretvorba v Mealyja, brez minimalizacije, ker ni enakih skupin.</p>"
+    expl: "<p>4 Moorova stanja. S₂ ≡ S₃ (oba dajeta izhod 1 in gresta v enaka stanja) → minimalni Mealy z 3 stanji.</p>"
   },
   {
     topic: "8. & 9. Spominske celice & sekvenčna vezja",
     q: "Delovanje sinhronskega sekvenčnega vezja je opisano s tabelo stanj. Katera stanja moramo združiti, da dobimo minimalno število stanj?",
-    image: "img90.jpg",
+    image: "img92.jpg",
     answers: ["S₁≡S₆; S₂≡S₃; S₄≡S₅", "S₁≡S₂; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅"],
     correct: 2,
-    expl: "<p>Iščemo ekvivalentna stanja (enaki izhodi in naslednja stanja pri vseh vhodih). S₂ in S₃ imata enako tabelo, S₄, S₅, S₆ tudi (kjer se don't care '−' ujema s katero koli vrednostjo). <strong>S₂≡S₃; S₄≡S₅≡S₆</strong></p>"
+    expl: "<p>Iščemo ekvivalentna stanja (enaki izhodi in naslednja stanja pri vseh vhodih). S₂ in S₃ imata enako tabelo, S₄, S₅, S₆ tudi (kjer se don't care '−' ujema). <strong>S₂≡S₃; S₄≡S₅≡S₆</strong></p>"
   },
 
   // ============ 10. TEORETIČNA VPRAŠANJA ============
@@ -687,6 +687,315 @@ const questions = [
     answers: ["manjše število programirljivih blokov, ki pa so večji", "manjše število programirljivih blokov, ki so tudi manjši", "večje število programirljivih blokov, ki pa so manjši", "večje število programirljivih blokov, ki so tudi večji"],
     correct: 2,
     expl: "<p><strong>FPGA</strong>: veliko <strong>manjših</strong> blokov (LUT-i, flip-flopi).<br><strong>CPLD</strong>: manj <strong>večjih</strong> blokov z bolj predvidljivimi povezavami.</p>"
+  },
+
+  // ============ STARI IZPITI ============
+
+  // ---- Izpit 4081 (27.6.2011) ----
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Kateri od multipleksorjev 8/1, prikazanih na desni, deluje enako kot vezje iz štirih multipleksorjev 2/1 na levi?",
+    image: "4081-1.png",
+    answers: ["vezje 2", "vezje 4", "vezje 3", "vezje 1"],
+    correct: 3,
+    expl: "<p>Drevesno vezje 2/1 multipleksorjev reduciramo na ekvivalenten 8/1 MUX. Pravilen je <strong>vezje 1</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Vezje na desni prikazuje notranjo zgradbo ene od spominskih celic tipa D. Kdaj se takšna celica odziva na spremembe vhodnega signala D?",
+    image: "4081-2.png",
+    answers: ["ob nivoju C = 1", "ob spremembi C z 1 na 0", "ob nivoju C = 0", "ob spremembi C z 0 na 1"],
+    correct: 1,
+    expl: "<p>Master-slave struktura D flip-flopa — celica se odziva ob <strong>padajočem robu</strong> ure (1 → 0).</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Katere člene moramo prišteti funkciji, katere zapis v MDNO se glasi f(x₁,x₂,x₃,x₄) = x₂x₃ + x̄₂x₄ + x₁x̄₃x̄₄, da ta ne bo vsebovala hazarda?",
+    answers: ["nobenega", "x̄₁x₃x₄ + x₁x₃x₄ + x₁x̄₂x̄₃", "x₃x₄", "x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃"],
+    correct: 3,
+    expl: "<p>V K-karti najdemo mejne pare ne pokrite z istim implicentom in dodamo redundantne implicente: <strong>x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Delovanje digitalnega vezja je opisano s kodo VHDL. Kakšna je vrednost f pri x = 10 in y = 0?<pre>architecture izpit of P1 is\nsignal a,x: std_logic_vector (1 downto 0);\nsignal y: std_logic;\nbegin\n  a <= x(1) & y;\n  with a select\n    f <= \"000\" when \"00\",\n         \"100\" when \"11\",\n         \"101\" when \"01\",\n         \"110\" when others;\nend izpit;</pre>",
+    answers: ["000", "100", "110", "101"],
+    correct: 2,
+    expl: "<p>x(1) = 1 (MSB od x=10), y = 0. Konkatenacija: a = 1 & 0 = \"10\". Tega ni eksplicitno v select, zato <code>when others</code> → <strong>110</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Kaj moramo priključiti na vhode CPD, CPU, PL in MR vezja 74HC193, da bo delovalo kot 4-bitni števec, ki šteje navzdol?",
+    image: "4081-5.png",
+    answers: ["CLK, 1, 0, 0", "1, CLK, 1, 0", "1, 1, 1, 0", "CLK, 1, 1, 0"],
+    correct: 3,
+    expl: "<p>Za navzdol-števec: CPD = CLK, CPU = 1 (neaktiven), PL = 1 (neaktiven), MR = 0 (neaktiven).</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Kateri je pravilen dvojiški zapis desetiškega števila (ulomka) 1/7, če velja 1/7 = Σ 1/2^(3n)?",
+    answers: ["0.001", "0.<span style='text-decoration:overline'>0010</span>", "0.0101", "0.<span style='text-decoration:overline'>001</span>"],
+    correct: 3,
+    expl: "<p>Vzorec <code>001</code> se ponavlja v neskončnost: <strong>0.<span style='text-decoration:overline'>001</span></strong></p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Katero spominsko celico vsebuje stabilizator preklopnika (angl. switch debouncer oz. switch debounce circuit)?",
+    answers: ["zapah S̄R̄", "flip-flop JK", "flip-flop D", "zapah D"],
+    correct: 0,
+    expl: "<p>Stabilizator preklopnika uporablja <strong>zapah S̄R̄</strong> z negiranimi vhodi — odpravlja drhtenje mehanskih stikal.</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Katera od tabel stanj ustreza diagramu stanj na levi, če želimo sekvenčno vezje zgraditi v Mealyjevi izvedbi z minimalnim številom stanj?",
+    image: "4081-8.png",
+    answers: ["tabela 2", "tabela 3", "tabela 4", "tabela 1"],
+    correct: 1,
+    expl: "<p>Pretvorba Moorovega diagrama v Mealyjev z minimizacijo ekvivalentnih stanj → <strong>tabela 3</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Poiščite minimalno obliko (MDNO) funkcije f(x₁,x₂,x₃) = M₀ · M₁ · M₅",
+    answers: ["x̄₂(x₁ + x̄₃)", "x̄₂ + x̄₁x₃", "x̄₁x̄₂ + x̄₁x₃ + x₁x̄₂", "(x₁ + x̄₂)(x₁ + x̄₃)(x̄₁ + x₂)"],
+    correct: 1,
+    expl: "<p>Funkcija je 0 pri M₀, M₁, M₅ → enice pri ostalih mintermih. K-karta minimizacija: <strong>x̄₂ + x̄₁x₃</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Katero od vezij na desni ne deluje tako, kot prikazuje časovni diagram na levi?",
+    image: "4081-10.png",
+    answers: ["vezje 1", "vezje 4", "vezje 3", "vezje 2"],
+    correct: 1,
+    expl: "<p>Iz časovnega diagrama določimo funkcijo in primerjamo z vsemi 4 vezji. <strong>Vezje 4</strong> ne ustreza.</p>"
+  },
+
+  // ---- Izpit 4044 (18.2.2011) ----
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "V jeziku VHDL sta podana vektorja A in B:<pre>A <= \"0101\"; B <= \"1010\";</pre>Katera vrednost je zapisana v vektorju C, če ga definiramo takole?<pre>C <= B(3) & A(2 downto 0);</pre>",
+    answers: ["101", "1000", "0101", "1101"],
+    correct: 3,
+    expl: "<p>B(3) = 1, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>1101</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Poiščite MKNO zapis funkcije f(x₁,x₂,x₃) = <span style='text-decoration:overline'>(x₁↓x̄₂)</span> ⊕ (x₁↑x₃)",
+    answers: ["(x̄₁ + x̄₂)·(x₁ + x̄₃)", "x₁x̄₂ + x̄₁x̄₃", "(x₁ + x₂)·(x̄₁ + x₃)", "x̄₁x₂ + x₁x₃"],
+    correct: 2,
+    expl: "<p>Po De Morganu: <span style='text-decoration:overline'>(x₁↓x̄₂)</span> = x₁ + x̄₂. XOR s x₁↑x₃ in minimizacija v MKNO: <strong>(x₁+x₂)·(x̄₁+x₃)</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Spodnje funkcije želimo vse hkrati realizirati z enim kombinacijskim vezjem:<pre>f₁ = x₁x₂ + x̄₁x₃\nf₂ = x̄₁x̄₂x̄₃ + x₁x₃\nf₃ = (x₁ + x₃)·x̄₁</pre>V katerem od naštetih vezij je za to potrebno najmanjše število logičnih vrat?",
+    answers: ["v PAL in PLA enako", "PAL", "PLA", "PROM"],
+    correct: 2,
+    expl: "<p>PLA omogoča <strong>deljenje AND vrat med funkcijami</strong>, kar zmanjša skupno število vrat.</p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Funkcijo f(x₁,x₂,x₃,x₄) = Π(1,2,3,6,8,9,12,14) želimo realizirati v obliki DNO tako, da vezje ne bo vsebovalo hazarda. Katera od spodnjih funkcij opisuje takšno vezje?<pre>f₁ = x̄₁x̄₃x̄₄ + x₂x̄₃x̄₄ + x̄₁x₂x̄₃ + x₁x̄₂x₃\nf₂ = x̄₁x̄₃x̄₄ + x₂x̄₃x̄₄ + x̄₁x₂x̄₃ + x₁x̄₂x₃ + x̄₁x₂x₄ + x₁x₃x₄\nf₃ = x̄₂x̄₄ + x̄₁x₂x̄₃ + x₁x₃x₄\nf₄ = x̄₂x̄₄ + x̄₁x₂x̄₃ + x₁x₃x₄ + x̄₁x̄₃x̄₄ + x₁x̄₂x₃</pre>",
+    answers: ["f₄", "f₁", "f₃", "f₂"],
+    correct: 0,
+    expl: "<p><strong>f₄</strong> vsebuje vse potrebne redundantne implicente za odpravo hazardov.</p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Katero funkcijo f (v obliki MDNO) generira vezje 74HC02 s prikazanimi povezavami?",
+    image: "4044-5.png",
+    answers: ["x₁x₂ + x̄₂x₃", "x₁x₂ + x̄₂x₃ + x₁x₃", "(x₁ + x̄₂)·(x₂ + x₃)", "x₁x̄₂ + x₂x₃"],
+    correct: 0,
+    expl: "<p>74HC02 vsebuje NOR vrata. Iz vezja preberemo MKNO in pretvorimo v MDNO: <strong>x₁x₂ + x̄₂x₃</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Katero izhodno sekvenco Q₁Q₂ generira vezje na sliki ob treh zaporednih pulzih ure CLK, če je x = 1 in začetno stanje Q₁Q₂ = 00?",
+    image: "4044-6.png",
+    answers: ["10, 10, 10", "11, 00, 11", "11, 10, 10", "01, 10, 11"],
+    correct: 0,
+    expl: "<p>Iz vezja z JK flip-flopoma določimo prehode pri x=1. Sekvenca: <strong>10, 10, 10</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Sinhronsko sekvenčno vezje je podano z diagramom stanj na desni. Katere enačbe ustrezajo vezju v Mealyjevi obliki, če ga zgradimo iz T celic in logičnih vrat?",
+    image: "4044-7.png",
+    answers: ["T₁=x̄Q₁Q̄₂+xQ₂; T₂=x+Q̄₁Q₂; y=xQ₁Q̄₂+x̄Q₁Q₂", "T₁=x̄Q₁Q̄₂+xQ₂; T₂=x+Q̄₁Q₂; y=Q₁Q₂", "T₁=xQ₂; T₂=x+Q̄₁Q₂; y=xQ₁Q̄₂+x̄Q₁Q₂", "T₁=x̄Q₁Q̄₂+xQ₂; T₂=x; y=xQ₁Q̄₂+x̄Q₁Q₂"],
+    correct: 0,
+    expl: "<p>Iz diagrama stanj določimo prehode in izhode, nato za T celice izračunamo T = Q ⊕ Q⁺.</p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Kateri je pravilen dvojiški (binarni) zapis desetiškega števila 0.53125 = 17/32?",
+    answers: ["0.10101", "0.10001", "0.<span style='text-decoration:overline'>1000</span>", "0.1011011"],
+    correct: 1,
+    expl: "<p>17/32 = 17/2⁵ = 10001₂/2⁵ = <strong>0.10001</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Katero vezje deluje kot stabilizirano dvopolno stikalo oz. preklopnik (debounced switch)?",
+    image: "4044-9.png",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 0,
+    expl: "<p>Stabilizirano stikalo uporablja zapah S̄R̄ (z NAND vrati) — vezje <strong>a)</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Katera od navedenih enačb NI pravilna?<br>a) x̄·ȳ + y = x̄ + y<br>b) x·ȳ + y = y<br>c) <span style='text-decoration:overline'>x·ȳ + y</span> = x·ȳ<br>d) x⊕y = x̄⊕ȳ",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 1,
+    expl: "<p>x·ȳ + y = <strong>x + y</strong> (ne samo y). Absorpcija z dopolnitvijo.</p>"
+  },
+
+  // ---- Izpit 4039 (1.2.2011) ----
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Imamo spominsko celico z dvema vhodoma. Na prožilni vhod dovedemo signal C, na preostali vhod signal X, na izhodu pa dobimo signal (stanje) Q. Za kateri tip oziroma vrsto spominske celice gre?",
+    image: "4039-1.png",
+    answers: ["zapah T", "flip-flop T", "zapah D", "flip-flop D"],
+    correct: 1,
+    expl: "<p>Iz časovnega diagrama vidimo, da Q preklopi ob vsakem aktivnem robu C, ko je X=1, in ohrani stanje, ko je X=0. Prožilni vhod C → <strong>flip-flop T</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Na vhode prikazanega vezja PLA privedemo kombinacijo x₁x₂x₃x₄ = 0110. Križci označujejo povezave v mreži. Kaj dobimo na izhodih?",
+    image: "4039-2.png",
+    answers: ["f₁f₂f₃ = 001", "f₁f₂f₃ = 100", "f₁f₂f₃ = 111", "f₁f₂f₃ = 101"],
+    correct: 3,
+    expl: "<p>Pri vhodih 0110 izračunamo, kateri produkti so aktivni in kateri izhodi dobijo 1. Rezultat: <strong>f₁f₂f₃ = 101</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Katero vezje deluje kot 3-bitni serijski števec?",
+    image: "4039-3.png",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 0,
+    expl: "<p>Serijski (asinhroni) števec ima T flip-flope, kjer ura naslednje stopnje pride iz izhoda prejšnje. Pravilno je vezje <strong>a)</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Po vodilu smo prejeli zaporedje štirih 8-bitnih besed:<pre>1 0 1 0 1 0 0 1\n0 1 0 0 0 0 1 1\n0 1 0 1 1 0 0 1\n1 1 1 1 0 0 1 1</pre>v njem pa je zaradi šuma pri enem bitu prišlo do napake. Napake odkrivamo s kontrolo parnosti (1. bit vsake besede + zadnja kontrolna beseda). Kateri bit v kateri besedi je napačen?",
+    answers: ["4. bit v 2. besedi", "8. bit v 3. besedi", "6. bit v 3. besedi", "2. bit v 2. besedi"],
+    correct: 3,
+    expl: "<p>Z vrstično pariteto najdemo besedo z napako, s stolpčno pariteto pa stolpec. Presečišče: <strong>2. bit v 2. besedi</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Katera od navedenih enačb NI pravilna?<br>a) x·y = <span style='text-decoration:overline'>x̄ + ȳ</span><br>b) x + x·y = x<br>c) x + y + x̄ = 1<br>d) x·ȳ + y = y",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 3,
+    expl: "<p>x·ȳ + y = <strong>x + y</strong> (po absorpciji z dopolnitvijo), ne samo y.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture P1 of reg is\nbegin\nprocess (clk,reset) begin\n  if reset = '1' then q <= \"0000\";\n  elsif (clk'event and clk='1') then q <= D;\n  end if;\nend process;\nend P1;</pre>",
+    answers: ["navadni z zapahi D", "navadni s flip-flopi D", "pomikalni s flip-flopi D", "pomikalni z zapahi D"],
+    correct: 1,
+    expl: "<p>Sinhrono proženje (clk'event), vsi biti hkrati q ← D, brez pomika → <strong>navadni register iz flip-flopov D</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja \"110\"?",
+    image: "4039-7.png",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 0,
+    expl: "<p>Detektor zaporedja \"110\" — diagram <strong>a)</strong> ima pravilne prehode.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Poiščite MDNO zapis funkcije f(x₁,x₂,x₃) = M₀ · M₅",
+    answers: ["(x₁+x̄₃)(x₂+x̄₃)(x̄₁+x₂)", "x̄₂ + x₁x̄₃ + x̄₁x₃", "x₂ + x₁x̄₃ + x̄₁x₃", "x₁x̄₂ + x̄₁x̄₂ + x₁x̄₃ + x̄₁x₃"],
+    correct: 1,
+    expl: "<p>Funkcija je 0 pri M₀ in M₅. K-karta minimizacija: <strong>x̄₂ + x₁x̄₃ + x̄₁x₃</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Vezje na desni vsebuje več statičnih hazardov. Katera od funkcij ustreza takšni razširitvi prikazanega vezja, ki odpravlja vse vsebovane hazarde?<pre>f₁ = x̄₁x̄₃ + x₁x̄₂x̄₄ + x₂x₃x̄₄ + x̄₁x̄₃x₄ + x₂x₃x₄ + x₁x̄₂x₄\nf₂ = x̄₁x̄₃ + x₁x̄₂x̄₄ + x₂x₃x̄₄ + x₁x₃x̄₄\nf₃ = x̄₁x̄₃ + x₁x̄₂x̄₄ + x₂x₃x̄₄ + x₁x₃x̄₄ + x̄₂x̄₃x̄₄ + x̄₁x₂x̄₄\nf₄ = x̄₁x̄₃ + x₁x̄₂x̄₄ + x₂x₃x̄₄ + x₁x₃x̄₄ + x̄₂x̄₃x̄₄</pre>",
+    image: "4039-9.png",
+    answers: ["f₃", "f₂", "f₄", "f₁"],
+    correct: 0,
+    expl: "<p><strong>f₃</strong> vsebuje vse potrebne redundantne implicente za odpravo vseh hazardov.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Katero funkcijo (v obliki MDNO) generira vezje na desni?",
+    image: "4039-10.png",
+    answers: ["x₁x̄₂ + x₁x̄₄ + x₁x̄₃", "x₁ + x₃ + x̄₁x̄₄", "x̄₁x̄₂ + x̄₁x̄₃x₄", "x₁ + x₂x₃ + x₂x̄₄"],
+    correct: 3,
+    expl: "<p>Iz vezja z multipleksorji preberemo funkcijo in minimiziramo: <strong>x₁ + x₂x₃ + x₂x̄₄</strong></p>"
+  },
+
+  // ---- Izpit 4092 (7.9.2011) ----
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katera vhodna sprememba v vezju na desni povzroči statični hazard?",
+    image: "4092-1.png",
+    answers: ["sprememba x₁: 0 → 1", "sprememba x₁: 1 → 0", "sprememba x₂: 0 → 1", "sprememba x₂: 1 → 0"],
+    correct: 2,
+    expl: "<p>Vezje je OR-AND struktura → hazard pri prehodu <strong>0 → 1</strong>. Spremenljivka x₂ gre po dveh poteh (direktno in skozi invertor).</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture P1 of reg is\nbegin\nprocess (clk,reset) begin\n  if reset = '1' then q <= \"0000\";\n  elsif (clk'event and clk='1') then q <= D;\n  end if;\nend process;\nend P1;</pre>",
+    answers: ["navadni z zapahi D", "pomikalni z zapahi D", "navadni s flip-flopi D", "pomikalni s flip-flopi D"],
+    correct: 2,
+    expl: "<p>Sinhrono proženje (clk'event), vsi biti hkrati q ← D, brez pomika → <strong>navadni s flip-flopi D</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Z vezjem PLA želimo realizirati naslednje tri funkcije:<pre>f₁ = x₁x̄₂x̄₃ + x₂x₃x̄₄\nf₂ = x̄₃x₄ + x₁x̄₂x̄₃\nf₃ = x₂x₃x̄₄ + x̄₃x₄</pre>Kolikšno je najmanjše število vrat AND in OR v mreži PLA?",
+    answers: ["6 AND in 3 OR", "3 AND in 3 OR", "3 AND in 6 OR", "10 AND in 3 OR"],
+    correct: 1,
+    expl: "<p>Različni produkti: {x₁x̄₂x̄₃, x₂x₃x̄₄, x̄₃x₄} → <strong>3 AND</strong>. Vsaka funkcija dobi 1 OR → <strong>3 OR</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Kakšna je tribitna številska koda, ki števila od 0 do 7 kodira takole: 000, 001, 011, 010, 110, 111, 101, 100?",
+    answers: ["enokoračna in reflektivna", "nič od naštetega", "utežnostna in enokoračna", "utežnostna in reflektivna"],
+    correct: 0,
+    expl: "<p>To je Grayeva koda — <strong>enokoračna</strong> in <strong>reflektivna</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Poiščite minimalno obliko (MDNO) funkcije f(x₁,x₂,x₃) = <span style='text-decoration:overline'>x̄₁ · (x₂+x₃) · <span style='text-decoration:overline'>(x₁+x̄₂)</span></span>",
+    answers: ["x̄₁x̄₂", "x₁ + x̄₁x₂", "x₁ + x̄₁x₂ + x̄₁x₂x₃", "x₁ + x₂"],
+    correct: 3,
+    expl: "<p>Poenostavimo korak za korakom z De Morganom in absorpcijo. Rezultat: <strong>x₁ + x₂</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katera od navedenih enačb NI pravilna?<br>a) x·ȳ + y = y<br>b) x⊕y = x̄⊕ȳ<br>c) <span style='text-decoration:overline'>x·ȳ + y</span> = x·ȳ<br>d) x↓y = <span style='text-decoration:overline'>x̄↑ȳ</span>",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 0,
+    expl: "<p>x·ȳ + y = <strong>x + y</strong>, ne samo y.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja \"110\"?",
+    image: "4092-7.png",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 1,
+    expl: "<p>Detektor zaporedja \"110\" — diagram <strong>b)</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katero funkcijo (v obliki MKNO) generira vezje na desni?",
+    image: "4092-8.png",
+    answers: ["(x₁+x₂)(x₂+x₃)", "x₁+x₃+x̄₁x̄₂", "x̄₂+x̄₁x̄₃", "(x̄₁+x̄₂)(x̄₂+x̄₃)"],
+    correct: 3,
+    expl: "<p>Iz vezja preberemo funkcijo in zapišemo v MKNO: <strong>(x̄₁+x̄₂)(x̄₂+x̄₃)</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katere vrednosti moramo dovesti na vhode T in R, da bo vezje na sliki delovalo kot binarni števec, ki šteje navzdol (sekvenca Q₁Q₀ = 00, 11, 10, 01, 00, ...)?",
+    image: "4092-9.png",
+    answers: ["T₁=T₂=1, R₁=R₂=1", "T₁=T₂=1, R₁=R₂=0", "T₁=T₂=0, R₁=R₂=0", "T₁=T₂=0, R₁=R₂=1"],
+    correct: 0,
+    expl: "<p>T=1 omogoča toggle (štetje), R=1 obrne smer štetja navzdol prek negiranih izhodov.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katero spominsko celico vsebuje stabilizator preklopnika (angl. switch debouncer oz. switch debounce circuit)?",
+    answers: ["flip-flop JK", "zapah S̄R̄", "flip-flop D", "zapah D"],
+    correct: 1,
+    expl: "<p>Stabilizator preklopnika uporablja <strong>zapah S̄R̄</strong> z negiranimi vhodi.</p>"
   }
 ];
 
