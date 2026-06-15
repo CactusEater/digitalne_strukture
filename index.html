@@ -210,484 +210,484 @@
 <div id="quiz-container"></div>
 
 <script>
-const questions = [
-  // ============ 1. ŠTEVILSKE KODE ============
-  {
-    topic: "1. Številske kode",
-    q: "Kateri je pravilen dvojiški zapis desetiškega števila 0.53125? (namig: 0.53125 = 17/32)",
-    answers: ["0.10101", "0.1011011", "0.1000", "0.10001"],
-    correct: 3,
-    expl: "<p>17/32 = 17/2⁵. Število 17 v dvojiškem zapisu je <code>10001</code>. Z deljenjem z 2⁵ premaknemo decimalno vejico za 5 mest v levo: <strong>0.10001₂</strong></p><p>Preverimo: 0.10001₂ = 1/2 + 1/32 = 16/32 + 1/32 = 17/32 ✓</p>"
-  },
-  {
-    topic: "1. Številske kode",
-    q: "Kateri je pravilen dvojiški zapis ulomka 1/7? (namig: 1/7 = Σ 1/2^(3n))",
-    answers: ["0.<span style='text-decoration:overline'>0010</span>", "0.001", "0.<span style='text-decoration:overline'>00101</span>", "0.<span style='text-decoration:overline'>001</span>"],
-    correct: 3,
-    expl: "<p>1/7 = 1/8 + 1/64 + 1/512 + ... — enice na pozicijah 3, 6, 9, ...</p><p>Vzorec <code>001</code> se ponavlja v neskončnost: <strong>0.<span style='text-decoration:overline'>001</span></strong></p>"
-  },
-  {
-    topic: "1. Številske kode",
-    q: "Tribitna številska koda: 000, 001, 011, 010, 110, 111, 101, 100. Kakšna koda je to?",
-    answers: ["nič od naštetega", "enokoračna in refleksivna", "utežnostna in enokoračna", "utežnostna in refleksivna"],
-    correct: 1,
-    expl: "<p>To je <strong>Grayeva koda</strong>:</p><ul><li><strong>Enokoračna</strong>: sosednji kodni besedi se razlikujeta v natanko enem bitu.</li><li><strong>Refleksivna</strong>: druga polovica je zrcalna slika prve z dodanim MSB=1.</li></ul><p>Ni utežnostna — biti nimajo težinskih vrednosti.</p>"
-  },
-  {
-    topic: "1. Številske kode",
-    q: "Po vodilu so prejete 4 osembitne besede:<pre>1 0101001\n0 1000011\n0 1011001\n1 1110011</pre>1. bit vsake besede je paritetni, zadnja beseda je kontrolna. V kateri besedi je napačen kateri bit?",
-    answers: ["4. bit v 2. besedi", "8. bit v 3. besedi", "2. bit v 2. besedi", "6. bit v 3. besedi"],
-    correct: 2,
-    expl: "<p><strong>Postopek</strong>:</p><ol><li>Preveri vrstično pariteto vsake od prvih 3 besed → ugotoviš, v kateri besedi je napaka.</li><li>Uporabi 4. (kontrolno) besedo za stolpčno pariteto → ugotoviš, v katerem bitu (stolpcu) je napaka.</li><li>Presečišče = napačen bit.</li></ol><p>Rezultat: <strong>2. bit v 2. besedi</strong></p>"
-  },
+	const questions = [
+	  // ============ 1. ŠTEVILSKE KODE ============
+	  {
+		topic: "1. Številske kode",
+		q: "Kateri je pravilen dvojiški zapis desetiškega števila 0.53125? (namig: 0.53125 = 17/32)",
+		answers: ["0.10101", "0.1011011", "0.1000", "0.10001"],
+		correct: 3,
+		expl: "<p>17/32 = 17/2⁵. Število 17 v dvojiškem zapisu je <code>10001</code>. Z deljenjem z 2⁵ premaknemo decimalno vejico za 5 mest v levo: <strong>0.10001₂</strong></p><p>Preverimo: 0.10001₂ = 1/2 + 1/32 = 16/32 + 1/32 = 17/32 ✓</p>"
+	  },
+	  {
+		topic: "1. Številske kode",
+		q: "Kateri je pravilen dvojiški zapis ulomka 1/7? (namig: 1/7 = Σ 1/2^(3n))",
+		answers: ["0.<span style='text-decoration:overline'>0010</span>", "0.001", "0.<span style='text-decoration:overline'>00101</span>", "0.<span style='text-decoration:overline'>001</span>"],
+		correct: 3,
+		expl: "<p>1/7 = 1/8 + 1/64 + 1/512 + ... — enice na pozicijah 3, 6, 9, ...</p><p>Vzorec <code>001</code> se ponavlja v neskončnost: <strong>0.<span style='text-decoration:overline'>001</span></strong></p>"
+	  },
+	  {
+		topic: "1. Številske kode",
+		q: "Tribitna številska koda: 000, 001, 011, 010, 110, 111, 101, 100. Kakšna koda je to?",
+		answers: ["nič od naštetega", "enokoračna in refleksivna", "utežnostna in enokoračna", "utežnostna in refleksivna"],
+		correct: 1,
+		expl: "<p>To je <strong>Grayeva koda</strong>:</p><ul><li><strong>Enokoračna</strong>: sosednji kodni besedi se razlikujeta v natanko enem bitu.</li><li><strong>Refleksivna</strong>: druga polovica je zrcalna slika prve z dodanim MSB=1.</li></ul><p>Ni utežnostna — biti nimajo težinskih vrednosti.</p>"
+	  },
+	  {
+		topic: "1. Številske kode",
+		q: "Po vodilu so prejete 4 osembitne besede:<pre>1 0101001\n0 1000011\n0 1011001\n1 1110011</pre>1. bit vsake besede je paritetni, zadnja beseda je kontrolna. V kateri besedi je napačen kateri bit?",
+		answers: ["4. bit v 2. besedi", "8. bit v 3. besedi", "2. bit v 2. besedi", "6. bit v 3. besedi"],
+		correct: 2,
+		expl: "<p><strong>Postopek</strong>:</p><ol><li>Preveri vrstično pariteto vsake od prvih 3 besed → ugotoviš, v kateri besedi je napaka.</li><li>Uporabi 4. (kontrolno) besedo za stolpčno pariteto → ugotoviš, v katerem bitu (stolpcu) je napaka.</li><li>Presečišče = napačen bit.</li></ol><p><strong>Liha pariteta (paritetni bit 1, če je liho št. enic).</strong></p>"
+	  },
 
-  // ============ 2. & 3. BOOLOVA ALGEBRA & PREKLOPNE FUNKCIJE ============
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katero funkcijo f (v obliki MKNO) generira vezje 74HC00 z naslednjimi povezavami?",
-    image: "img20.jpg",
-    answers: ["(x₁+x₂)·(x₁+x₃)", "(x₁+x₂)·(x̄₁+x₃)", "x̄₁x₂ + x₁x₃", "(x₁+x̄₂)·(x̄₁+x₃)"],
-    correct: 1,
-    expl: "<p>74HC00 vsebuje NAND vrata. Iz vezja preberemo MDNO: f = x̄₁x₂ + x₁x₃. Pretvorba v MKNO preko K-karte ničel da: <strong>f = (x₁+x₂)(x̄₁+x₃)</strong></p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katero funkcijo f (v obliki MDNO) generira vezje 74HC00 z naslednjimi povezavami?",
-    image: "img21.jpg",
-    answers: ["x̄₁x₂ + x₁x₃", "x₁x₂ + x₁x₃", "(x̄₁+x₃)·(x₁+x₂)", "x̄₁x₂ + x₁x₃ + x₂x₃"],
-    correct: 0,
-    expl: "<p>NAND-NAND vezje beremo direktno kot AND-OR (krogci se izničijo).</p><p>Spodnji NAND kot AND vrata → produkti, zgornji NAND kot OR → vsota: <strong>f = x̄₁x₂ + x₁x₃</strong></p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katero funkcijo f (v obliki MDNO) generira vezje 74HC02 z naslednjimi povezavami?",
-    image: "img22.jpg",
-    answers: ["(x₁+x̄₂)·(x₂+x₃)", "x₁x̄₂ + x₂x₃", "x₁x₂ + x̄₂x₃ + x₁x₃", "x₁x₂ + x̄₂x₃"],
-    correct: 3,
-    expl: "<p>74HC02 vsebuje NOR vrata. Struktura NOR-NOR realizira MKNO direktno, MDNO pa preko De Morgana.</p><p><strong>f = x₁x₂ + x̄₂x₃</strong></p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katero od vezij NE deluje tako, kot prikazuje naslednji časovni diagram?",
-    image: "img26.jpg",
-    answers: ["Vezje a", "Vezje b", "Vezje c", "Vezje d"],
-    correct: 0,
-    expl: "<p>Iz časovnega diagrama odčitamo funkcijo izhoda glede na vhode x₁, x₂, x₃ in primerjamo z vsako od 4 možnih realizacij.</p><p>Vezje <strong>a)</strong> ne ustreza danemu diagramu.</p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katera od navedenih enačb NI pravilna?",
-    image: "img23.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 2,
-    expl: "<p>x≡y (XNOR) je <strong>negacija</strong> od x⊕y (XOR). Ko je XOR=1, je XNOR=0, in produkt z NAND ne more biti enak XOR. Enačba ne velja.</p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katera od navedenih enačb NI pravilna?",
-    image: "img28.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 0,
-    expl: "<p>Po absorpciji z dopolnitvijo: <code>x·ȳ + y = x + y</code> (ne x + ȳ).</p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katera od navedenih enačb NI pravilna?",
-    image: "img29.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 0,
-    expl: "<p>x·ȳ + y = <strong>x + y</strong>, ne samo y. Drugi člen vsebuje x, ki ga ne moremo izgubiti.</p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Katera od navedenih enačb NI pravilna?",
-    image: "img35.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 2,
-    expl: "<p>NOR (x↓y) = 1 samo, ko sta oba 0. NAND·OR ne da nikoli te vrednosti, ker NAND=0 le pri obojih 1, OR=0 pri obojih 0 → produkt je vedno 0.</p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = M₀·M₁·M₅?",
-    answers: ["x̄₂ + x̄₁x₃", "(x₁+x̄₂)(x₁+x̄₃)(x̄₁+x₂)", "x̄₁x̄₂ + x̄₁x₃ + x₃x̄₂", "x̄₃(x₁+x̄₃)"],
-    correct: 0,
-    expl: "<p>Po učbeniški konvenciji M_i = m̄_{7-i}: M₀=m̄₇, M₁=m̄₆, M₅=m̄₂. Funkcija je 0 pri {2,6,7}, 1 pri {0,1,3,4,5}.</p><p>K-karta minimizacija: <strong>x̄₂ + x̄₁x₃</strong></p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = m₀+m₁+m₃+m₄+m₅?",
-    answers: ["x̄₂(x₁+x̄₃)", "x̄₂ + x̄₁x₃", "x̄₂ + x̄₁x₂x₃", "(x̄₁+x̄₂)·(x̄₂+x₃)"],
-    correct: 1,
-    expl: "<p>K-karta z mintermi 0,1,3,4,5: stolpca x₂=0 (m0,m1,m4,m5) → x̄₂; m1,m3 → x̄₁x₃.</p><p><strong>f = x̄₂ + x̄₁x₃</strong></p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Kako se glasi MKNO zapis funkcije f(x₁,x₂,x₃,x₃) = m₀+m₁+m₃+m₄+m₅?",
-    answers: ["x̄₂(x₁+x̄₃)", "x̄₂ + x̄₁x₃", "(x̄₁+x̄₂)·(x̄₂+x₃)", "x̄₂·(x̄₁+x₃)"],
-    correct: 2,
-    expl: "<p>Ista funkcija kot prej, samo zapisana kot produkt vsot. Iz K-karte ničel: <strong>(x̄₁+x̄₂)·(x̄₂+x₃)</strong></p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Kako se glasi MKNO zapis funkcije f(x₁, x₂, x₃) = <span style='text-decoration:overline'>(x₁↓x̄₂)</span> ⊕ (x₁↑x₃)?",
-    image: "img33.jpg",
-    answers: ["x₁x̄₂ + x̄₁x̄₃", "x̄₁x₂ + x₁x₃", "(x̄₁+x₂)·(x₁+x̄₃)", "(x₁+x₂)·(x̄₁+x₃)"],
-    correct: 3,
-    expl: "<p>Izračunamo oba člena, naredimo XOR, nato iz K-karte ničel dobimo MKNO: <strong>(x₁+x₂)·(x̄₁+x₃)</strong></p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = ∏ 0,1,5?",
-    answers: ["x̄₁x₂ + x̄₁x₃ + x₃x̄₂", "(x₁+x̄₂)(x₁+x̄₃)(x̄₁+x₂)", "x̄₂(x₁+x̄₃)", "x̄₂ + x̄₁x₃"],
-    correct: 3,
-    expl: "<p>Po učbeniški konvenciji: ∏ 0,1,5 = M₀M₁M₅ = ničle pri mintermih {7,6,2}, enice pri {0,1,3,4,5}.</p><p>K-karta minimizacija: skupina cel stolpec x₂=0 = x̄₂, plus m1+m3 = x̄₁x₃.</p><p><strong>f = x̄₂ + x̄₁x₃</strong></p>"
-  },
-  {
-    topic: "2. & 3. Boolova algebra & preklopne funkcije",
-    q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = (x̄₁·((x₂+x₃)·(x₁+x̄₂)')')'?",
-    image: "img36.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 2,
-    expl: "<p>Poenostavimo izraz korak za korakom z De Morganom in absorpcijo ter dobimo minimalno MDNO obliko.</p>"
-  },
+	  // ============ 2. & 3. BOOLOVA ALGEBRA & PREKLOPNE FUNKCIJE ============
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katero funkcijo f (v obliki MKNO) generira vezje 74HC00 z naslednjimi povezavami?",
+		image: "img20.jpg",
+		answers: ["(x₁+x₂)·(x₁+x₃)", "(x₁+x₂)·(x̄₁+x₃)", "x̄₁x₂ + x₁x₃", "(x₁+x̄₂)·(x̄₁+x₃)"],
+		correct: 1,
+		expl: "<p>74HC00 vsebuje NAND vrata. Iz vezji 74HC00 preberemo MDNO: f = x̄₁x₂ + x₁x₃. Pretvorba v MKNO preko K-karte ničel da: <strong>f = (x₁+x₂)(x̄₁+x₃)</strong>.<p><p>V K-karti za MKNO okrožujemo <strong>ničle</strong> in negiramo za <strong>enke</strong>.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katero funkcijo f (v obliki MDNO) generira vezje 74HC00 z naslednjimi povezavami?",
+		image: "img21.jpg",
+		answers: ["x̄₁x₂ + x₁x₃", "x₁x₂ + x₁x₃", "(x̄₁+x₃)·(x₁+x₂)", "x̄₁x₂ + x₁x₃ + x₂x₃"],
+		correct: 0,
+		expl: "<p>74HC00 vsebuje NAND vrata. Iz vezji 74HC00 direktno preberemo MDNO: f = x̄₁x₂ + x₁x₃.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katero funkcijo f (v obliki MDNO) generira vezje 74HC02 z naslednjimi povezavami?",
+		image: "img22.jpg",
+		answers: ["(x₁+x̄₂)·(x₂+x₃)", "x₁x̄₂ + x₂x₃", "x₁x₂ + x̄₂x₃ + x₁x₃", "x₁x₂ + x̄₂x₃"],
+		correct: 3,
+		expl: "<p>74HC02 vsebuje NOR vrata. Struktura NOR-NOR realizira MKNO direktno, MDNO pa preko De Morgana:</p><p><strong>f = x₁x₂ + x̄₂x₃</strong> ali K-karta in obkrožujemo <strong>enke</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katero od vezij NE deluje tako, kot prikazuje naslednji časovni diagram?",
+		image: "img26.jpg",
+		answers: ["Vezje a", "Vezje b", "Vezje c", "Vezje d"],
+		correct: 0,
+		expl: "<p>Iz časovnega diagrama odčitamo funkcijo izhoda glede na vhode x₁, x₂, x₃ in primerjamo z vsako od 4 možnih realizacij.</p><p>Vezje <strong>a)</strong> ne ustreza danemu diagramu.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katera od navedenih enačb NI pravilna?",
+		image: "img23.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>x≡y (XNOR) je <strong>negacija</strong> od x⊕y (XOR). Ko je XOR=1, je XNOR=0, in produkt z NAND ne more biti enak XOR. Enačba ne velja.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katera od navedenih enačb NI pravilna?",
+		image: "img28.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 0,
+		expl: "<p>Po absorpciji z dopolnitvijo: <code>x·ȳ + y = x + y</code> (ne x + ȳ).</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katera od navedenih enačb NI pravilna?",
+		image: "img29.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 0,
+		expl: "<p>x·ȳ + y = <strong>x + y</strong>, ne samo y. Drugi člen vsebuje x, ki ga ne moremo izgubiti.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katera od navedenih enačb NI pravilna?",
+		image: "img35.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>NOR (x↓y) = 1 samo, ko sta oba 0. NAND·OR ne da nikoli te vrednosti, ker NAND=0 le pri obojih 1, OR=0 pri obojih 0 → produkt je vedno 0.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = M₀·M₁·M₅?",
+		answers: ["x̄₂ + x̄₁x₃", "(x₁+x̄₂)(x₁+x̄₃)(x̄₁+x₂)", "x̄₁x̄₂ + x̄₁x₃ + x₃x̄₂", "x̄₃(x₁+x̄₃)"],
+		correct: 0,
+		expl: "<p>Po učbeniški konvenciji M_i = m̄_{7-i}: M₀=m̄₇, M₁=m̄₆, M₅=m̄₂. Funkcija je 0 pri {2,6,7}, 1 pri {0,1,3,4,5}.</p><p>K-karta minimizacija: <strong>x̄₂ + x̄₁x₃</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = m₀+m₁+m₃+m₄+m₅?",
+		answers: ["x̄₂(x₁+x̄₃)", "x̄₂ + x̄₁x₃", "x̄₂ + x̄₁x₂x₃", "(x̄₁+x̄₂)·(x̄₂+x₃)"],
+		correct: 1,
+		expl: "<p>K-karta z mintermi 0,1,3,4,5: stolpca x₂=0 (m0,m1,m4,m5) → x̄₂; m1,m3 → x̄₁x₃.</p><p><strong>f = x̄₂ + x̄₁x₃</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MKNO zapis funkcije f(x₁,x₂,x₃,x₃) = m₀+m₁+m₃+m₄+m₅?",
+		answers: ["x̄₂(x₁+x̄₃)", "x̄₂ + x̄₁x₃", "(x̄₁+x̄₂)·(x̄₂+x₃)", "x̄₂·(x̄₁+x₃)"],
+		correct: 2,
+		expl: "<p>Ista funkcija kot prej, samo zapisana kot produkt vsot. Iz K-karte ničel: <strong>(x̄₁+x̄₂)·(x̄₂+x₃)</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MKNO zapis funkcije f(x₁, x₂, x₃) = <span style='text-decoration:overline'>(x₁↓x̄₂)</span> ⊕ (x₁↑x₃)?",
+		image: "img33.jpg",
+		answers: ["x₁x̄₂ + x̄₁x̄₃", "x̄₁x₂ + x₁x₃", "(x̄₁+x₂)·(x₁+x̄₃)", "(x₁+x₂)·(x̄₁+x₃)"],
+		correct: 3,
+		expl: "<p>Izračunamo oba člena, naredimo XOR, nato iz K-karte ničel dobimo MKNO: <strong>(x₁+x₂)·(x̄₁+x₃)</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = ∏ 0,1,5?",
+		answers: ["x̄₁x₂ + x̄₁x₃ + x₃x̄₂", "(x₁+x̄₂)(x₁+x̄₃)(x̄₁+x₂)", "x̄₂(x₁+x̄₃)", "x̄₂ + x̄₁x₃"],
+		correct: 3,
+		expl: "<p>Po učbeniški konvenciji: ∏ 0,1,5 = M₀M₁M₅ = ničle pri mintermih {7,6,2}, enice pri {0,1,3,4,5}.</p><p>K-karta minimizacija: skupina cel stolpec x₂=0 = x̄₂, plus m1+m3 = x̄₁x₃.</p><p><strong>f = x̄₂ + x̄₁x₃</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = (x̄₁·((x₂+x₃)·(x₁+x̄₂)')')'?",
+		image: "img36.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>Poenostavimo izraz korak za korakom z De Morganom in absorpcijo ter dobimo minimalno MDNO obliko.</p>"
+	  },
 
-  // ============ 4. STATIČNI HAZARD ============
-  {
-    topic: "4. Statični hazard",
-    q: "Katere člene moramo prišteti funkciji f(x₁,x₂,x₃,x₄) = x₂x₃ + x̄₂x₄ + x̄₁x̄₃x̄₄, da realizacija ne bo vsebovala hazarda?",
-    answers: ["x₃x₄", "x₃x₄ + x̄₁x₂x̄₄ + x̄₁x̄₂x̄₃", "x₃x₄ + x̄₁x̄₂x₃", "nobenega"],
-    correct: 1,
-    expl: "<p>V K-karti poiščemo mejne pare ne pokrite z istim implicentom. Potrebni so trije dodatki: <strong>x₃x₄ + x̄₁x₂x̄₄ + x̄₁x̄₂x̄₃</strong></p>"
-  },
-  {
-    topic: "4. Statični hazard",
-    q: "Katere člene moramo prišteti funkciji f = x₂x₃ + x̄₂x₄ + x₁x̄₃x̄₄?",
-    answers: ["nobenega", "x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃", "x₃x₄", "x̄₁x₃x₄ + x₁x₃x₄ + x₁x̄₂x̄₃"],
-    correct: 1,
-    expl: "<p>Enako načelo: dodamo redundantne implicente za vsak mejni par.</p><p><strong>x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃</strong></p>"
-  },
-  {
-    topic: "4. Statični hazard",
-    q: "Katere člene moramo zmnožiti k funkciji f(x₁,x₂,x₃) = (x₂+x₃)·(x₁+x̄₃)?",
-    answers: ["(x̄₁+x₂)", "(x₁+x̄₂)", "(x̄₁+x̄₂)", "(x₁+x₂)"],
-    correct: 3,
-    expl: "<p>Pri OR-AND realizaciji hazard odpravimo z redundantno vsoto. Konsenz med (x₂+x₃) in (x₁+x̄₃) izloči x₃: <strong>(x₁+x₂)</strong></p>"
-  },
-  {
-    topic: "4. Statični hazard",
-    q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
-    image: "img40.jpg",
-   answers: ["sprememba x₂ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₃ iz 1 v 0", "sprememba x₃ iz 0 v 1"],	
-    correct: 2,
-    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje NAND-NAND (krogci po &).</p>"
-  },
-  {
-    topic: "4. Statični hazard",
-    q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
-    image: "img45.jpg",
-    answers: ["sprememba x₃ iz 0 v 1", "sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 1 v 0"],
-    correct: 2,
-    expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje AND-OR.</p>"
-  },
-  {
-    topic: "4. Statični hazard",
-    q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
-    image: "img46.jpg",
-    answers: ["sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₂ iz 1 v 0"],
-    correct: 0,
-    expl: "<p>Pri vezjih OR‐AND in NOR pa hazardni pojav povzroči le sprememba vhoda iz 0 v 1. V tem primeru je vezje OR-AND.</p>"
-  },
+	  // ============ 4. STATIČNI HAZARD ============
+	  {
+		topic: "4. Statični hazard",
+		q: "Katere člene moramo prišteti funkciji f(x₁,x₂,x₃,x₄) = x₂x₃ + x̄₂x₄ + x̄₁x̄₃x̄₄, da realizacija ne bo vsebovala hazarda?",
+		answers: ["x₃x₄", "x₃x₄ + x̄₁x₂x̄₄ + x̄₁x̄₂x̄₃", "x₃x₄ + x̄₁x̄₂x₃", "nobenega"],
+		correct: 1,
+		expl: "<p>V K-karti poiščemo mejne pare ne pokrite z istim implicentom. Potrebni so trije dodatki: <strong>x₃x₄ + x̄₁x₂x̄₄ + x̄₁x̄₂x̄₃</strong></p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katere člene moramo prišteti funkciji f = x₂x₃ + x̄₂x₄ + x₁x̄₃x̄₄?",
+		answers: ["nobenega", "x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃", "x₃x₄", "x̄₁x₃x₄ + x₁x₃x₄ + x₁x̄₂x̄₃"],
+		correct: 1,
+		expl: "<p>Enako načelo: dodamo redundantne implicente za vsak mejni par.</p><p><strong>x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃</strong></p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katere člene moramo zmnožiti k funkciji f(x₁,x₂,x₃) = (x₂+x₃)·(x₁+x̄₃)?",
+		answers: ["(x̄₁+x₂)", "(x₁+x̄₂)", "(x̄₁+x̄₂)", "(x₁+x₂)"],
+		correct: 3,
+		expl: "<p>Pogledamo kje f=0, zapišemo maksterme v K-karto. Poiščemo mejne pare.<strong>(x₁+x₂)</strong></p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
+		image: "img40.jpg",
+	   answers: ["sprememba x₂ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₃ iz 1 v 0", "sprememba x₃ iz 0 v 1"],	
+		correct: 2,
+		expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje NAND-NAND (krogci po &).</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
+		image: "img45.jpg",
+		answers: ["sprememba x₃ iz 0 v 1", "sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 1 v 0"],
+		correct: 2,
+		expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje AND-OR.</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
+		image: "img46.jpg",
+		answers: ["sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₂ iz 1 v 0"],
+		correct: 0,
+		expl: "<p>Pri vezjih OR‐AND in NOR pa hazardni pojav povzroči le sprememba vhoda iz 0 v 1. V tem primeru je vezje OR-AND.</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
+	  },
 
-  // ============ 5. KOMBINACIJSKA VEZJA & PLA ============
-  {
-    topic: "5. Kombinacijska vezja & PLA",
-    q: "Z vezjem PLA želimo realizirati funkcije:<pre>f₁ = x₁x̄₂x̄₃ + x₂x₃x̄₄\nf₂ = x̄₃x₄ + x₁x̄₂x̄₃\nf₃ = x₂x₃x̄₄ + x̄₃x₄</pre>Najmanjše število vrat AND in OR?",
-    answers: ["6 AND in 3 OR", "3 AND in 6 OR", "3 AND in 3 OR", "10 AND in 3 OR"],
-    correct: 2,
-    expl: "<p>Različni produkti: {x₁x̄₂x̄₃, x₂x₃x̄₄, x̄₃x₄} → <strong>3 AND vrata</strong>. Vsaka funkcija dobi 1 OR → <strong>3 OR vrata</strong>.</p>"
-  },
-  {
-    topic: "5. Kombinacijska vezja & PLA",
-    q: "Kateri od multipleksorjev 4/2 realizira enobitni polni odštevalnik x − y (A = razlika, B = izposoja)?",
-    image: "img49.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 1,
-    expl: "<p>Polni odštevalnik: A = x ⊕ y ⊕ B_in, B_out = x̄·y + (x̄+y)·B_in.</p><p>MUX 4/2 krmiljen z (x,y), za vsako kombinacijo priklopi ustrezno funkcijo B_in.</p>"
-  },
-  {
-    topic: "5. Kombinacijska vezja & PLA",
-    q: "Kateri od multipleksorjev 4/2 realizira enobitni polni seštevalnik x + y (A = vsota, B = prenos)?",
-    image: "img50.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 2,
-    expl: "<p>Polni seštevalnik: S = x ⊕ y ⊕ C_in, C_out = x·y + (x+y)·C_in.</p>"
-  },
-  {
-    topic: "5. Kombinacijska vezja & PLA",
-    q: "Kateri od multipleksorjev 8/1 realizira isto preklopno funkcijo kot prikazano vezje?",
-    image: "img52.jpg",
-    answers: ["a) 1,0,1,X₄,1,0,0,0", "b) 0,1,0,X₄,1,0,1,0", "c) 0,0,0,X₄,1,0,0,0", "d) 0,1,0,X₄,1,0,1,0"],
-    correct: 1,
-    expl: "<p>Drevesni MUX reduciramo na 8 vrednosti za vsako kombinacijo (x₁,x₂,x₃) in primerjamo s 8/1 MUX tabelo.</p>"
-  },
-  {
-    topic: "5. Kombinacijska vezja & PLA",
-    q: "Katero preklopno funkcijo realizira vezje Dekodirnik + Multipleksor (z negiranimi izhodi Dk in križno vezavo)?",
-    image: "img55.jpg",
-    answers: ["f = 0", "f = x₁ ⊕ x₂", "f = 1", "f = x₁ ≡ x₂"],
-    correct: 0,
-    expl: "<p>Dekodirnik ima negirane izhode (krogci). ko je x1=0 x1=1 -> 01, bo 2. izhod deodirnika negiran 1=0 in bo f vrednost na vhodu mux x1=0 x1=1 -> 10, torej f=0.</p>"
-  },
-  {
-    topic: "5. Kombinacijska vezja & PLA",
-    q: "Katero preklopno funkcijo realizira naslednje vezje?",
-    image: "img57.jpg",
-    answers: ["f = 0", "f = x₁ ⊕ x₂", "f = 1", "f = x₁ ≡ x₂"],
-    correct: 1,
-    expl: "<p>Pri tej vezavi MUX s krmilno kodo (x₁,x₂) izbira izhode dekodirnika v drugačnem zaporedju, kar realizira XOR funkcijo: <strong>f = x₁ ⊕ x₂</strong></p>"
-  },
-  {
-    topic: "5. Kombinacijska vezja & PLA",
-    q: "Kako se v obliki MDNO glasi funkcija f₂, ki jo realizira prikazano vezje PLA?",
-    image: "img56.jpg",
-    answers: ["x̄₂ + x₃", "x̄₂ + x̄₃ + x₄ = 1", "x̄₁x₄", "x̄₂x̄₃ + x₃"],
-    correct: 0,
-    expl: "<p>Iz PLA mreže preberemo, kateri produkti so povezani z izhodom f₂. Po minimizaciji dobimo: <strong>x₂ + x₃</strong></p>"
-  },
+	  // ============ 5. KOMBINACIJSKA VEZJA & PLA ============
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Z vezjem PLA želimo realizirati funkcije:<pre>f₁ = x₁x̄₂x̄₃ + x₂x₃x̄₄\nf₂ = x̄₃x₄ + x₁x̄₂x̄₃\nf₃ = x₂x₃x̄₄ + x̄₃x₄</pre>Najmanjše število vrat AND in OR?",
+		answers: ["6 AND in 3 OR", "3 AND in 6 OR", "3 AND in 3 OR", "10 AND in 3 OR"],
+		correct: 2,
+		expl: "<p>Različni produkti: {x₁x̄₂x̄₃, x₂x₃x̄₄, x̄₃x₄} → <strong>3 AND vrata</strong>. Vsaka funkcija dobi 1 OR → <strong>3 OR vrata</strong>.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Kateri od multipleksorjev 4/2 realizira enobitni polni odštevalnik x − y (A = razlika, B = izposoja)?",
+		image: "img49.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 1,
+		expl: "<p>Polni odštevalnik: A = x ⊕ y ⊕ B_in, B_out = x̄·y + (x̄+y)·B_in.</p><p>MUX 4/2 krmiljen z (x,y), za vsako kombinacijo priklopi ustrezno funkcijo B_in.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Kateri od multipleksorjev 4/2 realizira enobitni polni seštevalnik x + y (A = vsota, B = prenos)?",
+		image: "img50.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>Polni seštevalnik: S = x ⊕ y ⊕ C_in, C_out = x·y + (x+y)·C_in.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Kateri od multipleksorjev 8/1 realizira isto preklopno funkcijo kot prikazano vezje?",
+		image: "img52.jpg",
+		answers: ["a) 1,0,1,X₄,1,0,0,0", "b) 0,1,0,X₄,1,0,1,0", "c) 0,0,0,X₄,1,0,0,0", "d) 0,1,0,X₄,1,0,1,0"],
+		correct: 1,
+		expl: "<p>Drevesni MUX reduciramo na 8 vrednosti za vsako kombinacijo (x₁,x₂,x₃) in primerjamo s 8/1 MUX tabelo.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Katero preklopno funkcijo realizira vezje Dekodirnik + Multipleksor (z negiranimi izhodi Dk in križno vezavo)?",
+		image: "img55.jpg",
+		answers: ["f = 0", "f = x₁ ⊕ x₂", "f = 1", "f = x₁ ≡ x₂"],
+		correct: 0,
+		expl: "<p>Dekodirnik ima negirane izhode (krogci). ko je x1=0 x1=1 -> 01, bo 2. izhod deodirnika negiran 1=0 in bo f vrednost na vhodu mux x1=0 x1=1 -> 10, torej f=0.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Katero preklopno funkcijo realizira naslednje vezje?",
+		image: "img57.jpg",
+		answers: ["f = 0", "f = x₁ ⊕ x₂", "f = 1", "f = x₁ ≡ x₂"],
+		correct: 1,
+		expl: "<p>Pri tej vezavi MUX s krmilno kodo (x₁,x₂) izbira izhode dekodirnika v drugačnem zaporedju, kar realizira XOR funkcijo: <strong>f = x₁ ⊕ x₂</strong></p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Kako se v obliki MDNO glasi funkcija f₂, ki jo realizira prikazano vezje PLA?",
+		image: "img56.jpg",
+		answers: ["x̄₂ + x₃", "x̄₂ + x̄₃ + x₄ = 1", "x̄₁x₄", "x̄₂x̄₃ + x₃"],
+		correct: 0,
+		expl: "<p>Iz PLA mreže preberemo, kateri produkti so povezani z izhodom f₂. Po minimizaciji dobimo: <strong>x̄₂ + x₃</strong></p>"
+	  },
 
-  // ============ 6. & 7. VHDL ============
-  {
-    topic: "6. & 7. VHDL",
-    q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal y: std_logic_vector (3 downto 0);\nbegin\nwith a select\n    y <= \"0001\" when \"00\",\n         \"0010\" when \"01\",\n         \"0100\" when \"10\",\n         \"1000\" when others;\nend behavioral;</pre>",
-    answers: ["multipleksor", "zapah", "register", "dekodirnik"],
-    correct: 3,
-    expl: "<p>Vhod a (2 bita) izbira en izhod, ki ima vedno samo en bit '1' → <strong>dekodirnik 2 → 4</strong>.</p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nsignal f: std_logic;\nbegin\nf <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);\nend behavioral;</pre>",
-    answers: ["register", "zapah", "multipleksor", "dekodirnik"],
-    correct: 2,
-    expl: "<p>A je krmilni signal (2 bita), B(0..3) so podatkovni vhodi, f je izbrani izhod → <strong>4/1 multipleksor</strong>.</p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(3) & A(3 downto 1);</pre>Katera vrednost je zapisana v vektorju C?",
-    answers: ["010", "0101", "1010", "1000"],
-    correct: 2,
-    expl: "<p>Operator <code>&</code> je konkatenacija. B(3) = 1, A(3 downto 1) = <code>010</code>. Skupaj: <strong>1010</strong></p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(2) & A(2 downto 0);</pre>Katera vrednost je zapisana v vektorju C?",
-    answers: ["1010", "0101", "1101", "000"],
-    correct: 1,
-    expl: "<p>B(2) = 0, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>0101</strong></p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(3) & A(2 downto 0);</pre>Katera vrednost je zapisana v vektorju C?",
-    answers: ["1000", "1101", "0101", "101"],
-    correct: 1,
-    expl: "<p>B(3) = 1, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>1101</strong></p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "Ugotovite katero vezje je opisano z naslednjo VHDL kodo:<pre>process (clk) begin\n    if (clk'event and clk='1') then\n        if st = 9 then st <= \"0000\";\n        else st <= st + 1;\n        end if;\n    end if;\nend process;</pre>",
-    answers: ["BCD števec", "binarni števec", "števec po modulu 9", "števec po modulu 4"],
-    correct: 0,
-    expl: "<p>Šteje 0–9 in se postavi na 0 ko doseže 9 → <strong>BCD števec</strong> (modul 10).</p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "Ugotovite katero vezje je opisano z naslednjo VHDL kodo:<pre>process (clk,d) begin\n    if (clk'event and clk='1') then\n        q <= d;\n    end if;\nend process;\nd <= \"000\" when q = \"100\" else q + 1;</pre>",
-    answers: ["BCD števec", "števec po modulu 4", "binarni števec", "števec po modulu 5"],
-    correct: 3,
-    expl: "<p>Šteje 0,1,2,3,4 (000–100) in se resetira na 0 → 5 različnih stanj → <strong>modul 5</strong>.</p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register is\nbegin\nprocess (clk,reset) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk='1') then q <= D;\n    end if;\nend process;\nend behavioral;</pre>",
-    answers: ["pomikalni s flip-flopi D", "pomikalni z zapahi D", "navadni s flip-flopi D", "navadni z zapahi D"],
-    correct: 2,
-    expl: "<p>Sinhrono proženje (clk'event), vsi biti hkrati q ← D, brez pomika → <strong>navadni register iz flip-flopov D</strong>.</p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "Ugotovite kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register1 is\nsignal clk,reset,d: std_logic;\nsignal q,a: std_logic_vector (3 downto 0);\nbegin\nprocess (clk,reset,a) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk = '1') then q <= a;\n    end if;\nend process;\na <= d & q(3 downto 1);\nend behavioral;</pre>",
-    answers: ["pomikalni z zapahi D", "pomikalni s flip-flopi D", "navadni s flip-flopi D", "navadni z zapahi D"],
-    correct: 1,
-    expl: "<p>Vrstica <code>a <= d & q(3 downto 1)</code> izvede pomik v desno za eno mesto z d na MSB. Klasični <strong>pomikalni register s flip-flopi D</strong>.</p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "Ugotovite katera spominska celica je opisana z naslednjo VHDL kodo:<pre>process (a,b,c,q) begin\n    if a = '1' and c = '1' then q <= '0';\n    elsif b = '1' and c = '1' then q <= '1';\n    else q <= q;\n    end if;\nend process;</pre>",
-    answers: ["flip-flop JK", "zapah D", "flip-flop D", "zapah SR"],
-    correct: 3,
-    expl: "<p>c=1 deluje kot omogočilni signal (nivojsko, ne robno). a=1,c=1 → reset, b=1,c=1 → set, sicer obdrži → <strong>zapah SR</strong> z enable.</p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal y: std_logic_vector (3 downto 0);\nbegin\nwith a select\n    y <= \"0001\" when \"00\",\n         \"0010\" when \"01\",\n         \"0100\" when \"10\",\n         \"1000\" when others;\nend behavioral;</pre>",
-    answers: ["multipleksor", "zapah", "register", "dekodirnik"],
-    correct: 3,
-    expl: "<p>Vhod a (2 bita) izbira en izhod, ki ima vedno samo en bit '1' → <strong>dekodirnik 2 → 4</strong>.</p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nsignal f: std_logic;\nbegin\nf <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);\nend behavioral;</pre>",
-    answers: ["register", "zapah", "multipleksor", "dekodirnik"],
-    correct: 2,
-    expl: "<p>A je krmilni signal, B(0..3) so podatkovni vhodi, f je izbrani izhod → <strong>4/1 multipleksor</strong>.</p>"
-  },
-  {
-    topic: "6. & 7. VHDL",
-    q: "V vezju nastopata enobitna spremenljivka A in dvobitna spremenljivka B. Kako ju pravilno deklariramo v VHDL?",
-    answers: ["signal A: std_logic; signal B: std_logic_vector (1 downto 0);", "signal A: std_logic_vector (1 downto 0); signal B: std_logic_vector (2 downto 0);", "signal A: std_logic; signal B: std_logic_vector (2 downto 0);", "signal A, B: std_logic_vector (2 downto 0);"],
-    correct: 0,
-    expl: "<p>Enobitni signali so <code>std_logic</code>. Dvobitni vektorji potrebujejo <code>std_logic_vector (1 downto 0)</code>.</p>"
-  },
+	  // ============ 6. & 7. VHDL ============
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal y: std_logic_vector (3 downto 0);\nbegin\nwith a select\n    y <= \"0001\" when \"00\",\n         \"0010\" when \"01\",\n         \"0100\" when \"10\",\n         \"1000\" when others;\nend behavioral;</pre>",
+		answers: ["multipleksor", "zapah", "register", "dekodirnik"],
+		correct: 3,
+		expl: "<p>Vhod a (2 bita) izbira en izhod, ki ima vedno samo en bit '1' → <strong>dekodirnik 2 → 4</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nsignal f: std_logic;\nbegin\nf <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);\nend behavioral;</pre>",
+		answers: ["register", "zapah", "multipleksor", "dekodirnik"],
+		correct: 2,
+		expl: "<p>A je krmilni signal (2 bita), B(0..3) so podatkovni vhodi, f je izbrani izhod → <strong>4/1 multipleksor</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(3) & A(3 downto 1);</pre>Katera vrednost je zapisana v vektorju C?",
+		answers: ["010", "0101", "1010", "1000"],
+		correct: 2,
+		expl: "<p>Operator <code>&</code> je konkatenacija. B(3) = 1, A(3 downto 1) = <code>010</code>. Skupaj: <strong>1010</strong></p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(2) & A(2 downto 0);</pre>Katera vrednost je zapisana v vektorju C?",
+		answers: ["1010", "0101", "1101", "000"],
+		correct: 1,
+		expl: "<p>B(2) = 0, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>0101</strong></p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(3) & A(2 downto 0);</pre>Katera vrednost je zapisana v vektorju C?",
+		answers: ["1000", "1101", "0101", "101"],
+		correct: 1,
+		expl: "<p>B(3) = 1, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>1101</strong></p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite katero vezje je opisano z naslednjo VHDL kodo:<pre>process (clk) begin\n    if (clk'event and clk='1') then\n        if st = 9 then st <= \"0000\";\n        else st <= st + 1;\n        end if;\n    end if;\nend process;</pre>",
+		answers: ["BCD števec", "binarni števec", "števec po modulu 9", "števec po modulu 4"],
+		correct: 0,
+		expl: "<p>Šteje 0–9 in se postavi na 0 ko doseže 9 → <strong>BCD števec</strong> (modul 10).</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite katero vezje je opisano z naslednjo VHDL kodo:<pre>process (clk,d) begin\n    if (clk'event and clk='1') then\n        q <= d;\n    end if;\nend process;\nd <= \"000\" when q = \"100\" else q + 1;</pre>",
+		answers: ["BCD števec", "števec po modulu 4", "binarni števec", "števec po modulu 5"],
+		correct: 3,
+		expl: "<p>Šteje 0,1,2,3,4 (000–100) in se resetira na 0 → 5 različnih stanj → <strong>modul 5</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register is\nbegin\nprocess (clk,reset) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk='1') then q <= D;\n    end if;\nend process;\nend behavioral;</pre>",
+		answers: ["pomikalni s flip-flopi D", "pomikalni z zapahi D", "navadni s flip-flopi D", "navadni z zapahi D"],
+		correct: 2,
+		expl: "<p>Flip-flop ker sinhrono proženje ob clk. Navadni, ker prepiše vse bite hkrati q<=D</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register1 is\nsignal clk,reset,d: std_logic;\nsignal q,a: std_logic_vector (3 downto 0);\nbegin\nprocess (clk,reset,a) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk = '1') then q <= a;\n    end if;\nend process;\na <= d & q(3 downto 1);\nend behavioral;</pre>",
+		answers: ["pomikalni z zapahi D", "pomikalni s flip-flopi D", "navadni s flip-flopi D", "navadni z zapahi D"],
+		correct: 1,
+		expl: "<p>Vrstica <code>a <= d & q(3 downto 1)</code> izvede pomik v desno za eno mesto z d na MSB. Flip-flop ker sinhrono proženje ob clk.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite katera spominska celica je opisana z naslednjo VHDL kodo:<pre>process (a,b,c,q) begin\n    if a = '1' and c = '1' then q <= '0';\n    elsif b = '1' and c = '1' then q <= '1';\n    else q <= q;\n    end if;\nend process;</pre>",
+		answers: ["flip-flop JK", "zapah D", "flip-flop D", "zapah SR"],
+		correct: 3,
+		expl: "<p>SR=SetReset c -> enable, a -> reset, b -> set, else -> ohrani stanje. Zapah, ker <strong>ni<strong> ob uri.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal y: std_logic_vector (3 downto 0);\nbegin\nwith a select\n    y <= \"0001\" when \"00\",\n         \"0010\" when \"01\",\n         \"0100\" when \"10\",\n         \"1000\" when others;\nend behavioral;</pre>",
+		answers: ["multipleksor", "zapah", "register", "dekodirnik"],
+		correct: 3,
+		expl: "<p>Vhod a (2 bita) izbira en izhod, ki ima vedno samo en bit '1' → <strong>dekodirnik 2 → 4</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nsignal f: std_logic;\nbegin\nf <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);\nend behavioral;</pre>",
+		answers: ["register", "zapah", "multipleksor", "dekodirnik"],
+		correct: 2,
+		expl: "<p>A je krmilni signal, B(0..3) so podatkovni vhodi, f je izbrani izhod → <strong>4/1 multipleksor</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "V vezju nastopata enobitna spremenljivka A in dvobitna spremenljivka B. Kako ju pravilno deklariramo v VHDL?",
+		answers: ["signal A: std_logic; signal B: std_logic_vector (1 downto 0);", "signal A: std_logic_vector (1 downto 0); signal B: std_logic_vector (2 downto 0);", "signal A: std_logic; signal B: std_logic_vector (2 downto 0);", "signal A, B: std_logic_vector (2 downto 0);"],
+		correct: 0,
+		expl: "<p>Enobitni signali so <code>std_logic</code>. Dvobitni vektorji potrebujejo <code>std_logic_vector (1 downto 0)</code>.</p>"
+	  },
 
-  // ============ 8. & 9. SPOMINSKE CELICE & SEKVENČNA VEZJA ============
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
-    image: "img77.jpg",
-    answers: ["celice JK", "celice T", "celice SR", "celice D"],
-    correct: 1,
-    expl: "<p>Vhod 0 ohrani stanje (zanke), vhod 1 preklopi (puščice med stanjema) → definicija <strong>T celice</strong>.</p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
-    image: "img79.jpg",
-    answers: ["celice JK", "celice T", "celice D", "celice SR"],
-    correct: 2,
-    expl: "<p>Vhod 0 vedno vodi v Q=0, vhod 1 vedno v Q=1 (Q⁺ = D) → <strong>D celica</strong>.</p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Imamo spominsko celico s tremi vhodi. Na prožilni vhod dovajamo signal C, na preostala vhoda signala X in Y, na dveh izhodih pa dobimo naslednja signala (stanje) Q. Za katero spominsko celico gre?",
-    image: "img78.jpg",
-    answers: ["zapah SR", "flip-flop T", "flip-flop D", "flip-flop JK"],
-    correct: 3,
-    expl: "<p>Prožilni vhod C → flip-flop. Dva vhoda X, Y, kjer X=Y=1 preklopi stanje → <strong>JK flip-flop</strong>.</p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Imamo spominsko celico s tremi vhodi. Na prožilni vhod signal C, na preostalih X in Y, na izhodih Q in Q̄. Za katero spominsko celico gre?",
-    image: "img83.jpg",
-    answers: ["flip-flop JK", "zapah D", "zapah SR", "flip-flop SR"],
-    correct: 2,
-    expl: "<p>Iz diagrama vidimo, da je celica občutljiva na <strong>nivo</strong> C (ne na rob). X postavlja, Y ponastavlja → <strong>zapah SR</strong>.</p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Imamo spominsko celico z dvema vhodoma. Na prožilni vhod dovajamo signal C, na preostali vhod signal X, na izhodu pa dobimo naslednji signal (stanje) Q. Za katero spominsko celico gre?",
-    image: "img91.jpg",
-    answers: ["zapah T", "flip-flop D", "flip-flop T", "zapah D"],
-    correct: 3,
-    expl: "<p>En sam podatkovni vhod X, nivojska omogočitev C → <strong>zapah D</strong>. Q sledi X dokler je C=1.</p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Katera karakteristična enačba opisuje delovanje spominske celice JK?",
-    answers: ["Q⁺ = J⊕K", "Q⁺ = J·Q̄ + K̄·Q", "Q⁺ = J·Q̄ + K·Q̄", "Q⁺ = J·Q + J̄·Q̄"],
-    correct: 1,
-    expl: "<p><strong>Q⁺ = J·Q̄ + K̄·Q</strong></p><ul><li>J=1, K=0: Q⁺ = 1 (set)</li><li>J=0, K=1: Q⁺ = 0 (reset)</li><li>J=K=0: Q⁺ = Q (hold)</li><li>J=K=1: Q⁺ = Q̄ (toggle)</li></ul>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Katera karakteristična enačba opisuje delovanje spominske celice D?",
-    answers: ["Q⁺ = D⊕Q", "Q⁺ = D", "Q⁺ = D·Q", "Q⁺ = D·Q + D̄·Q̄"],
-    correct: 1,
-    expl: "<p>Najpreprostejša: <strong>Q⁺ = D</strong>. Izhod ob proženju postane enak vhodu.</p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Katero sekvenco generira naslednje vezje na izhodu Q₁Q₀?",
-    image: "img80.jpg",
-    answers: ["00, 11, 10, 01, 00...", "00, 10, 01, 00...", "00, 01, 11, 10, 00...", "00, 01, 10, 00..."],
-    correct: 3,
-    expl: "<p>T₁ = Q₁+Q₀, D₀ = ¬(Q₁+Q₀). Iz tabele prehodov dobimo števec po modulu 3: <strong>00 → 01 → 10 → 00</strong></p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Katere vrednosti moramo dovesti na vhode T in R, da bo vezje delovalo kot binarni števec navzdol (sekvenca 00, 11, 10, 01, 00...)?",
-    image: "img89.jpg",
-    answers: ["T₁=T₂=0; R₁=R₂=1", "T₁=T₂=1; R₁=R₂=0", "T₁=T₂=0; R₁=R₂=0", "T₁=T₂=1; R₁=R₂=1"],
-    correct: 3,
-    expl: "<p>T=1 vedno omogoča toggle (štetje). R=1 v določenih kombinacijah obrne smer štetja navzdol prek negiranih izhodov.</p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja (sekvence) \"001\"?",
-    image: "img90.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 2,
-    expl: "<p>Iščemo diagram, ki sprejme 0, 0, 1 in nato vrne v začetek z izhodom 1 ob zadnjem prehodu: <strong>S₀ →(0)→ S₁ →(0)→ S₂ →(1/1)→ S₀</strong></p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Katera od tabel stanj ustreza naslednjemu diagramu stanj (Mealyjeva izvedba z minimalnim številom stanj)?",
-    image: "img84.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 3,
-    expl: "<p>3 stanja (S₁, S₂, S₃), Moorovi izhodi v krogih. Pretvorba v Mealy in minimizacija: S₁ ≡ S₃ (enaki prehodi in izhodi) → minimalni avtomat z <strong>2 stanjema</strong>.</p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Katera od tabel stanj ustreza naslednjemu diagramu stanj (Mealyjeva izvedba)?",
-    image: "img86.jpg",
-    answers: ["a)", "b)", "c)", "d)"],
-    correct: 2,
-    expl: "<p>4 Moorova stanja. S₂ ≡ S₃ (oba dajeta izhod 1 in gresta v enaka stanja) → minimalni Mealy z 3 stanji.</p>"
-  },
-  {
-    topic: "8. & 9. Spominske celice & sekvenčna vezja",
-    q: "Delovanje sinhronskega sekvenčnega vezja je opisano s tabelo stanj. Katera stanja moramo združiti, da dobimo minimalno število stanj?",
-    image: "img92.jpg",
-    answers: ["S₁≡S₆; S₂≡S₃; S₄≡S₅", "S₁≡S₂; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅"],
-    correct: 2,
-    expl: "<p>Iščemo ekvivalentna stanja (enaki izhodi in naslednja stanja pri vseh vhodih). S₂ in S₃ imata enako tabelo, S₄, S₅, S₆ tudi (kjer se don't care '−' ujema). <strong>S₂≡S₃; S₄≡S₅≡S₆</strong></p>"
-  },
+	  // ============ 8. & 9. SPOMINSKE CELICE & SEKVENČNA VEZJA ============
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
+		image: "img79.jpg",
+		answers: ["celice JK", "celice T", "celice SR", "celice D"],
+		correct: 1,
+		expl: "<p>Vhod 0 ohrani stanje (zanke), vhod 1 preklopi (puščice med stanjema) → definicija <strong>T celice</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
+		image: "img77.jpg",
+		answers: ["celice JK", "celice T", "celice D", "celice SR"],
+		correct: 2,
+		expl: "<p>Vhod 0 vedno vodi v Q=0, vhod 1 vedno v Q=1 (Q⁺ = D) → <strong>D celica</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Imamo spominsko celico s tremi vhodi. Na prožilni vhod dovajamo signal C, na preostala vhoda signala X in Y, na dveh izhodih pa dobimo naslednja signala (stanje) Q. Za katero spominsko celico gre?",
+		image: "img78.jpg",
+		answers: ["zapah SR", "flip-flop T", "flip-flop D", "flip-flop JK"],
+		correct: 3,
+		expl: "<p>Reagira samo na rob C. Prožilni vhod C → flip-flop. Dva vhoda X, Y, kjer X=Y=1 preklopi stanje → <strong>JK flip-flop</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Imamo spominsko celico s tremi vhodi. Na prožilni vhod signal C, na preostalih X in Y, na izhodih Q in Q̄. Za katero spominsko celico gre?",
+		image: "img83.jpg",
+		answers: ["flip-flop JK", "zapah D", "zapah SR", "flip-flop SR"],
+		correct: 2,
+		expl: "<p>Iz diagrama vidimo, da je celica občutljiva na <strong>nivo</strong> C (ne na rob). X postavlja, Y ponastavlja → <strong>zapah SR</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Imamo spominsko celico z dvema vhodoma. Na prožilni vhod dovajamo signal C, na preostali vhod signal X, na izhodu pa dobimo naslednji signal (stanje) Q. Za katero spominsko celico gre?",
+		image: "img92.jpg",
+		answers: ["zapah T", "flip-flop D", "flip-flop T", "zapah D"],
+		correct: 3,
+		expl: "<p>En sam podatkovni vhod X, nivojska omogočitev C → <strong>zapah D</strong>. Q sledi X dokler je C=1.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katera karakteristična enačba opisuje delovanje spominske celice JK?",
+		answers: ["Q⁺ = J⊕K", "Q⁺ = J·Q̄ + K̄·Q", "Q⁺ = J·Q̄ + K·Q̄", "Q⁺ = J·Q + J̄·Q̄"],
+		correct: 1,
+		expl: "<p><strong>Q⁺ = J·Q̄ + K̄·Q</strong></p><ul><li>J=1, K=0: Q⁺ = 1 (set)</li><li>J=0, K=1: Q⁺ = 0 (reset)</li><li>J=K=0: Q⁺ = Q (hold)</li><li>J=K=1: Q⁺ = Q̄ (toggle)</li></ul>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katera karakteristična enačba opisuje delovanje spominske celice D?",
+		answers: ["Q⁺ = D⊕Q", "Q⁺ = D", "Q⁺ = D·Q", "Q⁺ = D·Q + D̄·Q̄"],
+		correct: 1,
+		expl: "<p>Najpreprostejša: <strong>Q⁺ = D</strong>. Izhod ob proženju postane enak vhodu.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katero sekvenco generira naslednje vezje na izhodu Q₁Q₀?",
+		image: "img80.jpg",
+		answers: ["00, 11, 10, 01, 00...", "00, 10, 01, 00...", "00, 01, 11, 10, 00...", "00, 01, 10, 00..."],
+		correct: 3,
+		expl: "<p>T₁ = Q₁+Q₀, D₀ = ¬(Q₁+Q₀). Iz tabele prehodov dobimo števec po modulu 3: <strong>00 → 01 → 10 → 00</strong></p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katere vrednosti moramo dovesti na vhode T in R, da bo vezje delovalo kot binarni števec navzdol (sekvenca 00, 11, 10, 01, 00...)?",
+		image: "img89.jpg",
+		answers: ["T₁=T₂=0; R₁=R₂=1", "T₁=T₂=1; R₁=R₂=0", "T₁=T₂=0; R₁=R₂=0", "T₁=T₂=1; R₁=R₂=1"],
+		correct: 3,
+		expl: "<p>T=1 vedno omogoča toggle (štetje). R določa smer štetja. R=1 je navzdol.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja (sekvence) \"001\"?",
+		image: "img91_narisano_HD.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>Iščemo diagram, ki sprejme 0, 0, 1 in nato vrne v začetek z izhodom 1 ob zadnjem prehodu: <strong>S₀ →(0)→ S₁ →(0)→ S₂ →(1/1)→ S₀</strong></p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katera od tabel stanj ustreza naslednjemu diagramu stanj (Mealyjeva izvedba z minimalnim številom stanj)?",
+		image: "img84.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 3,
+		expl: "<p>3 stanja (S₁, S₂, S₃), Moorovi izhodi v krogih. Pretvorba v Mealy in minimizacija: S₁ ≡ S₃ (enaki prehodi in izhodi) → minimalni avtomat z <strong>2 stanjema</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katera od tabel stanj ustreza naslednjemu diagramu stanj (Mealyjeva izvedba)?",
+		image: "img86.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>Pretvorba v Mealyja, brez minimalizacije, ker ni enakih skupin.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Delovanje sinhronskega sekvenčnega vezja je opisano s tabelo stanj. Katera stanja moramo združiti, da dobimo minimalno število stanj?",
+		image: "img90.jpg",
+		answers: ["S₁≡S₆; S₂≡S₃; S₄≡S₅", "S₁≡S₂; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅"],
+		correct: 2,
+		expl: "<p>Iščemo ekvivalentna stanja (enaki izhodi in naslednja stanja pri vseh vhodih). S₂ in S₃ imata enako tabelo, S₄, S₅, S₆ tudi (kjer se don't care '−' ujema s katero koli vrednostjo). <strong>S₂≡S₃; S₄≡S₅≡S₆</strong></p>"
+	  },
 
-  // ============ 10. TEORETIČNA VPRAŠANJA ============
-  {
-    topic: "10. Teoretična vprašanja",
-    q: "Katero strukturo uporablja spominska celica SRAM za hranjenje enobitnega podatka?",
-    answers: ["flip-flop D", "flip-flop T", "tranzistor in kondenzator", "zapah D"],
-    correct: 3,
-    expl: "<p>SRAM celica = <strong>zapah D</strong> (6 tranzistorjev — dva prečno vezana invertorja + 2 dostopna tranzistorja).</p>"
-  },
-  {
-    topic: "10. Teoretična vprašanja",
-    q: "V katerih vezjih najdemo zapahe D?",
-    answers: ["v vezjih PLA", "v vezjih SRAM", "v vezjih DRAM", "v multipleksorjih"],
-    correct: 1,
-    expl: "<p>Zapahi D so jedro <strong>SRAM</strong> celic. Vsaka celica SRAM hrani 1 bit v obliki zapaha D.</p>"
-  },
-  {
-    topic: "10. Teoretična vprašanja",
-    q: "Katero strukturo uporablja spominska celica DRAM za hranjenje enobitnega podatka?",
-    answers: ["tranzistor in kondenzator", "zapah D", "flip-flop T", "flip-flop D"],
-    correct: 0,
-    expl: "<p>DRAM = <strong>1 tranzistor + 1 kondenzator</strong>. Kondenzator hrani naboj, tranzistor je stikalo. Potrebuje periodično osveževanje (refresh).</p>"
-  },
-  {
-    topic: "10. Teoretična vprašanja",
-    q: "Tristanjski izravnalnik (three-state buffer) ima naslednja tri stanja: logično ničlo, logično enico in...?",
-    answers: ["stanje resonance", "prepovedano stanje", "stanje visoke impedance", "stanje visokega toka"],
-    correct: 2,
-    expl: "<p>Tretje stanje je <strong>Hi-Z (visoka impedanca)</strong> — izhod je električno odklopljen. Omogoča več izravnalnikom skupno vodilo.</p>"
-  },
-  {
-    topic: "10. Teoretična vprašanja",
-    q: "Vezja FPGA imajo v primerjavi z vezji CPLD...?",
-    answers: ["manjše število programirljivih blokov, ki pa so večji", "manjše število programirljivih blokov, ki so tudi manjši", "večje število programirljivih blokov, ki pa so manjši", "večje število programirljivih blokov, ki so tudi večji"],
-    correct: 2,
-    expl: "<p><strong>FPGA</strong>: veliko <strong>manjših</strong> blokov (LUT-i, flip-flopi).<br><strong>CPLD</strong>: manj <strong>večjih</strong> blokov z bolj predvidljivimi povezavami.</p>"
-  },
+	  // ============ 10. TEORETIČNA VPRAŠANJA ============
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "Katero strukturo uporablja spominska celica SRAM za hranjenje enobitnega podatka?",
+		answers: ["flip-flop D", "flip-flop T", "tranzistor in kondenzator", "zapah D"],
+		correct: 3,
+		expl: "<p>SRAM celica = <strong>zapah D</strong> (6 tranzistorjev — dva prečno vezana invertorja + 2 dostopna tranzistorja).</p>"
+	  },
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "V katerih vezjih najdemo zapahe D?",
+		answers: ["v vezjih PLA", "v vezjih SRAM", "v vezjih DRAM", "v multipleksorjih"],
+		correct: 1,
+		expl: "<p>Zapahi D so jedro <strong>SRAM</strong> celic. Vsaka celica SRAM hrani 1 bit v obliki zapaha D.</p>"
+	  },
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "Katero strukturo uporablja spominska celica DRAM za hranjenje enobitnega podatka?",
+		answers: ["tranzistor in kondenzator", "zapah D", "flip-flop T", "flip-flop D"],
+		correct: 0,
+		expl: "<p>DRAM = <strong>1 tranzistor + 1 kondenzator</strong>. Kondenzator hrani naboj, tranzistor je stikalo. Potrebuje periodično osveževanje (refresh).</p>"
+	  },
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "Tristanjski izravnalnik (three-state buffer) ima naslednja tri stanja: logično ničlo, logično enico in...?",
+		answers: ["stanje resonance", "prepovedano stanje", "stanje visoke impedance", "stanje visokega toka"],
+		correct: 2,
+		expl: "<p>Tretje stanje je <strong>Hi-Z (visoka impedanca)</strong> — izhod je električno odklopljen. Omogoča več izravnalnikom skupno vodilo.</p>"
+	  },
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "Vezja FPGA imajo v primerjavi z vezji CPLD...?",
+		answers: ["manjše število programirljivih blokov, ki pa so večji", "manjše število programirljivih blokov, ki so tudi manjši", "večje število programirljivih blokov, ki pa so manjši", "večje število programirljivih blokov, ki so tudi večji"],
+		correct: 2,
+		expl: "<p><strong>FPGA</strong>: veliko <strong>manjših</strong> blokov (LUT-i, flip-flopi).<br><strong>CPLD</strong>: manj <strong>večjih</strong> blokov z bolj predvidljivimi povezavami.</p>"
+	  },
 
   // ============ STARI IZPITI ============
 
