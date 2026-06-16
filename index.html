@@ -294,12 +294,12 @@
 <body>
 
 <h1>Digitalne strukture — Kviz</h1>
-<p class="subtitle">102 vprašanja iz vseh tem izpita. Klikni odgovor, nato "Pokaži razlago". Označi težka vprašanja za kasnejši pregled.</p>
+<p class="subtitle">102 vprašanja iz vseh starih izpitov na discordu.<br>Klikni odgovor, nato "Pokaži razlago", če jo želiš prebrati (nekatere so smeti ngl).<br>Označi težka vprašanja za kasnejši pregled.<br><br>Mislim, da ima vprašanje 31 (PLA) napačen odgovor že v original izpitu (mby pa sem jaz glup), za vprašanje 67 bi na izpitu dobil podatkovni list.<br><br></p>
 
 <!-- Mode bar -->
 <div class="mode-bar">
-  <button id="mode-study-btn" class="active" onclick="setMode('study')">📖 Učenje</button>
-  <button id="mode-game-btn" onclick="setMode('game')">🎮 Igra</button>
+  <button id="mode-study-btn" class="active" onclick="setMode('study')">📖 Vaja</button>
+  <button id="mode-game-btn" onclick="setMode('game')">🎮 Točkovan kviz</button>
   <span id="game-controls" style="display:none; gap:8px; align-items:center; display:none;">
     <button onclick="startGame()" id="start-game-btn">▶ Začni igro</button>
     <button onclick="endGame()" id="end-game-btn" style="display:none;">⏹ Končaj</button>
@@ -323,7 +323,7 @@
 <!-- Results overlay -->
 <div class="results-overlay" id="results-overlay">
   <div class="results-box">
-    <h2>🎮 Rezultat igre</h2>
+    <h2>🎮 Rezultat kviza</h2>
     <div class="score-big" id="res-score"></div>
     <div class="score-sub" id="res-sub"></div>
     <div id="res-wrong-section">
@@ -466,7 +466,7 @@
 		topic: "2. & 3. Boolova algebra & preklopne funkcije",
 		q: "Kako se glasi MKNO zapis funkcije f(x₁, x₂, x₃) = <span style='text-decoration:overline'>(x₁↓x̄₂)</span> ⊕ (x₁↑x₃)?",
 		image: "img33.jpg",
-		answers: ["x₁x̄₂ + x̄₁x̄₃", "x̄₁x₂ + x₁x₃", "(x̄₁+x₂)·(x₁+x̄₃)", "(x₁+x₂)·(x̄₁+x₃)"],
+		answers: ["x₁x̄₂ + x̄₁x̄₃", "x̄₁x₂ + x₁x₃", "(x̄₁+x̄₂)·(x₁+x̄₃)", "(x₁+x₂)·(x̄₁+x₃)"],
 		correct: 3,
 		expl: "<p>Izračunamo oba člena, naredimo XOR, nato iz K-karte ničel dobimo MKNO: <strong>(x₁+x₂)·(x̄₁+x₃)</strong></p>"
 	  },
