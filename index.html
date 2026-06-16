@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Digitalne strukture — Kviz (102 vprašanj)</title>
+<style>
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background: #fafaf7;
+    color: #2c2c2a;
+    line-height: 1.6;
+  }
+  h1 { font-size: 24px; font-weight: 500; margin: 0 0 8px; }
+  .subtitle { color: #5f5e5a; font-size: 14px; margin-bottom: 24px; }
+
+  .controls {
+    background: #fff;
+    border: 1px solid #e5e3dc;
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    position: sticky;
+    top: 10px;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  }
+  .controls button {
+    padding: 8px 14px;
+    font-size: 13px;
+    border: 1px solid #d3d1c7;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #2c2c2a;
+    font-family: inherit;
+  }
+  .controls button:hover { background: #f1efe8; }
+  .controls button.active { background: #2c2c2a; color: #fff; border-color: #2c2c2a; }
+  .stats {
+    margin-left: auto;
+    font-size: 13px;
+    color: #5f5e5a;
+  }
+  .stats span { font-weight: 500; color: #2c2c2a; }
+
+  .topic-header {
+    margin: 32px 0 16px;
+    padding: 12px 16px;
+    background: #ecebe5;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+  }
+
+  .question {
+    background: #fff;
+    border: 1px solid #e5e3dc;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: border-color 0.2s;
+  }
+  .question.marked-hard { border-color: #f0997b; background: #fef9f6; }
+
+  .q-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .q-number {
+    font-size: 12px;
+    color: #888780;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .hard-toggle {
+    background: none;
+    border: 1px solid #d3d1c7;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 12px;
+    cursor: pointer;
+    color: #5f5e5a;
+    font-family: inherit;
+  }
+  .hard-toggle:hover { background: #f1efe8; }
+  .hard-toggle.active { background: #d85a30; color: #fff; border-color: #d85a30; }
+
+  .q-text { font-size: 15px; margin-bottom: 14px; }
+  .q-text code { background: #f1efe8; padding: 2px 5px; border-radius: 3px; font-size: 13px; font-family: "Menlo", "Consolas", monospace; }
+  .q-text pre { background: #f1efe8; padding: 10px; border-radius: 6px; font-size: 13px; overflow-x: auto; font-family: "Menlo", "Consolas", monospace; }
+
+  .q-image {
+    margin: 12px 0;
+    text-align: center;
+  }
+  .q-image img {
+    max-width: 100%;
+    border: 1px solid #e5e3dc;
+    border-radius: 6px;
+    background: #fff;
+  }
+
+  .answers { display: flex; flex-direction: column; gap: 6px; }
+  .answer {
+    padding: 10px 14px;
+    border: 1px solid #d3d1c7;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 14px;
+    background: #fff;
+    text-align: left;
+    font-family: inherit;
+    color: #2c2c2a;
+  }
+  .answer:hover { background: #f1efe8; }
+  .answer.selected { border-color: #2c2c2a; background: #f5f4ef; font-weight: 500; }
+  .answer.correct {
+    background: #eaf3de;
+    border-color: #639922;
+    color: #173404;
+  }
+  .answer.incorrect {
+    background: #fceaea;
+    border-color: #c44545;
+    color: #501313;
+  }
+  .answer .marker {
+    display: inline-block;
+    width: 20px;
+    margin-right: 8px;
+    font-weight: 500;
+    color: #888780;
+  }
+  .answer code { background: #f1efe8; padding: 1px 5px; border-radius: 3px; font-size: 13px; font-family: "Menlo", "Consolas", monospace; }
+
+  .show-explanation {
+    margin-top: 14px;
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid #d3d1c7;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 13px;
+    color: #2c2c2a;
+    font-family: inherit;
+  }
+  .show-explanation:hover { background: #f1efe8; }
+
+  .explanation {
+    margin-top: 14px;
+    padding: 14px 16px;
+    background: #f5f4ef;
+    border-left: 3px solid #888780;
+    border-radius: 6px;
+    font-size: 14px;
+    display: none;
+  }
+  .explanation.visible { display: block; }
+  .explanation strong { color: #2c2c2a; }
+  .explanation p { margin: 0 0 8px; }
+  .explanation p:last-child { margin-bottom: 0; }
+  .explanation code { background: #fff; padding: 1px 5px; border-radius: 3px; font-size: 13px; font-family: "Menlo", "Consolas", monospace; }
+  .explanation ul { margin: 6px 0; padding-left: 20px; }
+  .explanation li { margin-bottom: 4px; }
+
+  .topic-counter {
+    font-size: 12px;
+    color: #888780;
+    font-weight: normal;
+    margin-left: 8px;
+  }
+
+  @media (max-width: 600px) {
+    .controls { flex-direction: column; align-items: stretch; position: static; }
+    .stats { margin-left: 0; text-align: center; }
+  }
+
+  /* ── GAME MODE ── */
+  .mode-bar {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: #fff;
+    border: 1px solid #e5e3dc;
+    border-radius: 10px;
+  }
+  .mode-bar button {
+    padding: 7px 14px;
+    font-size: 13px;
+    border: 1px solid #d3d1c7;
+    background: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: inherit;
+    color: #2c2c2a;
+  }
+  .mode-bar button:hover { background: #f1efe8; }
+  .mode-bar button.active { background: #2c2c2a; color: #fff; border-color: #2c2c2a; }
+  .mode-bar .timer {
+    margin-left: auto;
+    font-size: 15px;
+    font-weight: 500;
+    color: #2c2c2a;
+    font-variant-numeric: tabular-nums;
+  }
+  .mode-bar .timer.running { color: #3a7d1e; }
+
+  /* Results overlay */
+  .results-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(44,44,42,0.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+  }
+  .results-overlay.visible { display: flex; }
+  .results-box {
+    background: #fff;
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 560px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.15);
+  }
+  .results-box h2 { font-size: 20px; font-weight: 500; margin: 0 0 4px; }
+  .results-box .score-big { font-size: 36px; font-weight: 600; color: #2c2c2a; margin: 12px 0 4px; }
+  .results-box .score-sub { font-size: 14px; color: #5f5e5a; margin-bottom: 20px; }
+  .results-box .wrong-list { list-style: none; padding: 0; margin: 0 0 20px; }
+  .results-box .wrong-list li {
+    padding: 10px 12px;
+    border: 1px solid #f0c0b0;
+    border-radius: 8px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    background: #fef9f6;
+  }
+  .results-box .wrong-list li .q-label { font-weight: 500; color: #2c2c2a; margin-bottom: 4px; }
+  .results-box .wrong-list li .q-answers { color: #5f5e5a; }
+  .results-box .wrong-list li .q-answers .wrong-ans { color: #c44545; }
+  .results-box .wrong-list li .q-answers .right-ans { color: #3a7d1e; }
+  .results-box .history-title { font-size: 13px; font-weight: 500; color: #888780; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 8px; }
+  .history-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    padding: 6px 0;
+    border-bottom: 1px solid #f1efe8;
+    color: #5f5e5a;
+  }
+  .history-row .h-score { font-weight: 500; color: #2c2c2a; }
+  .results-box .btn-row { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+  .results-box .btn-row button {
+    padding: 9px 16px;
+    font-size: 13px;
+    border-radius: 7px;
+    cursor: pointer;
+    font-family: inherit;
+    border: 1px solid #d3d1c7;
+    background: #fff;
+    color: #2c2c2a;
+  }
+  .results-box .btn-row button:hover { background: #f1efe8; }
+  .results-box .btn-row button.primary { background: #2c2c2a; color: #fff; border-color: #2c2c2a; }
+  .results-box .btn-row button.primary:hover { background: #444; }
+
+  /* LocalStorage badge */
+  .ls-badge {
+    font-size: 11px;
+    color: #888780;
+    margin-left: 6px;
+  }
+</style>
+</head>
+<body>
+
+<h1>Digitalne strukture — Kviz</h1>
+<p class="subtitle">102 vprašanja iz vseh tem izpita. Klikni odgovor, nato "Pokaži razlago". Označi težka vprašanja za kasnejši pregled.</p>
+
+<!-- Mode bar -->
+<div class="mode-bar">
+  <button id="mode-study-btn" class="active" onclick="setMode('study')">📖 Učenje</button>
+  <button id="mode-game-btn" onclick="setMode('game')">🎮 Igra</button>
+  <span id="game-controls" style="display:none; gap:8px; align-items:center; display:none;">
+    <button onclick="startGame()" id="start-game-btn">▶ Začni igro</button>
+    <button onclick="endGame()" id="end-game-btn" style="display:none;">⏹ Končaj</button>
+  </span>
+  <span class="timer" id="timer" style="display:none;">00:00</span>
+</div>
+
+<div class="controls">
+  <button id="randomize-btn" onclick="toggleRandom()">🔀 Naključni vrstni red</button>
+  <button onclick="showOnlyHard()">⚑ Pokaži samo težka</button>
+  <button onclick="showAll()">Pokaži vsa</button>
+  <button onclick="reset()">↻ Resetiraj odgovore</button>
+  <button onclick="resetHard()" title="Počisti seznam težkih vprašanj">⚑ Počisti težka</button>
+  <div class="stats">
+    Odgovorjeno: <span id="answered-count">0</span> / <span id="total-count">0</span>
+    &nbsp;•&nbsp; Pravilno: <span id="correct-count">0</span>
+    &nbsp;•&nbsp; ⚑ <span id="hard-count">0</span><span class="ls-badge" id="ls-badge"></span>
+  </div>
+</div>
+
+<!-- Results overlay -->
+<div class="results-overlay" id="results-overlay">
+  <div class="results-box">
+    <h2>🎮 Rezultat igre</h2>
+    <div class="score-big" id="res-score"></div>
+    <div class="score-sub" id="res-sub"></div>
+    <div id="res-wrong-section">
+      <div class="history-title" style="margin-top:16px;">Napačni odgovori</div>
+      <ul class="wrong-list" id="res-wrong-list"></ul>
+    </div>
+    <div id="res-history-section">
+      <div class="history-title">Zgodovina rezultatov</div>
+      <div id="res-history"></div>
+    </div>
+    <div class="btn-row">
+      <button class="primary" onclick="closeResults()">Zapri</button>
+      <button onclick="resetHard()">⚑ Počisti težka vprašanja</button>
+      <button onclick="clearHistory()">🗑 Počisti zgodovino</button>
+    </div>
+  </div>
+</div>
+
+<div id="quiz-container"></div>
+
+<script>
+	const questions = [
+	  // ============ 1. ŠTEVILSKE KODE ============
+	  {
+		topic: "1. Številske kode",
+		q: "Kateri je pravilen dvojiški zapis desetiškega števila 0.53125? (namig: 0.53125 = 17/32)",
+		answers: ["0.10101", "0.1011011", "0.1000", "0.10001"],
+		correct: 3,
+		expl: "<p>17/32 = 17/2⁵. Število 17 v dvojiškem zapisu je <code>10001</code>. Z deljenjem z 2⁵ premaknemo decimalno vejico za 5 mest v levo: <strong>0.10001₂</strong></p><p>Preverimo: 0.10001₂ = 1/2 + 1/32 = 16/32 + 1/32 = 17/32 ✓</p>"
+	  },
+	  {
+		topic: "1. Številske kode",
+		q: "Kateri je pravilen dvojiški zapis ulomka 1/7? (namig: 1/7 = Σ 1/2^(3n))",
+		answers: ["0.<span style='text-decoration:overline'>0010</span>", "0.001", "0.<span style='text-decoration:overline'>00101</span>", "0.<span style='text-decoration:overline'>001</span>"],
+		correct: 3,
+		expl: "<p>1/7 = 1/8 + 1/64 + 1/512 + ... — enice na pozicijah 3, 6, 9, ...</p><p>Vzorec <code>001</code> se ponavlja v neskončnost: <strong>0.<span style='text-decoration:overline'>001</span></strong></p>"
+	  },
+	  {
+		topic: "1. Številske kode",
+		q: "Tribitna številska koda: 000, 001, 011, 010, 110, 111, 101, 100. Kakšna koda je to?",
+		answers: ["nič od naštetega", "enokoračna in refleksivna", "utežnostna in enokoračna", "utežnostna in refleksivna"],
+		correct: 1,
+		expl: "<p>To je <strong>Grayeva koda</strong>:</p><ul><li><strong>Enokoračna</strong>: sosednji kodni besedi se razlikujeta v natanko enem bitu.</li><li><strong>Refleksivna</strong>: druga polovica je zrcalna slika prve z dodanim MSB=1.</li></ul><p>Ni utežnostna — biti nimajo težinskih vrednosti.</p>"
+	  },
+	  {
+		topic: "1. Številske kode",
+		q: "Po vodilu so prejete 4 osembitne besede:<pre>1 0101001\n0 1000011\n0 1011001\n1 1110011</pre>1. bit vsake besede je paritetni, zadnja beseda je kontrolna. V kateri besedi je napačen kateri bit?",
+		answers: ["4. bit v 2. besedi", "8. bit v 3. besedi", "2. bit v 2. besedi", "6. bit v 3. besedi"],
+		correct: 2,
+		expl: "<p><strong>Postopek</strong>:</p><ol><li>Preveri vrstično pariteto vsake od prvih 3 besed → ugotoviš, v kateri besedi je napaka.</li><li>Uporabi 4. (kontrolno) besedo za stolpčno pariteto → ugotoviš, v katerem bitu (stolpcu) je napaka.</li><li>Presečišče = napačen bit.</li></ol><p><strong>Liha pariteta (paritetni bit 1, če je liho št. enic).</strong></p>"
+	  },
+
+	  // ============ 2. & 3. BOOLOVA ALGEBRA & PREKLOPNE FUNKCIJE ============
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katero funkcijo f (v obliki MKNO) generira vezje 74HC00 z naslednjimi povezavami?",
+		image: "img20.jpg",
+		answers: ["(x₁+x₂)·(x₁+x₃)", "(x₁+x₂)·(x̄₁+x₃)", "x̄₁x₂ + x₁x₃", "(x₁+x̄₂)·(x̄₁+x₃)"],
+		correct: 1,
+		expl: "<p>74HC00 vsebuje NAND vrata. Iz vezji 74HC00 preberemo MDNO: f = x̄₁x₂ + x₁x₃. Pretvorba v MKNO preko K-karte ničel da: <strong>f = (x₁+x₂)(x̄₁+x₃)</strong>.<p><p>V K-karti za MKNO okrožujemo <strong>ničle</strong> in negiramo za <strong>enke</strong>.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katero funkcijo f (v obliki MDNO) generira vezje 74HC00 z naslednjimi povezavami?",
+		image: "img21.jpg",
+		answers: ["x̄₁x₂ + x₁x₃", "x₁x₂ + x₁x₃", "(x̄₁+x₃)·(x₁+x₂)", "x̄₁x₂ + x₁x₃ + x₂x₃"],
+		correct: 0,
+		expl: "<p>74HC00 vsebuje NAND vrata. Iz vezji 74HC00 direktno preberemo MDNO: f = x̄₁x₂ + x₁x₃.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katero funkcijo f (v obliki MDNO) generira vezje 74HC02 z naslednjimi povezavami?",
+		image: "img22.jpg",
+		answers: ["(x₁+x̄₂)·(x₂+x₃)", "x₁x̄₂ + x₂x₃", "x₁x₂ + x̄₂x₃ + x₁x₃", "x₁x₂ + x̄₂x₃"],
+		correct: 3,
+		expl: "<p>74HC02 vsebuje NOR vrata. Struktura NOR-NOR realizira MKNO direktno, MDNO pa preko De Morgana:</p><p><strong>f = x₁x₂ + x̄₂x₃</strong> ali K-karta in obkrožujemo <strong>enke</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katero od vezij NE deluje tako, kot prikazuje naslednji časovni diagram?",
+		image: "img26.jpg",
+		answers: ["Vezje a", "Vezje b", "Vezje c", "Vezje d"],
+		correct: 0,
+		expl: "<p>Iz časovnega diagrama odčitamo funkcijo izhoda glede na vhode x₁, x₂, x₃ in primerjamo z vsako od 4 možnih realizacij.</p><p>Vezje <strong>a)</strong> ne ustreza danemu diagramu.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katera od navedenih enačb NI pravilna?",
+		image: "img23.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>x≡y (XNOR) je <strong>negacija</strong> od x⊕y (XOR). Ko je XOR=1, je XNOR=0, in produkt z NAND ne more biti enak XOR. Enačba ne velja.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katera od navedenih enačb NI pravilna?",
+		image: "img28.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 0,
+		expl: "<p>Po absorpciji z dopolnitvijo: <code>x·ȳ + y = x + y</code> (ne x + ȳ).</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katera od navedenih enačb NI pravilna?",
+		image: "img29.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 0,
+		expl: "<p>x·ȳ + y = <strong>x + y</strong>, ne samo y. Drugi člen vsebuje x, ki ga ne moremo izgubiti.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Katera od navedenih enačb NI pravilna?",
+		image: "img35.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>NOR (x↓y) = 1 samo, ko sta oba 0. NAND·OR ne da nikoli te vrednosti, ker NAND=0 le pri obojih 1, OR=0 pri obojih 0 → produkt je vedno 0.</p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = M₀·M₁·M₅?",
+		answers: ["x̄₂ + x̄₁x₃", "(x₁+x̄₂)(x₁+x̄₃)(x̄₁+x₂)", "x̄₁x̄₂ + x̄₁x₃ + x₃x̄₂", "x̄₃(x₁+x̄₃)"],
+		correct: 0,
+		expl: "<p>Po učbeniški konvenciji M_i = m̄_{7-i}: M₀=m̄₇, M₁=m̄₆, M₅=m̄₂. Funkcija je 0 pri {2,6,7}, 1 pri {0,1,3,4,5}.</p><p>K-karta minimizacija: <strong>x̄₂ + x̄₁x₃</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = m₀+m₁+m₃+m₄+m₅?",
+		answers: ["x̄₂(x₁+x̄₃)", "x̄₂ + x̄₁x₃", "x̄₂ + x̄₁x₂x₃", "(x̄₁+x̄₂)·(x̄₂+x₃)"],
+		correct: 1,
+		expl: "<p>K-karta z mintermi 0,1,3,4,5: stolpca x₂=0 (m0,m1,m4,m5) → x̄₂; m1,m3 → x̄₁x₃.</p><p><strong>f = x̄₂ + x̄₁x₃</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MKNO zapis funkcije f(x₁,x₂,x₃,x₃) = m₀+m₁+m₃+m₄+m₅?",
+		answers: ["x̄₂(x₁+x̄₃)", "x̄₂ + x̄₁x₃", "(x̄₁+x̄₂)·(x̄₂+x₃)", "x̄₂·(x̄₁+x₃)"],
+		correct: 2,
+		expl: "<p>Ista funkcija kot prej, samo zapisana kot produkt vsot. Iz K-karte ničel: <strong>(x̄₁+x̄₂)·(x̄₂+x₃)</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MKNO zapis funkcije f(x₁, x₂, x₃) = <span style='text-decoration:overline'>(x₁↓x̄₂)</span> ⊕ (x₁↑x₃)?",
+		image: "img33.jpg",
+		answers: ["x₁x̄₂ + x̄₁x̄₃", "x̄₁x₂ + x₁x₃", "(x̄₁+x₂)·(x₁+x̄₃)", "(x₁+x₂)·(x̄₁+x₃)"],
+		correct: 3,
+		expl: "<p>Izračunamo oba člena, naredimo XOR, nato iz K-karte ničel dobimo MKNO: <strong>(x₁+x₂)·(x̄₁+x₃)</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = ∏ 0,1,5?",
+		answers: ["x̄₁x₂ + x̄₁x₃ + x₃x̄₂", "(x₁+x̄₂)(x₁+x̄₃)(x̄₁+x₂)", "x̄₂(x₁+x̄₃)", "x̄₂ + x̄₁x₃"],
+		correct: 3,
+		expl: "<p>Po učbeniški konvenciji: ∏ 0,1,5 = M₀M₁M₅ = ničle pri mintermih {7,6,2}, enice pri {0,1,3,4,5}.</p><p>K-karta minimizacija: skupina cel stolpec x₂=0 = x̄₂, plus m1+m3 = x̄₁x₃.</p><p><strong>f = x̄₂ + x̄₁x₃</strong></p>"
+	  },
+	  {
+		topic: "2. & 3. Boolova algebra & preklopne funkcije",
+		q: "Kako se glasi MDNO zapis funkcije f(x₁,x₂,x₃) = (x̄₁·((x₂+x₃)·(x₁+x̄₂)')')'?",
+		image: "img36.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>Poenostavimo izraz korak za korakom z De Morganom in absorpcijo ter dobimo minimalno MDNO obliko.</p>"
+	  },
+
+	  // ============ 4. STATIČNI HAZARD ============
+	  {
+		topic: "4. Statični hazard",
+		q: "Katere člene moramo prišteti funkciji f(x₁,x₂,x₃,x₄) = x₂x₃ + x̄₂x₄ + x̄₁x̄₃x̄₄, da realizacija ne bo vsebovala hazarda?",
+		answers: ["x₃x₄", "x₃x₄ + x̄₁x₂x̄₄ + x̄₁x̄₂x̄₃", "x₃x₄ + x̄₁x̄₂x₃", "nobenega"],
+		correct: 1,
+		expl: "<p>V K-karti poiščemo mejne pare ne pokrite z istim implicentom. Potrebni so trije dodatki: <strong>x₃x₄ + x̄₁x₂x̄₄ + x̄₁x̄₂x̄₃</strong></p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katere člene moramo prišteti funkciji f = x₂x₃ + x̄₂x₄ + x₁x̄₃x̄₄?",
+		answers: ["nobenega", "x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃", "x₃x₄", "x̄₁x₃x₄ + x₁x₃x₄ + x₁x̄₂x̄₃"],
+		correct: 1,
+		expl: "<p>Enako načelo: dodamo redundantne implicente za vsak mejni par.</p><p><strong>x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃</strong></p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katere člene moramo zmnožiti k funkciji f(x₁,x₂,x₃) = (x₂+x₃)·(x₁+x̄₃)?",
+		answers: ["(x̄₁+x₂)", "(x₁+x̄₂)", "(x̄₁+x̄₂)", "(x₁+x₂)"],
+		correct: 3,
+		expl: "<p>Pogledamo kje f=0, zapišemo maksterme v K-karto. Poiščemo mejne pare.<strong>(x₁+x₂)</strong></p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
+		image: "img40.jpg",
+	   answers: ["sprememba x₂ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₃ iz 1 v 0", "sprememba x₃ iz 0 v 1"],	
+		correct: 2,
+		expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje NAND-NAND (krogci po &).</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
+		image: "img45.jpg",
+		answers: ["sprememba x₃ iz 0 v 1", "sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 1 v 0"],
+		correct: 2,
+		expl: "<p>Pri vezjih AND‐OR in NAND, ki jih realiziramo dvonivojsko, hazardni pojav povzroči le sprememba vhoda iz 1 v 0. V tem primeru je vezje AND-OR.</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
+	  },
+	  {
+		topic: "4. Statični hazard",
+		q: "Katera vhodna sprememba lahko v spodnjem vezju povzroči statični hazard?",
+		image: "img46.jpg",
+		answers: ["sprememba x₁ iz 0 v 1", "sprememba x₁ iz 1 v 0", "sprememba x₂ iz 0 v 1", "sprememba x₂ iz 1 v 0"],
+		correct: 0,
+		expl: "<p>Pri vezjih OR‐AND in NOR pa hazardni pojav povzroči le sprememba vhoda iz 0 v 1. V tem primeru je vezje OR-AND.</p><p>Zapišemo funkcijo s sheme, naredimo K-karto, najdemo mejne pare.</p>"
+	  },
+
+	  // ============ 5. KOMBINACIJSKA VEZJA & PLA ============
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Z vezjem PLA želimo realizirati funkcije:<pre>f₁ = x₁x̄₂x̄₃ + x₂x₃x̄₄\nf₂ = x̄₃x₄ + x₁x̄₂x̄₃\nf₃ = x₂x₃x̄₄ + x̄₃x₄</pre>Najmanjše število vrat AND in OR?",
+		answers: ["6 AND in 3 OR", "3 AND in 6 OR", "3 AND in 3 OR", "10 AND in 3 OR"],
+		correct: 2,
+		expl: "<p>Različni produkti: {x₁x̄₂x̄₃, x₂x₃x̄₄, x̄₃x₄} → <strong>3 AND vrata</strong>. Vsaka funkcija dobi 1 OR → <strong>3 OR vrata</strong>.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Kateri od multipleksorjev 4/2 realizira enobitni polni odštevalnik x − y (A = razlika, B = izposoja)?",
+		image: "img49.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 1,
+		expl: "<p>Polni odštevalnik: A = x ⊕ y ⊕ B_in, B_out = x̄·y + (x̄+y)·B_in.</p><p>MUX 4/2 krmiljen z (x,y), za vsako kombinacijo priklopi ustrezno funkcijo B_in.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Kateri od multipleksorjev 4/2 realizira enobitni polni seštevalnik x + y (A = vsota, B = prenos)?",
+		image: "img50.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>Polni seštevalnik: S = x ⊕ y ⊕ C_in, C_out = x·y + (x+y)·C_in.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Kateri od multipleksorjev 8/1 realizira isto preklopno funkcijo kot prikazano vezje?",
+		image: "img52.jpg",
+		answers: ["a) 1,0,1,X₄,1,0,0,0", "b) 0,1,0,X₄,1,0,1,0", "c) 0,0,0,X₄,1,0,0,0", "d) 0,1,0,X₄,1,0,1,0"],
+		correct: 1,
+		expl: "<p>Drevesni MUX reduciramo na 8 vrednosti za vsako kombinacijo (x₁,x₂,x₃) in primerjamo s 8/1 MUX tabelo.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Katero preklopno funkcijo realizira vezje Dekodirnik + Multipleksor (z negiranimi izhodi Dk in križno vezavo)?",
+		image: "img55.jpg",
+		answers: ["f = 0", "f = x₁ ⊕ x₂", "f = 1", "f = x₁ ≡ x₂"],
+		correct: 0,
+		expl: "<p>Dekodirnik ima negirane izhode (krogci). ko je x1=0 x1=1 -> 01, bo 2. izhod deodirnika negiran 1=0 in bo f vrednost na vhodu mux x1=0 x1=1 -> 10, torej f=0.</p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Katero preklopno funkcijo realizira naslednje vezje?",
+		image: "img57.jpg",
+		answers: ["f = 0", "f = x₁ ⊕ x₂", "f = 1", "f = x₁ ≡ x₂"],
+		correct: 1,
+		expl: "<p>Pri tej vezavi MUX s krmilno kodo (x₁,x₂) izbira izhode dekodirnika v drugačnem zaporedju, kar realizira XOR funkcijo: <strong>f = x₁ ⊕ x₂</strong></p>"
+	  },
+	  {
+		topic: "5. Kombinacijska vezja & PLA",
+		q: "Kako se v obliki MDNO glasi funkcija f₂, ki jo realizira prikazano vezje PLA?",
+		image: "img56.jpg",
+		answers: ["x̄₂ + x₃", "x̄₂ + x̄₃ + x₄ = 1", "x̄₁x₄", "x̄₂x̄₃ + x₃"],
+		correct: 0,
+		expl: "<p>Iz PLA mreže preberemo, kateri produkti so povezani z izhodom f₂. Po minimizaciji dobimo: <strong>x̄₂ + x₃</strong></p>"
+	  },
+
+	  // ============ 6. & 7. VHDL ============
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal y: std_logic_vector (3 downto 0);\nbegin\nwith a select\n    y <= \"0001\" when \"00\",\n         \"0010\" when \"01\",\n         \"0100\" when \"10\",\n         \"1000\" when others;\nend behavioral;</pre>",
+		answers: ["multipleksor", "zapah", "register", "dekodirnik"],
+		correct: 3,
+		expl: "<p>Vhod a (2 bita) izbira en izhod, ki ima vedno samo en bit '1' → <strong>dekodirnik 2 → 4</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nsignal f: std_logic;\nbegin\nf <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);\nend behavioral;</pre>",
+		answers: ["register", "zapah", "multipleksor", "dekodirnik"],
+		correct: 2,
+		expl: "<p>A je krmilni signal (2 bita), B(0..3) so podatkovni vhodi, f je izbrani izhod → <strong>4/1 multipleksor</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(3) & A(3 downto 1);</pre>Katera vrednost je zapisana v vektorju C?",
+		answers: ["010", "0101", "1010", "1000"],
+		correct: 2,
+		expl: "<p>Operator <code>&</code> je konkatenacija. B(3) = 1, A(3 downto 1) = <code>010</code>. Skupaj: <strong>1010</strong></p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(2) & A(2 downto 0);</pre>Katera vrednost je zapisana v vektorju C?",
+		answers: ["1010", "0101", "1101", "000"],
+		correct: 1,
+		expl: "<p>B(2) = 0, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>0101</strong></p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "V jeziku VHDL sta podana vektorja A (3 downto 0) in B (3 downto 0):<pre>A <= \"0101\"; B <= \"1010\";\nC <= B(3) & A(2 downto 0);</pre>Katera vrednost je zapisana v vektorju C?",
+		answers: ["1000", "1101", "0101", "101"],
+		correct: 1,
+		expl: "<p>B(3) = 1, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>1101</strong></p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite katero vezje je opisano z naslednjo VHDL kodo:<pre>process (clk) begin\n    if (clk'event and clk='1') then\n        if st = 9 then st <= \"0000\";\n        else st <= st + 1;\n        end if;\n    end if;\nend process;</pre>",
+		answers: ["BCD števec", "binarni števec", "števec po modulu 9", "števec po modulu 4"],
+		correct: 0,
+		expl: "<p>Šteje 0–9 in se postavi na 0 ko doseže 9 → <strong>BCD števec</strong> (modul 10).</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite katero vezje je opisano z naslednjo VHDL kodo:<pre>process (clk,d) begin\n    if (clk'event and clk='1') then\n        q <= d;\n    end if;\nend process;\nd <= \"000\" when q = \"100\" else q + 1;</pre>",
+		answers: ["BCD števec", "števec po modulu 4", "binarni števec", "števec po modulu 5"],
+		correct: 3,
+		expl: "<p>Šteje 0,1,2,3,4 (000–100) in se resetira na 0 → 5 različnih stanj → <strong>modul 5</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register is\nbegin\nprocess (clk,reset) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk='1') then q <= D;\n    end if;\nend process;\nend behavioral;</pre>",
+		answers: ["pomikalni s flip-flopi D", "pomikalni z zapahi D", "navadni s flip-flopi D", "navadni z zapahi D"],
+		correct: 2,
+		expl: "<p>Flip-flop ker sinhrono proženje ob clk. Navadni, ker prepiše vse bite hkrati q<=D</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture behavioral of register1 is\nsignal clk,reset,d: std_logic;\nsignal q,a: std_logic_vector (3 downto 0);\nbegin\nprocess (clk,reset,a) begin\n    if reset = '1' then q <= \"0000\";\n    elsif (clk'event and clk = '1') then q <= a;\n    end if;\nend process;\na <= d & q(3 downto 1);\nend behavioral;</pre>",
+		answers: ["pomikalni z zapahi D", "pomikalni s flip-flopi D", "navadni s flip-flopi D", "navadni z zapahi D"],
+		correct: 1,
+		expl: "<p>Vrstica <code>a <= d & q(3 downto 1)</code> izvede pomik v desno za eno mesto z d na MSB. Flip-flop ker sinhrono proženje ob clk.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Ugotovite katera spominska celica je opisana z naslednjo VHDL kodo:<pre>process (a,b,c,q) begin\n    if a = '1' and c = '1' then q <= '0';\n    elsif b = '1' and c = '1' then q <= '1';\n    else q <= q;\n    end if;\nend process;</pre>",
+		answers: ["flip-flop JK", "zapah D", "flip-flop D", "zapah SR"],
+		correct: 3,
+		expl: "<p>SR=SetReset c -> enable, a -> reset, b -> set, else -> ohrani stanje. Zapah, ker <strong>ni<strong> ob uri.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal y: std_logic_vector (3 downto 0);\nbegin\nwith a select\n    y <= \"0001\" when \"00\",\n         \"0010\" when \"01\",\n         \"0100\" when \"10\",\n         \"1000\" when others;\nend behavioral;</pre>",
+		answers: ["multipleksor", "zapah", "register", "dekodirnik"],
+		correct: 3,
+		expl: "<p>Vhod a (2 bita) izbira en izhod, ki ima vedno samo en bit '1' → <strong>dekodirnik 2 → 4</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "Katero digitalno vezje je opisano z naslednjo kodo VHDL:<pre>architecture behavioral of circuit1 is\nsignal a: std_logic_vector (1 downto 0);\nsignal b: std_logic_vector (3 downto 0);\nsignal f: std_logic;\nbegin\nf <= B(0) when A=\"00\" else\n     B(1) when A=\"01\" else\n     B(2) when A=\"10\" else\n     B(3);\nend behavioral;</pre>",
+		answers: ["register", "zapah", "multipleksor", "dekodirnik"],
+		correct: 2,
+		expl: "<p>A je krmilni signal, B(0..3) so podatkovni vhodi, f je izbrani izhod → <strong>4/1 multipleksor</strong>.</p>"
+	  },
+	  {
+		topic: "6. & 7. VHDL",
+		q: "V vezju nastopata enobitna spremenljivka A in dvobitna spremenljivka B. Kako ju pravilno deklariramo v VHDL?",
+		answers: ["signal A: std_logic; signal B: std_logic_vector (1 downto 0);", "signal A: std_logic_vector (1 downto 0); signal B: std_logic_vector (2 downto 0);", "signal A: std_logic; signal B: std_logic_vector (2 downto 0);", "signal A, B: std_logic_vector (2 downto 0);"],
+		correct: 0,
+		expl: "<p>Enobitni signali so <code>std_logic</code>. Dvobitni vektorji potrebujejo <code>std_logic_vector (1 downto 0)</code>.</p>"
+	  },
+
+	  // ============ 8. & 9. SPOMINSKE CELICE & SEKVENČNA VEZJA ============
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
+		image: "img79.jpg",
+		answers: ["celice JK", "celice T", "celice SR", "celice D"],
+		correct: 1,
+		expl: "<p>Vhod 0 ohrani stanje (zanke), vhod 1 preklopi (puščice med stanjema) → definicija <strong>T celice</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Delovanje katere spominske celice opisuje naslednji karakteristični diagram?",
+		image: "img77.jpg",
+		answers: ["celice JK", "celice T", "celice D", "celice SR"],
+		correct: 2,
+		expl: "<p>Vhod 0 vedno vodi v Q=0, vhod 1 vedno v Q=1 (Q⁺ = D) → <strong>D celica</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Imamo spominsko celico s tremi vhodi. Na prožilni vhod dovajamo signal C, na preostala vhoda signala X in Y, na dveh izhodih pa dobimo naslednja signala (stanje) Q. Za katero spominsko celico gre?",
+		image: "img78.jpg",
+		answers: ["zapah SR", "flip-flop T", "flip-flop D", "flip-flop JK"],
+		correct: 3,
+		expl: "<p>Reagira samo na rob C. Prožilni vhod C → flip-flop. Dva vhoda X, Y, kjer X=Y=1 preklopi stanje → <strong>JK flip-flop</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Imamo spominsko celico s tremi vhodi. Na prožilni vhod signal C, na preostalih X in Y, na izhodih Q in Q̄. Za katero spominsko celico gre?",
+		image: "img83.jpg",
+		answers: ["flip-flop JK", "zapah D", "zapah SR", "flip-flop SR"],
+		correct: 2,
+		expl: "<p>Iz diagrama vidimo, da je celica občutljiva na <strong>nivo</strong> C (ne na rob). X postavlja, Y ponastavlja → <strong>zapah SR</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Imamo spominsko celico z dvema vhodoma. Na prožilni vhod dovajamo signal C, na preostali vhod signal X, na izhodu pa dobimo naslednji signal (stanje) Q. Za katero spominsko celico gre?",
+		image: "img92.jpg",
+		answers: ["zapah T", "flip-flop D", "flip-flop T", "zapah D"],
+		correct: 3,
+		expl: "<p>En sam podatkovni vhod X, nivojska omogočitev C → <strong>zapah D</strong>. Q sledi X dokler je C=1.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katera karakteristična enačba opisuje delovanje spominske celice JK?",
+		answers: ["Q⁺ = J⊕K", "Q⁺ = J·Q̄ + K̄·Q", "Q⁺ = J·Q̄ + K·Q̄", "Q⁺ = J·Q + J̄·Q̄"],
+		correct: 1,
+		expl: "<p><strong>Q⁺ = J·Q̄ + K̄·Q</strong></p><ul><li>J=1, K=0: Q⁺ = 1 (set)</li><li>J=0, K=1: Q⁺ = 0 (reset)</li><li>J=K=0: Q⁺ = Q (hold)</li><li>J=K=1: Q⁺ = Q̄ (toggle)</li></ul>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katera karakteristična enačba opisuje delovanje spominske celice D?",
+		answers: ["Q⁺ = D⊕Q", "Q⁺ = D", "Q⁺ = D·Q", "Q⁺ = D·Q + D̄·Q̄"],
+		correct: 1,
+		expl: "<p>Najpreprostejša: <strong>Q⁺ = D</strong>. Izhod ob proženju postane enak vhodu.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katero sekvenco generira naslednje vezje na izhodu Q₁Q₀?",
+		image: "img80.jpg",
+		answers: ["00, 11, 10, 01, 00...", "00, 10, 01, 00...", "00, 01, 11, 10, 00...", "00, 01, 10, 00..."],
+		correct: 3,
+		expl: "<p>T₁ = Q₁+Q₀, D₀ = ¬(Q₁+Q₀). Iz tabele prehodov dobimo števec po modulu 3: <strong>00 → 01 → 10 → 00</strong></p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katere vrednosti moramo dovesti na vhode T in R, da bo vezje delovalo kot binarni števec navzdol (sekvenca 00, 11, 10, 01, 00...)?",
+		image: "img89.jpg",
+		answers: ["T₁=T₂=0; R₁=R₂=1", "T₁=T₂=1; R₁=R₂=0", "T₁=T₂=0; R₁=R₂=0", "T₁=T₂=1; R₁=R₂=1"],
+		correct: 3,
+		expl: "<p>T=1 vedno omogoča toggle (štetje). R določa smer štetja. R=1 je navzdol.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja (sekvence) \"001\"?",
+		image: "img91_narisano_HD.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>Iščemo diagram, ki sprejme 0, 0, 1 in nato vrne v začetek z izhodom 1 ob zadnjem prehodu: <strong>S₀ →(0)→ S₁ →(0)→ S₂ →(1/1)→ S₀</strong></p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katera od tabel stanj ustreza naslednjemu diagramu stanj (Mealyjeva izvedba z minimalnim številom stanj)?",
+		image: "img84.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 3,
+		expl: "<p>3 stanja (S₁, S₂, S₃), Moorovi izhodi v krogih. Pretvorba v Mealy in minimizacija: S₁ ≡ S₃ (enaki prehodi in izhodi) → minimalni avtomat z <strong>2 stanjema</strong>.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Katera od tabel stanj ustreza naslednjemu diagramu stanj (Mealyjeva izvedba)?",
+		image: "img86.jpg",
+		answers: ["a)", "b)", "c)", "d)"],
+		correct: 2,
+		expl: "<p>Pretvorba v Mealyja, brez minimalizacije, ker ni enakih skupin.</p>"
+	  },
+	  {
+		topic: "8. & 9. Spominske celice & sekvenčna vezja",
+		q: "Delovanje sinhronskega sekvenčnega vezja je opisano s tabelo stanj. Katera stanja moramo združiti, da dobimo minimalno število stanj?",
+		image: "img90.jpg",
+		answers: ["S₁≡S₆; S₂≡S₃; S₄≡S₅", "S₁≡S₂; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅≡S₆", "S₂≡S₃; S₄≡S₅"],
+		correct: 2,
+		expl: "<p>Iščemo ekvivalentna stanja (enaki izhodi in naslednja stanja pri vseh vhodih). S₂ in S₃ imata enako tabelo, S₄, S₅, S₆ tudi (kjer se don't care '−' ujema s katero koli vrednostjo). <strong>S₂≡S₃; S₄≡S₅≡S₆</strong></p>"
+	  },
+
+	  // ============ 10. TEORETIČNA VPRAŠANJA ============
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "Katero strukturo uporablja spominska celica SRAM za hranjenje enobitnega podatka?",
+		answers: ["flip-flop D", "flip-flop T", "tranzistor in kondenzator", "zapah D"],
+		correct: 3,
+		expl: "<p>SRAM celica = <strong>zapah D</strong> (6 tranzistorjev — dva prečno vezana invertorja + 2 dostopna tranzistorja).</p>"
+	  },
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "V katerih vezjih najdemo zapahe D?",
+		answers: ["v vezjih PLA", "v vezjih SRAM", "v vezjih DRAM", "v multipleksorjih"],
+		correct: 1,
+		expl: "<p>Zapahi D so jedro <strong>SRAM</strong> celic. Vsaka celica SRAM hrani 1 bit v obliki zapaha D.</p>"
+	  },
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "Katero strukturo uporablja spominska celica DRAM za hranjenje enobitnega podatka?",
+		answers: ["tranzistor in kondenzator", "zapah D", "flip-flop T", "flip-flop D"],
+		correct: 0,
+		expl: "<p>DRAM = <strong>1 tranzistor + 1 kondenzator</strong>. Kondenzator hrani naboj, tranzistor je stikalo. Potrebuje periodično osveževanje (refresh).</p>"
+	  },
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "Tristanjski izravnalnik (three-state buffer) ima naslednja tri stanja: logično ničlo, logično enico in...?",
+		answers: ["stanje resonance", "prepovedano stanje", "stanje visoke impedance", "stanje visokega toka"],
+		correct: 2,
+		expl: "<p>Tretje stanje je <strong>Hi-Z (visoka impedanca)</strong> — izhod je električno odklopljen. Omogoča več izravnalnikom skupno vodilo.</p>"
+	  },
+	  {
+		topic: "10. Teoretična vprašanja",
+		q: "Vezja FPGA imajo v primerjavi z vezji CPLD...?",
+		answers: ["manjše število programirljivih blokov, ki pa so večji", "manjše število programirljivih blokov, ki so tudi manjši", "večje število programirljivih blokov, ki pa so manjši", "večje število programirljivih blokov, ki so tudi večji"],
+		correct: 2,
+		expl: "<p><strong>FPGA</strong>: veliko <strong>manjših</strong> blokov (LUT-i, flip-flopi).<br><strong>CPLD</strong>: manj <strong>večjih</strong> blokov z bolj predvidljivimi povezavami.</p>"
+	  },
+
+  // ============ STARI IZPITI ============
+
+  // ---- Izpit 4081 (27.6.2011) ----
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Kateri od multipleksorjev 8/1, prikazanih na desni, deluje enako kot vezje iz štirih multipleksorjev 2/1 na levi?",
+    image: "4081-1.png",
+    answers: ["vezje 2", "vezje 4", "vezje 3", "vezje 1"],
+    correct: 3,
+    expl: "<p>Drevesno vezje 2/1 multipleksorjev reduciramo na ekvivalenten 8/1 MUX. Pravilen je <strong>vezje 1</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Vezje na desni prikazuje notranjo zgradbo ene od spominskih celic tipa D. Kdaj se takšna celica odziva na spremembe vhodnega signala D?",
+    image: "4081-2.png",
+    answers: ["ob nivoju C = 1", "ob spremembi C z 1 na 0", "ob nivoju C = 0", "ob spremembi C z 0 na 1"],
+    correct: 1,
+    expl: "<p>Master-slave struktura D flip-flopa — celica se odziva ob <strong>padajočem robu</strong> ure (1 → 0).</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Katere člene moramo prišteti funkciji, katere zapis v MDNO se glasi f(x₁,x₂,x₃,x₄) = x₂x₃ + x̄₂x₄ + x₁x̄₃x̄₄, da ta ne bo vsebovala hazarda?",
+    answers: ["nobenega", "x̄₁x₃x₄ + x₁x₃x₄ + x₁x̄₂x̄₃", "x₃x₄", "x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃"],
+    correct: 3,
+    expl: "<p>V K-karti najdemo mejne pare ne pokrite z istim implicentom in dodamo redundantne implicente: <strong>x₃x₄ + x₁x₂x̄₄ + x₁x̄₂x̄₃</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Delovanje digitalnega vezja je opisano s kodo VHDL. Kakšna je vrednost f pri x = 10 in y = 0?<pre>architecture izpit of P1 is\nsignal a,x: std_logic_vector (1 downto 0);\nsignal y: std_logic;\nbegin\n  a <= x(1) & y;\n  with a select\n    f <= \"000\" when \"00\",\n         \"100\" when \"11\",\n         \"101\" when \"01\",\n         \"110\" when others;\nend izpit;</pre>",
+    answers: ["000", "100", "110", "101"],
+    correct: 2,
+    expl: "<p>x(1) = 1 (MSB od x=10), y = 0. Konkatenacija: a = 1 & 0 = \"10\". Tega ni eksplicitno v select, zato <code>when others</code> → <strong>110</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Kaj moramo priključiti na vhode CPD, CPU, PL in MR vezja 74HC193, da bo delovalo kot 4-bitni števec, ki šteje navzdol?",
+    image: "4081-5.png",
+    answers: ["CLK, 1, 0, 0", "1, CLK, 1, 0", "1, 1, 1, 0", "CLK, 1, 1, 0"],
+    correct: 3,
+    expl: "<p>Za navzdol-števec: CPD = CLK, CPU = 1 (neaktiven), PL = 1 (neaktiven), MR = 0 (neaktiven).</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Kateri je pravilen dvojiški zapis desetiškega števila (ulomka) 1/7, če velja 1/7 = Σ 1/2^(3n)?",
+    answers: ["0.001", "0.<span style='text-decoration:overline'>0010</span>", "0.0101", "0.<span style='text-decoration:overline'>001</span>"],
+    correct: 3,
+    expl: "<p>Vzorec <code>001</code> se ponavlja v neskončnost: <strong>0.<span style='text-decoration:overline'>001</span></strong></p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Katero spominsko celico vsebuje stabilizator preklopnika (angl. switch debouncer oz. switch debounce circuit)?",
+    answers: ["zapah S̄R̄", "flip-flop JK", "flip-flop D", "zapah D"],
+    correct: 0,
+    expl: "<p>Stabilizator preklopnika uporablja <strong>zapah S̄R̄</strong> z negiranimi vhodi — odpravlja drhtenje mehanskih stikal.</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Katera od tabel stanj ustreza diagramu stanj na levi, če želimo sekvenčno vezje zgraditi v Mealyjevi izvedbi z minimalnim številom stanj?",
+    image: "4081-8.png",
+    answers: ["tabela 2", "tabela 3", "tabela 4", "tabela 1"],
+    correct: 1,
+    expl: "<p>Pretvorba Moorovega diagrama v Mealyjev z minimizacijo ekvivalentnih stanj → <strong>tabela 3</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Poiščite minimalno obliko (MDNO) funkcije f(x₁,x₂,x₃) = M₀ · M₁ · M₅",
+    answers: ["x̄₂(x₁ + x̄₃)", "x̄₂ + x̄₁x₃", "x̄₁x̄₂ + x̄₁x₃ + x₁x̄₂", "(x₁ + x̄₂)(x₁ + x̄₃)(x̄₁ + x₂)"],
+    correct: 1,
+    expl: "<p>Funkcija je 0 pri M₀, M₁, M₅ → enice pri ostalih mintermih. K-karta minimizacija: <strong>x̄₂ + x̄₁x₃</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4081 (27.6.2011)",
+    q: "Katero od vezij na desni ne deluje tako, kot prikazuje časovni diagram na levi?",
+    image: "4081-10.png",
+    answers: ["vezje 1", "vezje 4", "vezje 3", "vezje 2"],
+    correct: 1,
+    expl: "<p>Iz časovnega diagrama določimo funkcijo in primerjamo z vsemi 4 vezji. <strong>Vezje 4</strong> ne ustreza.</p>"
+  },
+
+  // ---- Izpit 4044 (18.2.2011) ----
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "V jeziku VHDL sta podana vektorja A in B:<pre>A <= \"0101\"; B <= \"1010\";</pre>Katera vrednost je zapisana v vektorju C, če ga definiramo takole?<pre>C <= B(3) & A(2 downto 0);</pre>",
+    answers: ["101", "1000", "0101", "1101"],
+    correct: 3,
+    expl: "<p>B(3) = 1, A(2 downto 0) = <code>101</code>. Konkatenacija: <strong>1101</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Poiščite MKNO zapis funkcije f(x₁,x₂,x₃) = <span style='text-decoration:overline'>(x₁↓x̄₂)</span> ⊕ (x₁↑x₃)",
+    answers: ["(x̄₁ + x̄₂)·(x₁ + x̄₃)", "x₁x̄₂ + x̄₁x̄₃", "(x₁ + x₂)·(x̄₁ + x₃)", "x̄₁x₂ + x₁x₃"],
+    correct: 2,
+    expl: "<p>Po De Morganu: <span style='text-decoration:overline'>(x₁↓x̄₂)</span> = x₁ + x̄₂. XOR s x₁↑x₃ in minimizacija v MKNO: <strong>(x₁+x₂)·(x̄₁+x₃)</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Spodnje funkcije želimo vse hkrati realizirati z enim kombinacijskim vezjem:<pre>f₁ = x₁x₂ + x̄₁x₃\nf₂ = x̄₁x̄₂x̄₃ + x₁x₃\nf₃ = (x₁ + x₃)·x̄₁</pre>V katerem od naštetih vezij je za to potrebno najmanjše število logičnih vrat?",
+    answers: ["v PAL in PLA enako", "PAL", "PLA", "PROM"],
+    correct: 2,
+    expl: "<p>PLA omogoča <strong>deljenje AND vrat med funkcijami</strong>, kar zmanjša skupno število vrat.</p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Funkcijo f(x₁,x₂,x₃,x₄) = Π(1,2,3,6,8,9,12,14) želimo realizirati v obliki DNO tako, da vezje ne bo vsebovalo hazarda. Katera od spodnjih funkcij opisuje takšno vezje?<pre>f₁ = x̄₁x̄₃x̄₄ + x₂x̄₃x̄₄ + x̄₁x₂x̄₃ + x₁x̄₂x₃\nf₂ = x̄₁x̄₃x̄₄ + x₂x̄₃x̄₄ + x̄₁x₂x̄₃ + x₁x̄₂x₃ + x̄₁x₂x₄ + x₁x₃x₄\nf₃ = x̄₂x̄₄ + x̄₁x₂x̄₃ + x₁x₃x₄\nf₄ = x̄₂x̄₄ + x̄₁x₂x̄₃ + x₁x₃x₄ + x̄₁x̄₃x̄₄ + x₁x̄₂x₃</pre>",
+    answers: ["f₄", "f₁", "f₃", "f₂"],
+    correct: 0,
+    expl: "<p><strong>f₄</strong> vsebuje vse potrebne redundantne implicente za odpravo hazardov.</p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Katero funkcijo f (v obliki MDNO) generira vezje 74HC02 s prikazanimi povezavami?",
+    image: "4044-5.png",
+    answers: ["x₁x₂ + x̄₂x₃", "x₁x₂ + x̄₂x₃ + x₁x₃", "(x₁ + x̄₂)·(x₂ + x₃)", "x₁x̄₂ + x₂x₃"],
+    correct: 0,
+    expl: "<p>74HC02 vsebuje NOR vrata. Iz vezja preberemo MKNO in pretvorimo v MDNO: <strong>x₁x₂ + x̄₂x₃</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Katero izhodno sekvenco Q₁Q₂ generira vezje na sliki ob treh zaporednih pulzih ure CLK, če je x = 1 in začetno stanje Q₁Q₂ = 00?",
+    image: "4044-6.png",
+    answers: ["10, 10, 10", "11, 00, 11", "11, 10, 10", "01, 10, 11"],
+    correct: 0,
+    expl: "<p>Iz vezja z JK flip-flopoma določimo prehode pri x=1. Sekvenca: <strong>10, 10, 10</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Sinhronsko sekvenčno vezje je podano z diagramom stanj na desni. Katere enačbe ustrezajo vezju v Mealyjevi obliki, če ga zgradimo iz T celic in logičnih vrat?",
+    image: "4044-7.png",
+    answers: ["T₁=x̄Q₁Q̄₂+xQ₂; T₂=x+Q̄₁Q₂; y=xQ₁Q̄₂+x̄Q₁Q₂", "T₁=x̄Q₁Q̄₂+xQ₂; T₂=x+Q̄₁Q₂; y=Q₁Q₂", "T₁=xQ₂; T₂=x+Q̄₁Q₂; y=xQ₁Q̄₂+x̄Q₁Q₂", "T₁=x̄Q₁Q̄₂+xQ₂; T₂=x; y=xQ₁Q̄₂+x̄Q₁Q₂"],
+    correct: 0,
+    expl: "<p>Iz diagrama stanj določimo prehode in izhode, nato za T celice izračunamo T = Q ⊕ Q⁺.</p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Kateri je pravilen dvojiški (binarni) zapis desetiškega števila 0.53125 = 17/32?",
+    answers: ["0.10101", "0.10001", "0.<span style='text-decoration:overline'>1000</span>", "0.1011011"],
+    correct: 1,
+    expl: "<p>17/32 = 17/2⁵ = 10001₂/2⁵ = <strong>0.10001</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Katero vezje deluje kot stabilizirano dvopolno stikalo oz. preklopnik (debounced switch)?",
+    image: "4044-9.png",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 0,
+    expl: "<p>Stabilizirano stikalo uporablja zapah S̄R̄ (z NAND vrati) — vezje <strong>a)</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4044 (18.2.2011)",
+    q: "Katera od navedenih enačb NI pravilna?<br>a) x̄·ȳ + y = x̄ + y<br>b) x·ȳ + y = y<br>c) <span style='text-decoration:overline'>x·ȳ + y</span> = x·ȳ<br>d) x⊕y = x̄⊕ȳ",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 1,
+    expl: "<p>x·ȳ + y = <strong>x + y</strong> (ne samo y). Absorpcija z dopolnitvijo.</p>"
+  },
+
+  // ---- Izpit 4039 (1.2.2011) ----
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Imamo spominsko celico z dvema vhodoma. Na prožilni vhod dovedemo signal C, na preostali vhod signal X, na izhodu pa dobimo signal (stanje) Q. Za kateri tip oziroma vrsto spominske celice gre?",
+    image: "4039-1.png",
+    answers: ["zapah T", "flip-flop T", "zapah D", "flip-flop D"],
+    correct: 1,
+    expl: "<p>Iz časovnega diagrama vidimo, da Q preklopi ob vsakem aktivnem robu C, ko je X=1, in ohrani stanje, ko je X=0. Prožilni vhod C → <strong>flip-flop T</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Na vhode prikazanega vezja PLA privedemo kombinacijo x₁x₂x₃x₄ = 0110. Križci označujejo povezave v mreži. Kaj dobimo na izhodih?",
+    image: "4039-2.png",
+    answers: ["f₁f₂f₃ = 001", "f₁f₂f₃ = 100", "f₁f₂f₃ = 111", "f₁f₂f₃ = 101"],
+    correct: 3,
+    expl: "<p>Pri vhodih 0110 izračunamo, kateri produkti so aktivni in kateri izhodi dobijo 1. Rezultat: <strong>f₁f₂f₃ = 101</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Katero vezje deluje kot 3-bitni serijski števec?",
+    image: "4039-3.png",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 0,
+    expl: "<p>Serijski (asinhroni) števec ima T flip-flope, kjer ura naslednje stopnje pride iz izhoda prejšnje. Pravilno je vezje <strong>a)</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Po vodilu smo prejeli zaporedje štirih 8-bitnih besed:<pre>1 0 1 0 1 0 0 1\n0 1 0 0 0 0 1 1\n0 1 0 1 1 0 0 1\n1 1 1 1 0 0 1 1</pre>v njem pa je zaradi šuma pri enem bitu prišlo do napake. Napake odkrivamo s kontrolo parnosti (1. bit vsake besede + zadnja kontrolna beseda). Kateri bit v kateri besedi je napačen?",
+    answers: ["4. bit v 2. besedi", "8. bit v 3. besedi", "6. bit v 3. besedi", "2. bit v 2. besedi"],
+    correct: 3,
+    expl: "<p>Z vrstično pariteto najdemo besedo z napako, s stolpčno pariteto pa stolpec. Presečišče: <strong>2. bit v 2. besedi</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Katera od navedenih enačb NI pravilna?<br>a) x·y = <span style='text-decoration:overline'>x̄ + ȳ</span><br>b) x + x·y = x<br>c) x + y + x̄ = 1<br>d) x·ȳ + y = y",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 3,
+    expl: "<p>x·ȳ + y = <strong>x + y</strong> (po absorpciji z dopolnitvijo), ne samo y.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture P1 of reg is\nbegin\nprocess (clk,reset) begin\n  if reset = '1' then q <= \"0000\";\n  elsif (clk'event and clk='1') then q <= D;\n  end if;\nend process;\nend P1;</pre>",
+    answers: ["navadni z zapahi D", "navadni s flip-flopi D", "pomikalni s flip-flopi D", "pomikalni z zapahi D"],
+    correct: 1,
+    expl: "<p>Sinhrono proženje (clk'event), vsi biti hkrati q ← D, brez pomika → <strong>navadni register iz flip-flopov D</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja \"110\"?",
+    image: "4039-7.png",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 0,
+    expl: "<p>Detektor zaporedja \"110\" — diagram <strong>a)</strong> ima pravilne prehode.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Poiščite MDNO zapis funkcije f(x₁,x₂,x₃) = M₀ · M₅",
+    answers: ["(x₁+x̄₃)(x₂+x̄₃)(x̄₁+x₂)", "x̄₂ + x₁x̄₃ + x̄₁x₃", "x₂ + x₁x̄₃ + x̄₁x₃", "x₁x̄₂ + x̄₁x̄₂ + x₁x̄₃ + x̄₁x₃"],
+    correct: 1,
+    expl: "<p>Funkcija je 0 pri M₀ in M₅. K-karta minimizacija: <strong>x̄₂ + x₁x̄₃ + x̄₁x₃</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Vezje na desni vsebuje več statičnih hazardov. Katera od funkcij ustreza takšni razširitvi prikazanega vezja, ki odpravlja vse vsebovane hazarde?<pre>f₁ = x̄₁x̄₃ + x₁x̄₂x̄₄ + x₂x₃x̄₄ + x̄₁x̄₃x₄ + x₂x₃x₄ + x₁x̄₂x₄\nf₂ = x̄₁x̄₃ + x₁x̄₂x̄₄ + x₂x₃x̄₄ + x₁x₃x̄₄\nf₃ = x̄₁x̄₃ + x₁x̄₂x̄₄ + x₂x₃x̄₄ + x₁x₃x̄₄ + x̄₂x̄₃x̄₄ + x̄₁x₂x̄₄\nf₄ = x̄₁x̄₃ + x₁x̄₂x̄₄ + x₂x₃x̄₄ + x₁x₃x̄₄ + x̄₂x̄₃x̄₄</pre>",
+    image: "4039-9.png",
+    answers: ["f₃", "f₂", "f₄", "f₁"],
+    correct: 0,
+    expl: "<p><strong>f₃</strong> vsebuje vse potrebne redundantne implicente za odpravo vseh hazardov.</p>"
+  },
+  {
+    topic: "Stari izpit 4039 (1.2.2011)",
+    q: "Katero funkcijo (v obliki MDNO) generira vezje na desni?",
+    image: "4039-10.png",
+    answers: ["x₁x̄₂ + x₁x̄₄ + x₁x̄₃", "x₁ + x₃ + x̄₁x̄₄", "x̄₁x̄₂ + x̄₁x̄₃x₄", "x₁ + x₂x₃ + x₂x̄₄"],
+    correct: 3,
+    expl: "<p>Iz vezja z multipleksorji preberemo funkcijo in minimiziramo: <strong>x₁ + x₂x₃ + x₂x̄₄</strong></p>"
+  },
+
+  // ---- Izpit 4092 (7.9.2011) ----
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katera vhodna sprememba v vezju na desni povzroči statični hazard?",
+    image: "4092-1.png",
+    answers: ["sprememba x₁: 0 → 1", "sprememba x₁: 1 → 0", "sprememba x₂: 0 → 1", "sprememba x₂: 1 → 0"],
+    correct: 2,
+    expl: "<p>Vezje je OR-AND struktura → hazard pri prehodu <strong>0 → 1</strong>. Spremenljivka x₂ gre po dveh poteh (direktno in skozi invertor).</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Ugotovite, kateri 4-bitni register je opisan z naslednjo VHDL kodo:<pre>architecture P1 of reg is\nbegin\nprocess (clk,reset) begin\n  if reset = '1' then q <= \"0000\";\n  elsif (clk'event and clk='1') then q <= D;\n  end if;\nend process;\nend P1;</pre>",
+    answers: ["navadni z zapahi D", "pomikalni z zapahi D", "navadni s flip-flopi D", "pomikalni s flip-flopi D"],
+    correct: 2,
+    expl: "<p>Sinhrono proženje (clk'event), vsi biti hkrati q ← D, brez pomika → <strong>navadni s flip-flopi D</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Z vezjem PLA želimo realizirati naslednje tri funkcije:<pre>f₁ = x₁x̄₂x̄₃ + x₂x₃x̄₄\nf₂ = x̄₃x₄ + x₁x̄₂x̄₃\nf₃ = x₂x₃x̄₄ + x̄₃x₄</pre>Kolikšno je najmanjše število vrat AND in OR v mreži PLA?",
+    answers: ["6 AND in 3 OR", "3 AND in 3 OR", "3 AND in 6 OR", "10 AND in 3 OR"],
+    correct: 1,
+    expl: "<p>Različni produkti: {x₁x̄₂x̄₃, x₂x₃x̄₄, x̄₃x₄} → <strong>3 AND</strong>. Vsaka funkcija dobi 1 OR → <strong>3 OR</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Kakšna je tribitna številska koda, ki števila od 0 do 7 kodira takole: 000, 001, 011, 010, 110, 111, 101, 100?",
+    answers: ["enokoračna in reflektivna", "nič od naštetega", "utežnostna in enokoračna", "utežnostna in reflektivna"],
+    correct: 0,
+    expl: "<p>To je Grayeva koda — <strong>enokoračna</strong> in <strong>reflektivna</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Poiščite minimalno obliko (MDNO) funkcije f(x₁,x₂,x₃) = <span style='text-decoration:overline'>x̄₁ · (x₂+x₃) · <span style='text-decoration:overline'>(x₁+x̄₂)</span></span>",
+	image: "4092-5.jpg",
+    answers: ["x̄₁x̄₂", "x₁ + x̄₁x₂", "x₁ + x̄₁x₂ + x̄₁x₂x₃", "x₁ + x₂"],
+    correct: 3,
+    expl: "<p>Poenostavimo korak za korakom z De Morganom in absorpcijo. Rezultat: <strong>x₁ + x₂</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katera od navedenih enačb NI pravilna?",
+	image: "4092-6.jpg",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 0,
+    expl: "<p>x·ȳ + y = <strong>x + y</strong>, ne samo y.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Kateri diagram stanj ustreza detektorju vhodnega zaporedja \"110\"?",
+    image: "4092-7.jpg",
+    answers: ["a)", "b)", "c)", "d)"],
+    correct: 1,
+    expl: "<p>Detektor zaporedja \"110\" — diagram <strong>b)</strong>.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katero funkcijo (v obliki MKNO) generira vezje na desni?",
+    image: "4092-8.png",
+    answers: ["(x₁+x₂)(x₂+x₃)", "x₁+x₃+x̄₁x̄₂", "x̄₂+x̄₁x̄₃", "(x̄₁+x̄₂)(x̄₂+x̄₃)"],
+    correct: 3,
+    expl: "<p>Iz vezja preberemo funkcijo in zapišemo v MKNO: <strong>(x̄₁+x̄₂)(x̄₂+x̄₃)</strong></p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katere vrednosti moramo dovesti na vhode T in R, da bo vezje na sliki delovalo kot binarni števec, ki šteje navzdol (sekvenca Q₁Q₀ = 00, 11, 10, 01, 00, ...)?",
+    image: "4092-9.png",
+    answers: ["T₁=T₂=1, R₁=R₂=1", "T₁=T₂=1, R₁=R₂=0", "T₁=T₂=0, R₁=R₂=0", "T₁=T₂=0, R₁=R₂=1"],
+    correct: 0,
+    expl: "<p>T=1 omogoča toggle (štetje), R=1 obrne smer štetja navzdol prek negiranih izhodov.</p>"
+  },
+  {
+    topic: "Stari izpit 4092 (7.9.2011)",
+    q: "Katero spominsko celico vsebuje stabilizator preklopnika (angl. switch debouncer oz. switch debounce circuit)?",
+    answers: ["flip-flop JK", "zapah S̄R̄", "flip-flop D", "zapah D"],
+    correct: 1,
+    expl: "<p>Stabilizator preklopnika uporablja <strong>zapah S̄R̄</strong> z negiranimi vhodi.</p>"
+  }
+];
+
+let currentQuestions = [...questions];
+let isRandom = false;
+let userAnswers = {};
+let hardMarks = {};
+let showingOnlyHard = false;
+
+// ── GAME MODE ──
+let gameMode = false;
+let gameActive = false;
+let gameStartTime = null;
+let timerInterval = null;
+let gameAnswers = {}; // answers during game session
+
+const LS_HARD = 'ds_kviz_hard';
+const LS_HISTORY = 'ds_kviz_history';
+
+// Load hard marks from localStorage
+function loadHard() {
+  try {
+    const saved = localStorage.getItem(LS_HARD);
+    if (saved) {
+      hardMarks = JSON.parse(saved);
+      updateLsBadge();
+    }
+  } catch(e) {}
+}
+
+function saveHard() {
+  try {
+    localStorage.setItem(LS_HARD, JSON.stringify(hardMarks));
+    updateLsBadge();
+  } catch(e) {}
+}
+
+function updateLsBadge() {
+  const badge = document.getElementById('ls-badge');
+  const count = Object.values(hardMarks).filter(Boolean).length;
+  if (badge) badge.textContent = count > 0 ? '(shranjeno)' : '';
+}
+
+function loadHistory() {
+  try {
+    const saved = localStorage.getItem(LS_HISTORY);
+    return saved ? JSON.parse(saved) : [];
+  } catch(e) { return []; }
+}
+
+function saveHistory(entry) {
+  try {
+    const history = loadHistory();
+    history.unshift(entry);
+    if (history.length > 10) history.pop();
+    localStorage.setItem(LS_HISTORY, JSON.stringify(history));
+  } catch(e) {}
+}
+
+function clearHistory() {
+  try { localStorage.removeItem(LS_HISTORY); } catch(e) {}
+  renderHistory();
+}
+
+// ── MODE SWITCHING ──
+function setMode(mode) {
+  gameMode = mode === 'game';
+  document.getElementById('mode-study-btn').classList.toggle('active', !gameMode);
+  document.getElementById('mode-game-btn').classList.toggle('active', gameMode);
+  const gc = document.getElementById('game-controls');
+  if (gc) gc.style.display = gameMode ? 'flex' : 'none';
+  if (!gameMode && gameActive) stopTimer();
+  render();
+}
+
+function startGame() {
+  if (gameActive) return;
+  gameActive = true;
+  gameAnswers = {};
+  userAnswers = {};
+  gameStartTime = Date.now();
+  document.getElementById('start-game-btn').style.display = 'none';
+  document.getElementById('end-game-btn').style.display = '';
+  const timerEl = document.getElementById('timer');
+  timerEl.style.display = '';
+  timerEl.classList.add('running');
+  timerInterval = setInterval(updateTimer, 1000);
+  // randomize for game
+  currentQuestions = [...questions].sort(() => Math.random() - 0.5);
+  render();
+}
+
+function updateTimer() {
+  if (!gameStartTime) return;
+  const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+  const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+  const s = String(elapsed % 60).padStart(2, '0');
+  const el = document.getElementById('timer');
+  if (el) el.textContent = `${m}:${s}`;
+}
+
+function stopTimer() {
+  clearInterval(timerInterval);
+  timerInterval = null;
+  const el = document.getElementById('timer');
+  if (el) el.classList.remove('running');
+}
+
+function endGame() {
+  if (!gameActive) return;
+  stopTimer();
+  gameActive = false;
+
+  const elapsed = Math.floor((Date.now() - gameStartTime) / 1000);
+  const total = questions.length;
+  const answered = Object.keys(userAnswers).length;
+  let correct = 0;
+  const wrong = [];
+
+  for (const [qi, ai] of Object.entries(userAnswers)) {
+    const q = questions[qi];
+    if (q.correct === ai) {
+      correct++;
+    } else {
+      wrong.push({ qi: parseInt(qi), chosen: ai });
+    }
+  }
+
+  const m = String(Math.floor(elapsed / 60)).padStart(2, '0');
+  const s = String(elapsed % 60).padStart(2, '0');
+  const timeStr = `${m}:${s}`;
+
+  // Save to history
+  saveHistory({ score: correct, total: answered, time: timeStr, date: new Date().toLocaleDateString('sl') });
+
+  // Show results
+  document.getElementById('res-score').textContent = `${correct} / ${answered}`;
+  document.getElementById('res-sub').textContent = `Čas: ${timeStr} · Neodgovorjenih: ${total - answered}`;
+
+  // Wrong answers list
+  const wrongList = document.getElementById('res-wrong-list');
+  wrongList.innerHTML = '';
+  if (wrong.length === 0) {
+    wrongList.innerHTML = '<li style="color:#3a7d1e; padding:10px; background:#eaf3de; border-color:#639922;">Vse pravilno! 🎉</li>';
+  } else {
+    wrong.forEach(({ qi, chosen }) => {
+      const q = questions[qi];
+      const letters = ['a','b','c','d'];
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <div class="q-label">${q.q.replace(/<[^>]+>/g,'').substring(0,80)}${q.q.length > 80 ? '...' : ''}</div>
+        <div class="q-answers">
+          <span class="wrong-ans">✗ Tvoj odgovor: ${letters[chosen]}) ${q.answers[chosen].replace(/<[^>]+>/g,'')}</span><br>
+          <span class="right-ans">✓ Pravilno: ${letters[q.correct]}) ${q.answers[q.correct].replace(/<[^>]+>/g,'')}</span>
+        </div>
+      `;
+      wrongList.appendChild(li);
+    });
+  }
+
+  renderHistory();
+
+  document.getElementById('results-overlay').classList.add('visible');
+  document.getElementById('start-game-btn').style.display = '';
+  document.getElementById('end-game-btn').style.display = 'none';
+  document.getElementById('timer').style.display = 'none';
+  document.getElementById('timer').textContent = '00:00';
+}
+
+function renderHistory() {
+  const history = loadHistory();
+  const el = document.getElementById('res-history');
+  if (!el) return;
+  if (history.length === 0) {
+    el.innerHTML = '<div style="font-size:13px;color:#888780;margin-bottom:12px;">Ni zgodovine.</div>';
+    return;
+  }
+  el.innerHTML = history.map(h =>
+    `<div class="history-row">
+      <span>${h.date}</span>
+      <span class="h-score">${h.score}/${h.total}</span>
+      <span>${h.time}</span>
+    </div>`
+  ).join('');
+}
+
+function closeResults() {
+  document.getElementById('results-overlay').classList.remove('visible');
+}
+
+// ── RENDER ──
+function render() {
+  const container = document.getElementById('quiz-container');
+  container.innerHTML = '';
+
+  let lastTopic = '';
+  let visibleQuestions = currentQuestions;
+
+  if (showingOnlyHard) {
+    visibleQuestions = currentQuestions.filter((q) => hardMarks[questions.indexOf(q)]);
+  }
+
+  visibleQuestions.forEach((q, displayIndex) => {
+    const originalIndex = questions.indexOf(q);
+
+    if (!isRandom && !gameMode && q.topic !== lastTopic) {
+      const topicCount = questions.filter(x => x.topic === q.topic).length;
+      const header = document.createElement('div');
+      header.className = 'topic-header';
+      header.innerHTML = `${q.topic} <span class="topic-counter">${topicCount} vprašanj</span>`;
+      container.appendChild(header);
+      lastTopic = q.topic;
+    }
+
+    const qDiv = document.createElement('div');
+    qDiv.className = 'question';
+    if (hardMarks[originalIndex]) qDiv.classList.add('marked-hard');
+
+    const isAnswered = userAnswers[originalIndex] !== undefined;
+    const selectedAnswer = userAnswers[originalIndex];
+
+    let answersHtml = '';
+    q.answers.forEach((a, ai) => {
+      let cls = 'answer';
+      const letters = ['a', 'b', 'c', 'd'];
+      if (isAnswered) {
+        if (ai === q.correct) cls += ' correct';
+        else if (ai === selectedAnswer) cls += ' incorrect';
+      } else if (selectedAnswer === ai) {
+        cls += ' selected';
+      }
+      answersHtml += `<button class="${cls}" onclick="selectAnswer(${originalIndex}, ${ai})" ${isAnswered ? 'disabled' : ''}><span class="marker">${letters[ai]})</span>${a}</button>`;
+    });
+
+    const imageHtml = q.image ? `<div class="q-image"><img src="slike_nalog/${q.image}" alt="Slika naloge"></div>` : '';
+
+    qDiv.innerHTML = `
+      <div class="q-header">
+        <span class="q-number">Vprašanje ${displayIndex + 1}${(!isRandom && !gameMode) ? ` · ${q.topic.split('.')[0]}` : ''}</span>
+        <button class="hard-toggle ${hardMarks[originalIndex] ? 'active' : ''}" onclick="toggleHard(${originalIndex})">
+          ${hardMarks[originalIndex] ? '⚑ Težko' : '⚑ Označi'}
+        </button>
+      </div>
+      <div class="q-text">${q.q}</div>
+      ${imageHtml}
+      <div class="answers">${answersHtml}</div>
+      <button class="show-explanation" onclick="toggleExplanation(${originalIndex})" ${!isAnswered ? 'disabled style="opacity:0.5;"' : ''}>
+        Pokaži razlago
+      </button>
+      <div class="explanation" id="expl-${originalIndex}">${q.expl}</div>
+    `;
+
+    container.appendChild(qDiv);
+  });
+
+  updateStats();
+}
+
+function selectAnswer(qIndex, ansIndex) {
+  if (userAnswers[qIndex] !== undefined) return;
+  userAnswers[qIndex] = ansIndex;
+  render();
+}
+
+function toggleExplanation(qIndex) {
+  const el = document.getElementById(`expl-${qIndex}`);
+  el.classList.toggle('visible');
+}
+
+function toggleHard(qIndex) {
+  hardMarks[qIndex] = !hardMarks[qIndex];
+  if (!hardMarks[qIndex]) delete hardMarks[qIndex];
+  saveHard();
+  render();
+}
+
+function resetHard() {
+  if (!confirm('Počisti seznam težkih vprašanj?')) return;
+  hardMarks = {};
+  saveHard();
+  render();
+}
+
+function toggleRandom() {
+  isRandom = !isRandom;
+  if (isRandom) {
+    currentQuestions = [...questions].sort(() => Math.random() - 0.5);
+  } else {
+    currentQuestions = [...questions];
+  }
+  document.getElementById('randomize-btn').classList.toggle('active', isRandom);
+  render();
+}
+
+function showOnlyHard() {
+  showingOnlyHard = true;
+  render();
+}
+
+function showAll() {
+  showingOnlyHard = false;
+  render();
+}
+
+function reset() {
+  if (!confirm('Resetiraj vse odgovore?')) return;
+  userAnswers = {};
+  showingOnlyHard = false;
+  isRandom = false;
+  currentQuestions = [...questions];
+  document.getElementById('randomize-btn').classList.remove('active');
+  render();
+}
+
+function updateStats() {
+  const total = questions.length;
+  const answered = Object.keys(userAnswers).length;
+  let correct = 0;
+  for (const [qi, ai] of Object.entries(userAnswers)) {
+    if (questions[qi].correct === ai) correct++;
+  }
+  const hard = Object.values(hardMarks).filter(Boolean).length;
+
+  document.getElementById('total-count').textContent = total;
+  document.getElementById('answered-count').textContent = answered;
+  document.getElementById('correct-count').textContent = correct;
+  document.getElementById('hard-count').textContent = hard;
+}
+
+// Init
+loadHard();
+render();
+</script>
+
+</body>
+</html>
